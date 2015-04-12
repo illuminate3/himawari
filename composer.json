@@ -1,0 +1,13 @@
+{
+	"name": "rakko/himawari",
+	"description": "CMS for Rakko",
+	"keywords": ["Himawari", "CMS", "Rakko"],
+	"require": {
+		"kalnoy/nestedset": "dev-master"
+	},
+	"config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
+}

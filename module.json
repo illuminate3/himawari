@@ -1,0 +1,8 @@
+{
+	"name": "Himawari",
+	"slug": "himawari",
+	"version": "1.0",
+	"description": "CMS for Rakko",
+	"enabled": true,
+	"order": 12
+}
