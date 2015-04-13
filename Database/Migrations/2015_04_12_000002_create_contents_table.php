@@ -19,28 +19,38 @@ class CreateContentsTable extends Migration
 	 */
 	public function up()
 	{
+/*
+
+            $table->unique(array('page_id', 'locale'));
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+
+        });
+*/
+
 		Schema::create($this->prefix . 'contents', function(Blueprint $table) {
 
 			$table->engine = 'InnoDB';
 			$table->increments('id');
 
-			$table->integer('page_id')->nullable();
-			$table->string('make')->nullable();
-			$table->string('model')->nullable();
-			$table->string('model_number')->nullable();
-			$table->text('description')->nullable();
-			$table->string('image')->nullable();
+			$table->integer('page_id')->index()->unique()->unsigned();
+			$table->string('locale')->index()->nullable();
+
+			$table->string('slug')->unique()->nullable();
+
+			$table->string('title')->unique()->nullable();
+			$table->string('summary')->nullable();
+			$table->text('body')->nullable();
+
+			$table->string('meta_title')->nullable();
+			$table->string('meta_keywords')->nullable();
+			$table->string('meta_description')->nullable();
+
+			$table->string('uri')->unique()->nullable();
+
 
 /*
-			$table->integer('asset_id');
-			$table->integer('site_id');
-			$table->string('asset_tag')->unique()->index();
-			$table->string('serial')->unique()->index();
-			$table->string('po')->index();
-			$table->string('custodian');
-			$table->text('note')->nullable();
+			$table->string('image')->nullable();
 */
-
 
 			$table->softDeletes();
 			$table->timestamps();

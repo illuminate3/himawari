@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
  */
 function make_nav_tree(Collection $tree, $activeContentKey = null, &$active = null)
 {
+//dd($tree);
 	if (!$tree->count()) return null;
 
 	return array_map(function ($content) use ($activeContentKey, &$active) {
@@ -63,6 +64,6 @@ function markdown($text)
  */
 function content_depth($depth)
 {
-dd($depth);
+//dd($depth);
 	return str_repeat('<span class="space">&raquo;</span>', $depth);
 }

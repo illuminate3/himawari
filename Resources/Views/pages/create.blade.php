@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::general.page', 2) }} :: @parent
+{{ Lang::choice('kotoba::cms.page', 2) }} :: @parent
 @stop
 
 @section('styles')

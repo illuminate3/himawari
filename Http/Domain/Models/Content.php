@@ -85,11 +85,6 @@ class Content extends Model {
 
 // DEFINE Relationships --------------------------------------------------
 
-	public function assets()
-	{
-		return $this->hasMany('App\Modules\Himawari\Http\Domain\Models\Asset');
-	}
-
 	public function page()
 	{
 		return $this->belongsTo('App\Modules\Himawari\Http\Domain\Models\Page');

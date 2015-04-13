@@ -2,22 +2,16 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::cms.page', 2) }} :: @parent
+{{ Lang::choice('kotoba::cms.print_status', 2) }} :: @parent
 @stop
 
 @section('styles')
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.1/chosen.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
 @stop
 
 @section('scripts')
-	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.1/chosen.jquery.min.js') }}"></script>
 @stop
 
 @section('inline-scripts')
-	jQuery(document).ready(function($) {
-		$(".chosen-select").chosen();
-	});
 @stop
 
 
@@ -27,7 +21,7 @@
 <div class="row">
 <h1>
 	<p class="pull-right">
-	<a href="/pages" class="btn btn-default" title="{{ trans('kotoba::button.back') }}">
+	<a href="/admin/print_statuses" class="btn btn-default" title="{{ trans('kotoba::button.back') }}">
 		<i class="fa fa-chevron-left fa-fw"></i>
 		{{ trans('kotoba::button.back') }}
 	</a>
@@ -41,9 +35,9 @@
 
 <div class="row">
 {!! Form::model(
-	$page,
+	$status,
 	[
-		'route' => ['pages.update', $page->id],
+		'route' => ['admin.print_statuses.update', $status->id],
 		'method' => 'PATCH',
 		'class' => 'form'
 	]
@@ -53,7 +47,7 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-		<input type="text" id="title" name="title" value="{{ $page->title }}" placeholder="{{ trans('kotoba::general.title') }}" class="form-control" autofocus="autofocus">
+		<input type="text" id="name" name="name" value="{{ $status->name }}" placeholder="{{ trans('kotoba::account.name') }}" class="form-control" autofocus="autofocus">
 </div>
 </div>
 
@@ -61,28 +55,9 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
-		<input type="text" id="slug" name="slug" value="{{ $page->slug }}" placeholder="{{ trans('kotoba::general.slug') }}" class="form-control">
+		<input type="text" id="description" name="description" value="{{ $status->description }}" placeholder="{{ trans('kotoba::general.description') }}" class="form-control">
 </div>
 </div>
-
-
-@if (!isset($page) || !$page->isRoot())
-	<div class="form-group padding-bottom-xl">
-		<label for="inputStatus" class="col-sm-1 control-label">{{ trans('kotoba::general.parent') }}:</label>
-		<div class="col-sm-11">
-			{!!
-				Form::select(
-					'parent_id',
-					$parents,
-					null,
-					array(
-						'class' => 'form-control chosen-select'
-					)
-				)
-			!!}
-		</div>
-	</div>
-@endif
 
 
 <hr>
@@ -97,7 +72,7 @@
 
 <div class="row">
 <div class="col-sm-4">
-	<a href="/pages" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
+	<a href="/admin/print_statuses" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
 		<i class="fa fa-times fa-fw"></i>
 		{{ trans('kotoba::button.cancel') }}
 	</a>

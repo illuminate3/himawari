@@ -24,11 +24,20 @@ class CreatePagesTable extends Migration
 			$table->engine = 'InnoDB';
 			$table->increments('id');
 
-
-			$table->string('slug')->unique();
-			$table->string('title');
-
 			NestedSet::columns($table);
+
+//			$table->string('slug')->unique();
+//			$table->string('title');
+			$table->integer('user_id')->index()->unsigned();
+
+			$table->tinyInteger('print_status_id')->default(0);
+			$table->tinyInteger('is_published')->default(0);
+			$table->tinyInteger('is_featured')->default(0);
+
+//			$table->tinyInteger('menu_id')->default(1);
+
+			$table->date('publish_start')->nullable();
+			$table->date('publish_end')->nullable();
 
 
 			$table->softDeletes();

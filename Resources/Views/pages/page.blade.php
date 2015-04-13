@@ -13,7 +13,7 @@
             <h1>{{ $page->title }}; page ID ={{ $page->id }}</h1>
         </header>
 
-        <article>{{ markdown($page->body) }}</article>
+        <article>{{-- markdown($page->body) --}}</article>
 @if (isset($prev) || isset($next))
         <ul class="pager">
     @if (isset($prev))

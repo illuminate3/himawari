@@ -48,7 +48,7 @@ class PagesController extends HimawariController {
 	public function index()
 	{
 		$pages = $this->page->withDepth()->defaultOrder()->get();
-dd($pages);
+// dd($pages);
 		return View('himawari::pages.index', compact('pages'));
 	}
 
@@ -60,6 +60,7 @@ dd($pages);
 	public function create()
 	{
 		$parents = $this->pageRepo->getParents();
+//		$parents = $this->pageRepo->getParents()->with('contents');
 //dd($parents);
 		return View('himawari::pages.create', compact('parents'));
 	}
@@ -127,7 +128,7 @@ dd($pages);
 //dd($request);
 		$this->pageRepo->update($request->all(), $id);
 
-		Flash::success( trans('kotoba::general.success.page_update') );
+		Flash::success( trans('kotoba::cms.success.page_update') );
 		return redirect('pages');
 	}
 
@@ -202,11 +203,11 @@ dd($pages);
 
 			if ($page->hasMoved())
 			{
-				Flash::success( trans('kotoba::general.success.page_move') );
+				Flash::success( trans('kotoba::cms.success.page_move') );
 				return redirect('pages');
 			}
 		}
-		Flash::error( trans('kotoba::general.error.page_move') );
+		Flash::error( trans('kotoba::cms.error.page_move') );
 		return redirect('pages');
 	}
 

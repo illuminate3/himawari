@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::shop.content', 2) }} :: @parent
+{{ Lang::choice('kotoba::cms.content', 2) }} :: @parent
 @stop
 
 @section('styles')
@@ -106,7 +106,7 @@ $(document).ready( function () {
 @if (count($content['assets']))
 
 <h3>
-	{{ Lang::choice('kotoba::shop.asset', 2) }}
+	{{ Lang::choice('kotoba::cms.asset', 2) }}
 </h3>
 
 <div class="row">

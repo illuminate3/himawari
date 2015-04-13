@@ -55,10 +55,7 @@ class PageController extends HimawariController {
 
 		if ($page === null)
 		{
-			$parents = $this->pageRepo->getParents();
-//dd($parents);
-			return View('himawari::pages.create', compact('parents'));
-//			App::abort(404, trans('kotoba::general.error.page'));
+			App::abort(404, trans('kotoba::general.error.page'));
 		}
 
 		$view = $page->isRoot() ? 'himawari::pages.pages_index' : 'himawari::pages.page';
@@ -105,7 +102,8 @@ class PageController extends HimawariController {
 		$ancestors = $page
 			->ancestors()
 			->withoutRoot()
-			->get(array('id', 'title', 'slug'));
+//			->get(array('id', 'title', 'slug'));
+			->get(array('id'));
 
 		if ($active !== null) $ancestors->push($page);
 
@@ -148,7 +146,8 @@ $tree = $results->toTree();
 		$contentTree = $this->page
 //		$contentTree = DB::table('pages')
 			->where('parent_id', '!=', 'NULL')
-			->get([ 'id', 'slug', 'title', '_lft', 'parent_id' ])
+//			->get([ 'id', 'slug', 'title', '_lft', 'parent_id' ])
+			->get([ 'id', '_lft', 'parent_id' ])
 			->toTree();
 
 		return $this->make_nav($contentTree, $activePage->getKey());

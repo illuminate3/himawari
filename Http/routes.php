@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin'], function() {
 
 // Controllers
 	Route::resource('contents', 'ContentsController');
+	Route::resource('print_statuses', 'PrintStatusesController');
 
 // Routes
 	Route::delete('contents/{id}', array(
@@ -43,10 +44,10 @@ Route::group(['prefix' => 'admin'], function() {
 // 		));
 
 // API DATA
-// 	Route::get('api/contents', array(
-// 	//	'as'=>'api.contents',
-// 		'uses'=>'ContentsController@data'
-// 		));
+	Route::get('api/print_statuses', array(
+//		'as'=>'api.print_statuses',
+		'uses'=>'PrintStatusesController@data'
+		));
 
 });
 

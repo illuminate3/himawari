@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::shop.asset_status', 2) }} :: @parent
+{{ Lang::choice('kotoba::cms.page', 2) }} :: @parent
 @stop
 
 @section('styles')
@@ -27,7 +27,7 @@
 	</a>
 	</p>
 	<i class="fa fa-angle-double-right fa-lg"></i>
-		{{ Lang::choice('kotoba::general.page', 2) }}
+		{{ Lang::choice('kotoba::cms.page', 2) }}
 	<hr>
 </h1>
 </div>

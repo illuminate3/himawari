@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::shop.content', 2) }} :: @parent
+{{ Lang::choice('kotoba::cms.content', 2) }} :: @parent
 @stop
 
 @section('styles')
@@ -44,7 +44,7 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-		<input type="text" id="make" name="make" placeholder="{{ trans('kotoba::shop.make') }}" class="form-control" autofocus="autofocus">
+		<input type="text" id="make" name="make" placeholder="{{ trans('kotoba::cms.make') }}" class="form-control" autofocus="autofocus">
 </div>
 </div>
 
@@ -52,7 +52,7 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
-		<input type="text" id="model" name="model" placeholder="{{ trans('kotoba::shop.model') }}" class="form-control">
+		<input type="text" id="model" name="model" placeholder="{{ trans('kotoba::cms.model') }}" class="form-control">
 </div>
 </div>
 
@@ -60,7 +60,7 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
-		<input type="text" id="model_number" name="model_number" placeholder="{{ trans('kotoba::shop.model_number') }}" class="form-control">
+		<input type="text" id="model_number" name="model_number" placeholder="{{ trans('kotoba::cms.model_number') }}" class="form-control">
 </div>
 </div>
 

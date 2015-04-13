@@ -87,7 +87,7 @@ $id = DB::getPdo()->lastInsertId();
 $content_id = Input::get('page_id');
 $this->contentRepo->attachContent($id, $content_id);
 
-		Flash::success( trans('kotoba::shop.success.content_create') );
+		Flash::success( trans('kotoba::cms.success.content_create') );
 		return redirect('admin/contents');
 	}
 // 	public function store1111()
@@ -208,7 +208,7 @@ $this->contentRepo->attachContent($id, $content_id);
 		$this->contentRepo->detachContent($id, $page_id);
 		$this->contentRepo->attachContent($id, $page_id);
 
-		Flash::success( trans('kotoba::shop.success.content_update') );
+		Flash::success( trans('kotoba::cms.success.content_update') );
 		return redirect('admin/contents');
 	}
 

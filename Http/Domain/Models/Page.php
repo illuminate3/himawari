@@ -159,7 +159,8 @@ public function assets()
         $contents = $source
             ->descendants()
             ->defaultOrder()
-            ->get([ 'id', 'slug', 'title', static::LFT, 'parent_id' ])
+//            ->get([ 'id', 'slug', 'title', static::LFT, 'parent_id' ])
+            ->get([ 'id', static::LFT, 'parent_id' ])
             ->toTree();
 
         return $contents;
