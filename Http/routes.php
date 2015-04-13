@@ -16,49 +16,6 @@ Route::get('welcome/himawari', array(
 	));
 
 // Controllers
-Route::controller('scans', 'ScansController');
-Route::get('scans/index',
-	[
-		'as' => 'scans.index',
-		'uses' => 'ScansController@index',
-	]
-);
-Route::post('scans/asset',
-	[
-		'as' => 'scans.asset',
-		'uses' => 'ScansController@postAsset',
-	]
-);
-Route::get('scans/asset',
-	[
-		'as' => 'scans.asset',
-		'uses' => 'ScansController@getAsset',
-	]
-);
-Route::get('scans/room',
-	[
-		'as' => 'scans.room',
-		'uses' => 'ScansController@getRoom',
-	]
-);
-Route::post('scans/room',
-	[
-		'as' => 'scans.room',
-		'uses' => 'ScansController@postRoom',
-	]
-);
-Route::post('scans/user',
-	[
-		'as' => 'scans.user',
-		'uses' => 'ScansController@postUser',
-	]
-);
-Route::get('scans/user',
-	[
-		'as' => 'scans.user',
-		'uses' => 'ScansController@getUser',
-	]
-);
 
 // API DATA
 // 	Route::get('api/sites', array(
@@ -73,10 +30,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::pattern('id', '[0-9]+');
 
 // Controllers
-	Route::resource('asset', 'AssetsController');
-	Route::resource('asset_statuses', 'AssetStatusesController');
 	Route::resource('contents', 'ContentsController');
-	Route::resource('tech_statuses', 'TechStatusesController');
 
 // Routes
 	Route::delete('contents/{id}', array(
@@ -89,22 +43,10 @@ Route::group(['prefix' => 'admin'], function() {
 // 		));
 
 // API DATA
-	Route::get('api/assets', array(
-//		'as'=>'api.assets',
-		'uses'=>'AssetsController@data'
-		));
-	Route::get('api/asset_statuses', array(
-//		'as'=>'api.asset_statuses',
-		'uses'=>'AssetStatusesController@data'
-		));
-	Route::get('api/contents', array(
-	//	'as'=>'api.contents',
-		'uses'=>'ContentsController@data'
-		));
-	Route::get('api/tech_statuses', array(
-//		'as'=>'api.tech_statuses',
-		'uses'=>'TechStatusesController@data'
-		));
+// 	Route::get('api/contents', array(
+// 	//	'as'=>'api.contents',
+// 		'uses'=>'ContentsController@data'
+// 		));
 
 });
 

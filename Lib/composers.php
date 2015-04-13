@@ -30,9 +30,11 @@ View::composer(['_partials.left_side'], function ($view)
 //View::composer(['layouts._partials.left_side'], function ($view)
 {
 $page = Page::with('contents')->whereSlug('/')->first();
-$contentTree = Page::where('parent_id', '!=', 'NULL')
-	->get([ 'id', 'slug', 'title', '_lft', 'parent_id' ])
-	->toTree();
-$view->menu2 = make_nav_tree($contentTree, $page->getKey());
+if ( $page != null ) {
+	$contentTree = Page::where('parent_id', '!=', 'NULL')
+		->get([ 'id', 'slug', 'title', '_lft', 'parent_id' ])
+		->toTree();
+	$view->menu2 = make_nav_tree($contentTree, $page->getKey());
+}
 //dd($menu2);
 });
