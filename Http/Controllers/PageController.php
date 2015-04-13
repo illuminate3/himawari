@@ -55,7 +55,10 @@ class PageController extends HimawariController {
 
 		if ($page === null)
 		{
-			App::abort(404, trans('kotoba::general.error.page'));
+			$parents = $this->pageRepo->getParents();
+//dd($parents);
+			return View('himawari::pages.create', compact('parents'));
+//			App::abort(404, trans('kotoba::general.error.page'));
 		}
 
 		$view = $page->isRoot() ? 'himawari::pages.pages_index' : 'himawari::pages.page';

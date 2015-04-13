@@ -72,7 +72,7 @@ class Page extends \Kalnoy\Nestedset\Node {
 
 	public function contents()
 	{
-		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Content', 'page_content', 'page_id', 'content_id');
+		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Content', 'content_page', 'content_id', 'page_id');
 	}
 
 /*

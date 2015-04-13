@@ -97,7 +97,7 @@ class Content extends Model {
 
 	public function pages()
 	{
-		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Page', 'page_content', 'content_id', 'page_id');
+		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Page', 'content_page', 'content_id', 'page_id');
 	}
 
 // 	public function assets()

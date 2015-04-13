@@ -19,7 +19,7 @@ class HimawariMenuProvider extends MenuServiceProvider {
 // navbar menu
 //		if ( (Auth::user()->can('manage_admin')) || (Auth::user()->can('manage_himawari')) ) {
 		$menu = Menu::get('navbar');
-		$menu->add('Pages', 'admin/pages')->data('order', 5);
+		$menu->add('Pages', 'pages')->data('order', 5);
 		$menu->sortBy('order');
 //		}
 

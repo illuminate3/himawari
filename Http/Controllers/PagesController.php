@@ -48,7 +48,7 @@ class PagesController extends HimawariController {
 	public function index()
 	{
 		$pages = $this->page->withDepth()->defaultOrder()->get();
-//dd($pages);
+dd($pages);
 		return View('himawari::pages.index', compact('pages'));
 	}
 
@@ -76,7 +76,7 @@ class PagesController extends HimawariController {
  		$data = $this->pageRepo->preprocessData($request->all());
 		$this->pageRepo->store($data);
 
-		Flash::success( trans('kotoba::general.success.page_create') );
+		Flash::success( trans('kotoba::cms.success.page_create') );
 		return redirect('pages');
 	}
 
