@@ -74,7 +74,29 @@ class PagesController extends HimawariController {
 		PageCreateRequest $request
 		)
 	{
+dd($request);
+
  		$data = $this->pageRepo->preprocessData($request->all());
+
+/*
+      "title" => "Index"
+      "summary" => ""
+      "body" => ""
+      "user_id" => ""
+      "print_status_id" => ""
+      "is_published" => ""
+      "is_featured" => ""
+      "publish_start" => ""
+      "publish_end" => ""
+      "locale" => ""
+      "uri" => ""
+      "meta_title" => ""
+      "meta_keywords" => ""
+      "meta_description" => ""
+      "slug" => "/"
+*/
+
+
 		$this->pageRepo->store($data);
 
 		Flash::success( trans('kotoba::cms.success.page_create') );

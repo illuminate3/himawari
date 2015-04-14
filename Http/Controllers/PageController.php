@@ -49,13 +49,20 @@ class PageController extends HimawariController {
 	 */
 	public function show($slug = '/')
 	{
-//		$page = $this->page->whereSlug($slug)->first();
-		$page = $this->page->with('contents')->whereSlug($slug)->first();
+//dd('die');
+		$page = $this->page->whereSlug($slug)->first();
+//		$page = $this->page->with('contents')->whereSlug($slug)->first();
 //dd($page);
 
 		if ($page === null)
 		{
-			App::abort(404, trans('kotoba::general.error.page'));
+		$parents = $this->pageRepo->getParents();
+//		$parents = $this->pageRepo->with('content')->getParents();
+//		$parents = $this->pageRepo->with('content')->get();
+
+//dd($parents);
+		return View('himawari::pages.create', compact('parents'));
+//			App::abort(404, trans('kotoba::general.error.page'));
 		}
 
 		$view = $page->isRoot() ? 'himawari::pages.pages_index' : 'himawari::pages.page';

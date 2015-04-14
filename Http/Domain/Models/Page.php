@@ -20,7 +20,7 @@ class Page extends \Kalnoy\Nestedset\Node {
 	 */
 	protected $table = 'pages';
 
-	protected $presenter = 'App\Modules\Campus\Http\Presenters\Himawari';
+	protected $presenter = 'App\Modules\Himawari\Http\Presenters\Himawari';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -72,7 +72,8 @@ class Page extends \Kalnoy\Nestedset\Node {
 
 	public function contents()
 	{
-		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Content', 'content_page', 'content_id', 'page_id');
+//		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Content', 'content_page', 'content_id', 'page_id');
+		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Content', 'content_page', 'page_id', 'content_id');
 	}
 
 /*
@@ -176,7 +177,7 @@ public function assets()
     public function getNext(array $columns = array('slug', 'title', 'parent_id'))
     {
         $result = parent::getNext($columns);
-
+dd($result);
         return $result && $result->parent_id == 1 ? null : $result;
     }
 

@@ -19,7 +19,7 @@ class Content extends Model {
 	 */
 	protected $table = 'contents';
 
-	protected $presenter = 'App\Modules\Campus\Http\Presenters\Himawari';
+	protected $presenter = 'App\Modules\Himawari\Http\Presenters\Himawari';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -83,6 +83,9 @@ class Content extends Model {
 		'image'
 		];
 
+	public static $slugPattern = '[a-z0-9\-/]+';
+
+
 // DEFINE Relationships --------------------------------------------------
 
 	public function page()
@@ -93,6 +96,7 @@ class Content extends Model {
 	public function pages()
 	{
 		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Page', 'content_page', 'content_id', 'page_id');
+//		return $this->belongsToMany('App\Modules\Himawari\Http\Domain\Models\Page', 'content_page', 'page_id', 'content_id');
 	}
 
 // 	public function assets()

@@ -31,13 +31,13 @@ function()
 //dd(LaravelLocalization::getCurrentLocale());
 // 		return View::make('hello');
 // 	});
+
+});
+
 Route::resource('pages', 'PagesController', array('except' => array('show')));
 
 Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
 	->where('slug', App\Modules\Himawari\Http\Domain\Models\Page::$slugPattern);
-
-});
-
 
 
 // Controllers

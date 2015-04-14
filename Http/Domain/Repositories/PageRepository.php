@@ -120,7 +120,7 @@ dd($id);
 	public function getParents()
 	{
 //		$all = $this->model->select('id', 'title')->withDepth()->defaultOrder()->get();
-		$all = $this->model->select('id')->withDepth()->defaultOrder()->get();
+		$all = $this->model->select('id')->with('content')->withDepth()->defaultOrder()->get();
 		$result = array();
 //dd($all);
 
@@ -132,48 +132,10 @@ dd($id);
 
 			$result[$content->id] = $title;
 		}
+//dd($result);
 
 		return $result;
 	}
-
- /**
-     * Perform validation.
-     *
-     * @return \Illuminate\Support\MessageBag|true
-     */
-//     public function validate()
-//     {
-//         $v = Validator::make($this->attributes, $this->getRules());
-//
-//         return $v->fails() ? $v->messages() : true;
-//     }
-
-    /**
-     * Get validation rules.
-     *
-     * @return array
-     */
-//     public function getRules()
-//     {
-//         $rules = array(
-//             'title' => 'required',
-//
-//             'slug'  => array(
-//                 'required',
-//                 'regex:#^'.self::$slugPattern.'$#',
-//                 'unique:pages'.($this->exists ? ',slug,'.$this->id : ''),
-//             ),
-//
-// //            'body'  => 'required',
-//         );
-//
-//         if ($this->exists && ! $this->isRoot())
-//         {
-//             $rules['parent_id'] = 'required|exists:pages,id';
-//         }
-//
-//         return $rules;
-//     }
 
     /**
      * Get the contents.
