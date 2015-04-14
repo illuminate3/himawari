@@ -15,6 +15,31 @@ Route::get('welcome/himawari', array(
 	'uses'=>'HimawariController@welcome'
 	));
 
+
+Route::group(
+[
+	'prefix' => LaravelLocalization::setLocale(),
+	'middleware' => [ 'localizationRedirect', 'localeSessionRedirect' ]
+],
+function()
+{
+	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
+// 	Route::get('/', function()
+// 	{
+// //dd(LaravelLocalization::getSupportedLocales());
+// //dd(LaravelLocalization::getSupportedLanguagesKeys());
+//dd(LaravelLocalization::getCurrentLocale());
+// 		return View::make('hello');
+// 	});
+Route::resource('pages', 'PagesController', array('except' => array('show')));
+
+Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
+	->where('slug', App\Modules\Himawari\Http\Domain\Models\Page::$slugPattern);
+
+});
+
+
+
 // Controllers
 
 // API DATA
@@ -58,7 +83,7 @@ Route::group(['prefix' => 'admin'], function() {
 // 	));
 
 
-Route::resource('pages', 'PagesController', array('except' => array('show')));
+//Route::resource('pages', 'PagesController', array('except' => array('show')));
 
 Route::group(array('prefix' => 'pages'), function () {
 
@@ -87,8 +112,8 @@ Route::group(array('prefix' => 'pages'), function () {
 
 // The slug route should be registered last since it will capture any slug-like
 // route
-Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
-	->where('slug', App\Modules\Himawari\Http\Domain\Models\Page::$slugPattern);
+// Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
+// 	->where('slug', App\Modules\Himawari\Http\Domain\Models\Page::$slugPattern);
 
 
 /*

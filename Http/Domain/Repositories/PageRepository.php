@@ -186,7 +186,7 @@ dd($id);
         $source = $this->parent_id == 1
             ? $this
             : $this->ancestors()->withoutRoot()->first();
-
+dd($source);
         $contents = $source
             ->descendants()
             ->defaultOrder()
