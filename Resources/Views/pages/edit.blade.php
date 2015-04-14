@@ -61,6 +61,110 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="summary" name="summary" value="{{ $page->summary }}" placeholder="{{ trans('kotoba::cms.summary') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="body" name="body" value="{{ $page->body }}" placeholder="{{ trans('kotoba::cms.body') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="user_id" name="user_id" value="{{ $page->user_id }}" placeholder="{{ Lang::choice('kotoba::account.user', 1) }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="print_status_id" name="print_status_id" value="{{ $page->print_status_id }}" placeholder="{{ trans('kotoba::cms.in_print') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="is_published" name="is_published" value="{{ $page->is_published }}" placeholder="{{ trans('kotoba::cms.is_published') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="is_featured" name="is_featured" value="{{ $page->is_featured }}" placeholder="{{ trans('kotoba::cms.is_featured') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="publish_start" name="publish_start" value="{{ $page->publish_start }}" placeholder="{{ trans('kotoba::cms.publish_start') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="publish_end" name="publish_end" value="{{ $page->publish_end }}" placeholder="{{ trans('kotoba::cms.publish_end') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="locale" name="locale" value="{{ $page->locale }}" placeholder="{{ trans('kotoba::cms.locale') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="uri" name="uri" value="{{ $page->uri }}" placeholder="{{ trans('kotoba::cms.uri') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="meta_title" name="meta_title" value="{{ $page->meta_title }}" placeholder="{{ trans('kotoba::cms.meta_title') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="meta_keywords" name="meta_keywords" value="{{ $page->meta_keywords }}" placeholder="{{ trans('kotoba::cms.meta_keywords') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
+		<input type="text" id="meta_description" name="meta_description" value="{{ $page->meta_description }}" placeholder="{{ trans('kotoba::cms.meta_description') }}" class="form-control">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="input-group">
+	<span class="input-group-addon">{{ Request::root().'/' }}</span>
 		<input type="text" id="slug" name="slug" value="{{ $page->slug }}" placeholder="{{ trans('kotoba::general.slug') }}" class="form-control">
 </div>
 </div>

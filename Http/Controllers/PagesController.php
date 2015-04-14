@@ -48,7 +48,7 @@ class PagesController extends HimawariController {
 	public function index()
 	{
 		$pages = $this->page->withDepth()->defaultOrder()->get();
-// dd($pages);
+//dd($pages);
 		return View('himawari::pages.index', compact('pages'));
 	}
 
@@ -59,7 +59,9 @@ class PagesController extends HimawariController {
 	 */
 	public function create()
 	{
-		$parents = $this->pageRepo->getParents();
+// 		$parents = $this->pageRepo->getParents();
+// 		$parents = $this->pageRepo->getParents()->with('content');
+		$parents = '';
 //		$parents = $this->pageRepo->getParents()->with('contents');
 //dd($parents);
 		return View('himawari::pages.create', compact('parents'));
@@ -74,12 +76,12 @@ class PagesController extends HimawariController {
 		PageCreateRequest $request
 		)
 	{
-dd($request);
+//dd($request);
 
  		$data = $this->pageRepo->preprocessData($request->all());
 
 /*
-      "title" => "Index"
+      "title" => "index"
       "summary" => ""
       "body" => ""
       "user_id" => ""

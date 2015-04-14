@@ -39,6 +39,22 @@ class CreatePagesTable extends Migration
 			$table->date('publish_start')->nullable();
 			$table->date('publish_end')->nullable();
 
+//			$table->integer('page_id')->index()->unique()->unsigned();
+			$table->string('locale')->index()->nullable();
+
+			$table->string('slug')->unique()->nullable();
+
+			$table->string('title')->unique()->nullable();
+			$table->string('summary')->nullable();
+			$table->text('body')->nullable();
+
+			$table->string('meta_title')->nullable();
+			$table->string('meta_keywords')->nullable();
+			$table->string('meta_description')->nullable();
+
+//			$table->string('uri')->unique()->nullable();
+			$table->string('uri')->nullable();
+
 
 			$table->softDeletes();
 			$table->timestamps();

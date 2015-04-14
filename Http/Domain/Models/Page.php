@@ -31,24 +31,45 @@ class Page extends \Kalnoy\Nestedset\Node {
 
 // DEFINE Fillable -------------------------------------------------------
 /*
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `_lft` int(10) unsigned NOT NULL,
-  `_rgt` int(10) unsigned NOT NULL,
-  `parent_id` int(10) unsigned DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `print_status_id` tinyint(4) NOT NULL DEFAULT '0',
+  `is_published` tinyint(4) NOT NULL DEFAULT '0',
+  `is_featured` tinyint(4) NOT NULL DEFAULT '0',
+  `publish_start` date DEFAULT NULL,
+  `publish_end` date DEFAULT NULL,
+  `page_id` int(10) unsigned NOT NULL,
+  `locale` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `summary` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `body` text COLLATE utf8_unicode_ci,
+  `meta_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `uri` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
 */
 //	protected $fillable = array('slug', 'title', 'parent_id');
 	protected $fillable = [
 		'id',
-		'slug',
-		'title',
 		'_lft',
 		'_rgt',
-		'parent_id'
+		'parent_id',
+		'user_id',
+		'print_status_id',
+		'is_published',
+		'is_featured',
+		'publish_start',
+		'publish_end',
+		'page_id',
+		'locale',
+		'slug',
+		'title',
+		'summary',
+		'body',
+		'meta_title',
+		'meta_keywords',
+		'meta_description',
+		'uri',
 		];
 
 
@@ -60,14 +81,14 @@ class Page extends \Kalnoy\Nestedset\Node {
 	public static $slugPattern = '[a-z0-9\-/]+';
 
 
-//	protected $visible = array('title', 'slug', 'children');
+	protected $visible = array('title', 'slug', 'children');
 
 
 // DEFINE Relationships --------------------------------------------------
 
 	public function content()
 	{
-		return $this->belongsTo('App\Modules\Himawari\Http\Domain\Models\Content');
+		return $this->hasOne('App\Modules\Himawari\Http\Domain\Models\Content');
 	}
 
 	public function contents()
@@ -90,61 +111,6 @@ public function assets()
 
 // Functions --------------------------------------------------
 
-
-
-	/**
-	 * Apply some processing for an input.
-	 *
-	 * @param  array  $data
-	 *
-	 * @return array
-	 */
-// 	public function preprocessData(array $data)
-// 	{
-// 		if (isset($data['slug'])) $data['slug'] = strtolower($data['slug']);
-//
-// 		return $data;
-// 	}
-
-    /**
-     * Perform validation.
-     *
-     * @return \Illuminate\Support\MessageBag|true
-     */
-//     public function validate()
-//     {
-//         $v = Validator::make($this->attributes, $this->getRules());
-//
-//         return $v->fails() ? $v->messages() : true;
-//     }
-
-    /**
-     * Get validation rules.
-     *
-     * @return array
-     */
-//     public function getRules()
-//     {
-//         $rules = array(
-//             'title' => 'required',
-//
-//             'slug'  => array(
-//                 'required',
-//                 'regex:#^'.self::$slugPattern.'$#',
-//                 'unique:pages'.($this->exists ? ',slug,'.$this->id : ''),
-//             ),
-//
-// //            'body'  => 'required',
-//         );
-//
-//         if ($this->exists && ! $this->isRoot())
-//         {
-//             $rules['parent_id'] = 'required|exists:pages,id';
-//         }
-//
-//         return $rules;
-//     }
-
     /**
      * Get the contents.
      *
@@ -160,8 +126,8 @@ public function assets()
         $contents = $source
             ->descendants()
             ->defaultOrder()
-//            ->get([ 'id', 'slug', 'title', static::LFT, 'parent_id' ])
-            ->get([ 'id', static::LFT, 'parent_id' ])
+            ->get([ 'id', 'slug', 'title', static::LFT, 'parent_id' ])
+//            ->get([ 'id', static::LFT, 'parent_id' ])
             ->toTree();
 
         return $contents;
@@ -177,7 +143,7 @@ public function assets()
     public function getNext(array $columns = array('slug', 'title', 'parent_id'))
     {
         $result = parent::getNext($columns);
-dd($result);
+//dd($result);
         return $result && $result->parent_id == 1 ? null : $result;
     }
 

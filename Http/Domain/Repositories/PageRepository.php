@@ -119,8 +119,8 @@ dd($id);
 	 */
 	public function getParents()
 	{
-//		$all = $this->model->select('id', 'title')->withDepth()->defaultOrder()->get();
-		$all = $this->model->select('id')->with('content')->withDepth()->defaultOrder()->get();
+		$all = $this->model->select('id', 'title')->withDepth()->defaultOrder()->get();
+//		$all = $this->model->select('id')->with('content')->withDepth()->defaultOrder()->get();
 		$result = array();
 //dd($all);
 

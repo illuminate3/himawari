@@ -51,6 +51,7 @@ class PageController extends HimawariController {
 	{
 //dd('die');
 		$page = $this->page->whereSlug($slug)->first();
+//		$page = $this->page->whereSlug($slug)->with('content')->first();
 //		$page = $this->page->with('contents')->whereSlug($slug)->first();
 //dd($page);
 

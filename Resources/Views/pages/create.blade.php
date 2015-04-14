@@ -74,7 +74,7 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-		<input type="text" id="user_id" name="user_id" placeholder="{{ trans('kotoba::cms.user_id') }}" class="form-control">
+		<input type="text" id="user_id" name="user_id" placeholder="{{ Lang::choice('kotoba::account.user', 1) }}" class="form-control">
 </div>
 </div>
 
@@ -82,7 +82,7 @@
 <div class="form-group">
 <div class="input-group">
 	<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-		<input type="text" id="print_status_id" name="print_status_id" placeholder="{{ trans('kotoba::cms.print_status_id') }}" class="form-control">
+		<input type="text" id="print_status_id" name="print_status_id" placeholder="{{ trans('kotoba::cms.in_print') }}" class="form-control">
 </div>
 </div>
 
