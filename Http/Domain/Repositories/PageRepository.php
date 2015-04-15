@@ -3,6 +3,11 @@ namespace App\Modules\Himawari\Http\Domain\Repositories;
 
 use App\Modules\Himawari\Http\Domain\Models\Page;
 
+use DB;
+// use Flash;
+// use Input;
+// use Lang;
+
 //class PageRepository extends \Kalnoy\Nestedset\Node {
 class PageRepository extends BaseRepository {
 
@@ -135,6 +140,12 @@ dd($id);
 //dd($result);
 
 		return $result;
+	}
+
+	public function getUsers()
+	{
+		$users = DB::table('users')->lists('email', 'id');
+		return $users;
 	}
 
     /**

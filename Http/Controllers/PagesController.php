@@ -10,9 +10,10 @@ use App\Modules\Himawari\Http\Requests\PageCreateRequest;
 use App\Modules\Himawari\Http\Requests\PageUpdateRequest;
 
 use App;
-use Datatables;
+//use Datatables;
 use Flash;
 use Input;
+use Lang;
 
 use dflydev\markdown\MarkdownParser;
 
@@ -59,12 +60,20 @@ class PagesController extends HimawariController {
 	 */
 	public function create()
 	{
-// 		$parents = $this->pageRepo->getParents();
+ 		$parents = $this->pageRepo->getParents();
 // 		$parents = $this->pageRepo->getParents()->with('content');
-		$parents = '';
+//		$parents = '';
 //		$parents = $this->pageRepo->getParents()->with('contents');
 //dd($parents);
-		return View('himawari::pages.create', compact('parents'));
+		$users = $this->pageRepo->getUsers();
+		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+
+
+		return View('himawari::pages.create',
+			compact(
+				'parents',
+				'users'
+			));
 	}
 
 	/**
