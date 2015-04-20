@@ -68,10 +68,13 @@ class PagesController extends HimawariController {
 		$users = $this->pageRepo->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
 
+		$print_statuses = $this->pageRepo->getPrintStatuses();
+		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
 		return View('himawari::pages.create',
 			compact(
 				'parents',
+				"print_statuses",
 				'users'
 			));
 	}
@@ -134,6 +137,13 @@ class PagesController extends HimawariController {
 		$parents = $this->pageRepo->getParents();
 //dd($parents);
 
+		$users = $this->pageRepo->getUsers();
+		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+
+		$print_statuses = $this->pageRepo->getPrintStatuses();
+		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
+
+
 		return View('himawari::pages.edit',
 			$this->page->findOrFail($id),
 				compact(
@@ -143,7 +153,9 @@ class PagesController extends HimawariController {
 					'modal_id',
 					'model',
 					'page',
-					'parents'
+					'parents',
+					"print_statuses",
+					'users'
 			));
 	}
 

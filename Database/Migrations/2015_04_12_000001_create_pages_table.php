@@ -55,6 +55,7 @@ class CreatePagesTable extends Migration
 //			$table->string('uri')->unique()->nullable();
 			$table->string('uri')->nullable();
 
+			$table->tinyInteger('tenant_id')->default(0);
 
 			$table->softDeletes();
 			$table->timestamps();

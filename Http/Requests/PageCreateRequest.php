@@ -36,7 +36,7 @@ class PageCreateRequest extends FormRequest {
 	{
 		return [
 			'slug'						=> 'required',
-			'title'				=> 'required'
+			'title'						=> 'required'
 		];
 	}
 

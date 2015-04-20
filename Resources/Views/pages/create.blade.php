@@ -138,82 +138,84 @@
 <div class="col-sm-4">
 
 
-		@if (!isset($page) || !$page->isRoot())
-			<div class="form-group padding-bottom-xl">
-				<label for="inputStatus" class="col-sm-2 control-label">{{ trans('kotoba::general.parent') }}:</label>
-				<div class="col-sm-10">
-					{!!
-						Form::select(
-							'parent_id',
-							$parents,
-							null,
-							array(
-								'class' => 'form-control chosen-select'
-							)
-						)
-					!!}
-				</div>
-			</div>
-		@endif
-
-
-<div class="form-group padding-bottom-xl">
-	<label for="category_id" class="col-sm-2 control-label">{{ Lang::choice('kotoba::account.user', 1) }}:</label>
-	<div class="col-sm-10">
-		{!!
-			Form::select(
-				'user_id',
-				$users,
-				null,
-				array(
-					'class' => 'form-control chosen-select'
-				)
-			)
-		!!}
-	</div>
-</div>
-
-
-		<div class="form-group">
-		<div class="input-group">
-			<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-				<input type="text" id="print_status_id" name="print_status_id" placeholder="{{ trans('kotoba::cms.in_print') }}" class="form-control">
-		</div>
-		</div>
-
-
-		<div class="form-group">
-		<div class="input-group">
-			<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-				<input type="text" id="is_published" name="is_published" placeholder="{{ trans('kotoba::cms.is_published') }}" class="form-control">
-		</div>
-		</div>
-
-
-		<div class="form-group">
-			<label for="is_featured" class="col-sm-2 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+	@if (!isset($page) || !$page->isRoot())
+		<div class="form-group padding-bottom-xl">
+			<label for="inputStatus" class="col-sm-2 control-label">{{ trans('kotoba::general.parent') }}:</label>
 			<div class="col-sm-10">
-				<div class="checkbox margin-bottom-xl">
-					<label>
-						<input type="checkbox" name="is_featured">
-					</label>
-				</div>
+				{!!
+					Form::select(
+						'parent_id',
+						$parents,
+						null,
+						array(
+							'class' => 'form-control chosen-select'
+						)
+					)
+				!!}
 			</div>
 		</div>
+	@endif
 
+
+	<div class="form-group padding-bottom-xl">
+		<label for="category_id" class="col-sm-2 control-label">{{ Lang::choice('kotoba::account.user', 1) }}:</label>
+		<div class="col-sm-10">
+			{!!
+				Form::select(
+					'user_id',
+					$users,
+					null,
+					array(
+						'class' => 'form-control chosen-select'
+					)
+				)
+			!!}
+		</div>
+	</div>
+
+
+	<div class="form-group padding-bottom-xl">
+		<label for="category_id" class="col-sm-2 control-label">{{ Lang::choice('kotoba::cms.print_status', 1) }}:</label>
+		<div class="col-sm-10">
+			{!!
+				Form::select(
+					'print_status_id',
+					$print_statuses,
+					null,
+					array(
+						'class' => 'form-control chosen-select'
+					)
+				)
+			!!}
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label for="is_featured" class="col-sm-2 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+		<div class="col-sm-10">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="is_featured">
+				</label>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="form-group padding-bottom-xl margin-bottom-xl">
+		<label for="publish_start" class="col-sm-2 control-label">{{ trans('kotoba::cms.publish_start') }}</label>
+		<div id="datepicker-container" class="col-sm-10">
+			<div class="input-group date">
+				<input type="text" id="publish_start" name="publish_start" class="form-control">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
+<br>
 
 		<div class="form-group padding-bottom-xl">
-			<label for="publish_start" class="col-sm-2 control-label">{{ trans('kotoba::cms.publish_start') }}</label>
-			<div id="datepicker-container" class="col-sm-10">
-				<div class="input-group date">
-					<input type="text" id="publish_start" name="publish_start" class="form-control">
-					<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="form-group padding-top-lg">
 			<label for="publish_end" class="col-sm-2 control-label">{{ trans('kotoba::cms.publish_end') }}</label>
 			<div id="datepicker-container" class="col-sm-10">
 				<div class="input-group date">
@@ -224,7 +226,15 @@
 		</div>
 
 
-		<div class="form-group padding-top-xl">
+		<div class="form-group">
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+				<input type="text" id="tenant_id" name="tenant_id" placeholder="{{ trans('kotoba::cms.tenant') }}" class="form-control">
+		</div>
+		</div>
+
+
+		<div class="form-group">
 		<div class="input-group">
 			<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
 				<input type="text" id="locale" name="locale" placeholder="{{ trans('kotoba::cms.locale') }}" class="form-control">
@@ -235,7 +245,7 @@
 		<div class="form-group">
 		<div class="input-group">
 			<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-				<input type="text" id="uri" name="uri" placeholder="{{ trans('kotoba::cms.uri') }}" class="form-control">
+				<input type="text" id="uri" name="uri" placeholder="{{ trans('kotoba::cms.link') }}" class="form-control">
 		</div>
 		</div>
 
@@ -245,7 +255,6 @@
 
 </div><!-- ./col -->
 </div><!-- ./row -->
-
 
 
 <hr>

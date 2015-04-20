@@ -37,7 +37,7 @@ class ContentCreateRequest extends FormRequest {
 	{
 		return [
 			'make'						=> 'required',
-			'model'				=> 'required'
+			'model'						=> 'required'
 		];
 	}
 

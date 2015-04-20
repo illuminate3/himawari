@@ -148,6 +148,12 @@ dd($id);
 		return $users;
 	}
 
+	public function getPrintStatuses()
+	{
+		$print_statuses = DB::table('print_statuses')->lists('name', 'id');
+		return $print_statuses;
+	}
+
     /**
      * Get the contents.
      *
