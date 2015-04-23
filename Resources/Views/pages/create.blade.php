@@ -160,7 +160,7 @@
 	<div class="form-group padding-bottom-xl">
 		<label for="category_id" class="col-sm-2 control-label">{{ Lang::choice('kotoba::account.user', 1) }}:</label>
 		<div class="col-sm-10">
-			{!!
+			{{--
 				Form::select(
 					'user_id',
 					$users,
@@ -169,7 +169,7 @@
 						'class' => 'form-control chosen-select'
 					)
 				)
-			!!}
+			--}}
 		</div>
 	</div>
 
@@ -177,7 +177,7 @@
 	<div class="form-group padding-bottom-xl">
 		<label for="category_id" class="col-sm-2 control-label">{{ Lang::choice('kotoba::cms.print_status', 1) }}:</label>
 		<div class="col-sm-10">
-			{!!
+			{{--
 				Form::select(
 					'print_status_id',
 					$print_statuses,
@@ -186,7 +186,7 @@
 						'class' => 'form-control chosen-select'
 					)
 				)
-			!!}
+			--}}
 		</div>
 	</div>
 

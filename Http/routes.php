@@ -15,7 +15,7 @@ Route::get('welcome/himawari', array(
 	'uses'=>'HimawariController@welcome'
 	));
 
-
+/*
 Route::group(
 [
 	'prefix' => LaravelLocalization::setLocale(),
@@ -23,7 +23,7 @@ Route::group(
 ],
 function()
 {
-	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
+	// ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP //
 // 	Route::get('/', function()
 // 	{
 // //dd(LaravelLocalization::getSupportedLocales());
@@ -33,6 +33,7 @@ function()
 // 	});
 
 });
+*/
 
 // Route::resource('pages', 'PagesController', array('except' => array('show')));
 //

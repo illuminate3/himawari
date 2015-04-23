@@ -67,6 +67,7 @@ class PagesController extends HimawariController {
 //dd($parents);
 		$users = $this->pageRepo->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//dd($users);
 
 		$print_statuses = $this->pageRepo->getPrintStatuses();
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
