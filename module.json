@@ -1,8 +1,8 @@
 {
-	"name": "Himawari",
-	"slug": "himawari",
-	"version": "1.0",
-	"description": "CMS for Rakko",
-	"enabled": false,
-	"order": 12
+    "name": "Himawari",
+    "slug": "himawari",
+    "description": "CMS for Rakko",
+    "version": "1.0",
+    "order": "12",
+    "enabled": null
 }
