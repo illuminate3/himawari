@@ -33,6 +33,7 @@ class CreateContentsTable extends Migration
 			$table->increments('id');
 
 			$table->integer('page_id')->index()->unique()->unsigned();
+			$table->integer('site_id')->index();
 			$table->string('locale')->index()->nullable();
 
 			$table->string('slug')->unique()->nullable();

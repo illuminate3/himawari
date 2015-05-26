@@ -10,22 +10,22 @@ class ModuleSeeder extends Seeder {
 	{
 
 // Module Information
-		$module = array(
-			'name'					=> 'Himawari',
-			'slug'					=> 'himawari',
-			'version'				=> '1.0',
-			'description'			=> 'CMS for Rakko',
-			'enabled'				=> 1,
-			'order'					=> 12
-		);
+// 		$module = array(
+// 			'name'					=> 'Himawari',
+// 			'slug'					=> 'himawari',
+// 			'version'				=> '1.0',
+// 			'description'			=> 'CMS for Rakko',
+// 			'enabled'				=> 1,
+// 			'order'					=> 12
+// 		);
 
 // Insert Module Information
-		if (Schema::hasTable('modules'))
-		{
-
-			DB::table('modules')->insert( $module );
-
-		}
+// 		if (Schema::hasTable('modules'))
+// 		{
+//
+// 			DB::table('modules')->insert( $module );
+//
+// 		}
 
 // Permission Information
 		$permissions = array(

@@ -22,7 +22,7 @@ class CreateContentPageTable extends Migration
 		Schema::create($this->prefix . 'content_page', function(Blueprint $table) {
 
 			$table->engine = 'InnoDB';
-			$table->increments('id');
+//			$table->increments('id');
 
 			$table->integer('content_id')->unsigned()->index();
 			$table->integer('page_id')->unsigned()->index();
