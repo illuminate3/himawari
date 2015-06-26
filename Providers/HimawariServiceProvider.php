@@ -57,7 +57,7 @@ class HimawariServiceProvider extends ServiceProvider
  */
 //require app_path().'/Modules/Himawari/Lib/helpers.php';
 //require app_path().'/Modules/Himawari/Lib/composers.php';
-require app_path().'/Modules/Himawari/Lib/macros.php';
+//require app_path().'/Modules/Himawari/Lib/macros.php';
 	}
 
 

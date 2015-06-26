@@ -60,10 +60,10 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::resource('print_statuses', 'PrintStatusesController');
 
 // Routes
-	Route::delete('contents/{id}', array(
-		'as'=>'contents.destroy',
-		'uses'=>'ContentsController@destroy'
-		));
+// 	Route::delete('contents/{id}', array(
+// 		'as'=>'contents.destroy',
+// 		'uses'=>'ContentsController@destroy'
+// 		));
 // 	Route::delete('sites/{id}', array(
 // 	//	'as'=>'sites.destroy',
 // 		'uses'=>'SitesController@destroy'
@@ -77,13 +77,18 @@ Route::group(['prefix' => 'admin'], function() {
 
 });
 
+Route::get('{page}', 'FrontendController@get_page')->where('page', '.*');
+
+
+
+
 // Route::get('/', 'PageController@show');
 // Route::get('/', array(
 // 	'as' => 'home',
 // 	'uses' => 'PageController@show'
 // 	));
 
-
+/*
 Route::resource('pages', 'PagesController', array('except' => array('show')));
 
 Route::group(array('prefix' => 'pages'), function () {
@@ -115,7 +120,7 @@ Route::group(array('prefix' => 'pages'), function () {
 // route
 Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
 	->where('slug', App\Modules\Himawari\Http\Domain\Models\Page::$slugPattern);
-
+*/
 
 /*
 //Route::when('assets/*', 'AssetsController');

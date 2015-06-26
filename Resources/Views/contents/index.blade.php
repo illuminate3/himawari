@@ -14,60 +14,14 @@
 	<script src="{{ asset('assets/vendors/DataTables-1.10.5/plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
 @stop
 
-
 @section('inline-scripts')
 $(document).ready(function() {
 oTable =
 	$('#table').DataTable({
-		"processing": true,
-		"serverSide": true,
-		"ajax": "{{ URL::to('/admin/api/contents') }}",
-		"columns": [
-			{
-				data: 'id',
-				name: 'id',
-				visible: false
-			},
-			{
-				data: 'title',
-				name: 'title',
-				orderable: true,
-				searchable: true
-			},
-			{
-				data: 'make',
-				name: 'make',
-				orderable: true,
-				searchable: true
-			},
-			{
-				data: 'model',
-				name: 'model',
-				orderable: true,
-				searchable: true
-			},
-			{
-				data: 'model_number',
-				name: 'model_number',
-				orderable: true,
-				searchable: true
-			},
-			{
-				data: 'description',
-				name: 'description',
-				orderable: true,
-				searchable: true
-			},
-			{
-				data: 'actions',
-				name: 'actions',
-				orderable: false,
-				searchable: false
-			}
-		]
 	});
 });
 @stop
+
 
 
 {{-- Content --}}
@@ -81,30 +35,52 @@ oTable =
 		{{ trans('kotoba::button.new') }}
 	</a>
 	</p>
-	<i class="fa fa-angle-double-right fa-lg"></i>
+	<i class="fa fa-paperclip fa-lg"></i>
 		{{ Lang::choice('kotoba::cms.content', 2) }}
 	<hr>
 </h1>
 </div>
 
 
+@if (count($contents))
+
 <div class="row">
 <table id="table" class="table table-striped table-hover">
 	<thead>
 		<tr>
-			<th>{{ trans('kotoba::table.id') }}</th>
-			<th>{{ trans('kotoba::table.page') }}</th>
-			<th>{{ trans('kotoba::table.make') }}</th>
-			<th>{{ trans('kotoba::table.model') }}</th>
-			<th>{{ trans('kotoba::table.model_number') }}</th>
-			<th>{{ trans('kotoba::table.description') }}</th>
-
+			<th>{{ trans('kotoba::table.title') }}</th>
+			<th>{{ trans('kotoba::table.summary') }}</th>
+			<th>{{ trans('kotoba::table.online') }}</th>
+			<th>{{ trans('kotoba::table.deleted') }}</th>
 			<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 		</tr>
 	</thead>
-	<tbody></tbody>
+	<tbody>
+		@foreach ($contents as $content)
+			<tr>
+				<td>{{ $content->title }}</td>
+				<td>{{ $content->summary }}</td>
+				<td>{{ $content->is_online }}</td>
+				<td>{{ $content->is_deleted }}</td>
+				<td>
+					<a href="/admin/contents/{{ $content->id }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
+						<i class="fa fa-pencil fa-fw"></i>
+						{{ trans('kotoba::button.edit') }}
+					</a>
+				</td>
+			</tr>
+		@endforeach
+	</tbody>
 </table>
 </div>
 
 
+@else
+<div class="alert alert-info">
+	{{ trans('kotoba::general.error.not_found') }}
+</div>
+@endif
+
+
+</div>
 @stop

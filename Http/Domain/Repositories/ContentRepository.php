@@ -1,9 +1,22 @@
 <?php
 namespace App\Modules\Himawari\Http\Domain\Repositories;
 
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+
+use App\Modules\Himawari\Http\Domain\Repositories\BaseRepository as BaseRepository;
+
+use App\Modules\General\Http\Domain\Models\Locale;
 use App\Modules\Himawari\Http\Domain\Models\Content;
 
+use App;
+use DB;
+use Route;
+use Session;
+
+
 class ContentRepository extends BaseRepository {
+
 
 	/**
 	 * The Module instance.
@@ -23,7 +36,13 @@ class ContentRepository extends BaseRepository {
 		)
 	{
 		$this->model = $content;
+
+		$this->id = Route::current()->parameter( 'id' );
+//		$this->pagelist = Page::getParentOptions( $exceptId = $this->id );
+//		$this->pagelist = Content::getParentOptions( $exceptId = $this->id );
+//dd($this->pagelist);
 	}
+
 
 	/**
 	 * Get role collection.
@@ -32,11 +51,23 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function create()
 	{
-//		$allPermissions =  $this->permission->all()->lists('name', 'id');
-//dd($allPermissions);
+		$lang = Session::get('locale');
+		$locales = $this->getLocales();
+		$locale_id = 1;
+//dd($locales);
+//		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
-		return compact('');
+		$pagelist = $this->getParents($locale_id, null);
+		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
+//dd($pagelist);
+
+		return compact(
+			'lang',
+			'locales',
+			'pagelist'
+			);
 	}
+
 
 	/**
 	 * Get user collection.
@@ -46,10 +77,17 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function show($id)
 	{
-		$content = $this->model->with('assets')->find($id);
-//dd($content['assets']);
-		return compact('content');
+		$content = $this->model->find($id);
+		$links = Content::find($id)->contentlinks;
+//$content = $this->content->show($id);
+
+//$content = $this->model->where('id', $id)->first();
+//		$content = new Collection($content);
+//dd($content);
+
+		return compact('content', 'links');
 	}
+
 
 	/**
 	 * Get user collection.
@@ -60,17 +98,25 @@ class ContentRepository extends BaseRepository {
 	public function edit($id)
 	{
 		$content = $this->model->find($id);
-//dd($content);
 
-		if ($content->image != NULL) {
-			$image = $content->image;
-		} else {
-			$image = null;
-		}
+		$lang = Session::get('locale');
+		$locales = $this->getLocales();
+		$locale_id = 1;
+//dd($locales);
+//		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
+		$pagelist = $this->getParents($locale_id, $id);
+		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
+//dd($pagelist);
 
-		return compact('content', 'image');
+		return compact(
+			'content',
+			'lang',
+			'locales',
+			'pagelist'
+			);
 	}
+
 
 	/**
 	 * Get all models.
@@ -80,9 +126,54 @@ class ContentRepository extends BaseRepository {
 	public function store($input)
 	{
 //dd($input);
-		$this->model = new Content;
-		$this->model->create($input);
+
+		$values = [
+//			'name'			=> $input['name'],
+			'is_current'		=> 1,
+			'is_online'			=> $input['is_online'],
+			'link'				=> $input['link'],
+			'order'				=> $input['order'],
+			'user_id'			=> 1
+		];
+//dd($values);
+
+		$content = Content::create($values);
+
+		$locales = $this->getLocales();
+
+		foreach($locales as $locale => $properties)
+		{
+			App::setLocale($properties['locale']);
+
+/*
+			if ( !isset($input['status_'.$properties['id']]) ) {
+				$status = 0;
+			} else {
+				$status = $input['status_'.$properties['id']];
+			}
+*/
+
+			$values = [
+				'content'		=> $input['content_'.$properties['id']],
+				'summary'		=> $input['summary_'.$properties['id']],
+				'title'			=> $input['title_'.$properties['id']],
+
+				'slug'			=> $input['slug_'.$properties['id']],
+
+				'meta_title'			=> $input['meta_title_'.$properties['id']],
+				'meta_keywords'			=> $input['meta_keywords_'.$properties['id']],
+				'meta_description'		=> $input['meta_description_'.$properties['id']]
+			];
+
+			$content->update($values);
+		}
+
+		$this->manageBaum($input['parent_id'], null);
+
+		App::setLocale('en');
+		return;
 	}
+
 
 	/**
 	 * Update a role.
@@ -93,43 +184,225 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function update($input, $id)
 	{
-//dd($input['enabled']);
+//dd($input);
+
 		$content = Content::find($id);
-		$content->update($input);
+
+		$values = [
+//			'name'			=> $input['name'],
+			'is_current'		=> 1,
+			'is_online'			=> $input['is_online'],
+			'link'				=> $input['link'],
+			'order'				=> $input['order'],
+			'user_id'			=> 1
+		];
+
+		$content->update($values);
+
+		$locales = $this->getLocales();
+
+		foreach($locales as $locale => $properties)
+		{
+			App::setLocale($properties['locale']);
+
+			$values = [
+				'content'		=> $input['content_'.$properties['id']],
+				'summary'		=> $input['summary_'.$properties['id']],
+				'title'			=> $input['title_'.$properties['id']],
+
+				'slug'			=> $input['slug_'.$properties['id']],
+
+				'meta_title'			=> $input['meta_title_'.$properties['id']],
+				'meta_keywords'			=> $input['meta_keywords_'.$properties['id']],
+				'meta_description'		=> $input['meta_description_'.$properties['id']]
+			];
+
+			$content->update($values);
+		}
+
+		$this->manageBaum($input['parent_id'], $id);
+
+		App::setLocale('en');
+		return;
 	}
 
 
-// Functions --------------------------------------------------
-
-	public function getAssets($content_id)
+	public function getLocales()
 	{
-		$assets = DB::table('assets')
-			->where('content_id', '=', $content_id)
+
+// 		$config = App::make('config');
+// 		$locales = (array) $config->get('languages.supportedLocales', []);
+ 		$locales = Locale::all();
+// 		$locales = DB::table('locales')
+// 			->lists('locale');
+
+//dd($locales);
+
+	return $locales;
+	}
+
+
+	public function getContentID($name)
+	{
+
+		$id = DB::table('contents')
+			->where('name', '=', $name)
+			->pluck('id');
+
+		return $id;
+	}
+
+//	public function getParents($exceptId, $locale)
+	public function getParents($locale_id, $id)
+	{
+		if ($id != null ) {
+			$query = Content::select('content_translations.title AS title', 'contents.id AS id')
+				->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+				->where('content_translations.locale_id', '=', $locale_id)
+				->where('contents.id', '!=', $id, 'AND')
+				->get();
+		} else {
+			$query = Content::select('content_translations.title AS title', 'contents.id AS id')
+			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+			->where('content_translations.locale_id', '=', $locale_id)
 			->get();
-		return $assets;
+		}
+
+		$parents = $query->lists('title', 'id');
+//dd($parents);
+
+		return $parents;
 	}
 
-	public function attachContent($id, $page_id)
+
+	public function manageBaum($parent_id, $id)
 	{
-//dd($page_id);
-		$content = $this->model->find($id);
-		$content->pages()->attach($page_id);
+//dd($parent_id);
+
+		if ($parent_id != 0 && $id != null) {
+			$node = Content::find($id);
+			$node->makeChildOf($parent_id);
+		}
+
+		if ($parent_id == 0 && $id != null) {
+			$node = Content::find($id);
+			$node->makeRoot();
+		}
+
 	}
 
-	public function detachContent($id, $page_id)
+
+	public function getPageID($slug)
 	{
-//dd($page_id);
-		$content = $this->model->find($id)->pages()->detach();
+//dd($slug);
+		$page_ID = DB::table('content_translations')
+			->where('content_translations.slug', '=', $slug)
+			->pluck('content_id');
+//dd($page_ID);
+
+		return $page_ID;
 	}
+
+
+	public function getContent($page_ID)
+	{
+//dd($page_ID);
+ 		$content = Content::find($page_ID);
+/*
+		$page = DB::table('contents')
+			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+			->where('content_translations.locale_id', '=', $locale_id)
+//			->where('contents.is_current', '=', 1, 'AND')
+			->where('contents.is_online', '=', 1, 'AND')
+			->where('contents.is_deleted', '=', 0, 'AND')
+			->where('content_translations.slug', '=', $slug, 'AND')
+			->pluck('contents.id');
+*/
+//dd($content);
+
+		return $content;
+	}
+
+	public function getPage($locale_id, $slug)
+	{
+//dd($slug);
+		$page = DB::table('contents')
+			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+			->where('content_translations.locale_id', '=', $locale_id)
+//			->where('contents.is_current', '=', 1, 'AND')
+			->where('contents.is_online', '=', 1, 'AND')
+			->where('contents.is_deleted', '=', 0, 'AND')
+			->where('content_translations.slug', '=', $slug, 'AND')
+			->pluck('contents.id');
+//dd($page);
+
+ 		$content = Content::find($page);
+dd($content);
+
 
 /*
-public function syncContent($id, $page_id)
-{
-	$content = Content::find($id);
-
-// this is not a proper array
-	$content->pages()->sync($page_id);
-}
+	   $page =  static::whereIsCurrent(1)
+					   ->whereIsOnline(1)
+					   ->whereIsDeleted(0)
+					   ->whereSlug($slug)
+					   ->first();
 */
+		return $page;
+	}
+
+
+
+	public function getRoots($locale_id)
+	{
+		// $roots = Cache::rememberForever('roots', function()
+		// {
+		$page = DB::table('contents')
+			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+			->where('content_translations.locale_id', '=', $locale_id)
+			->where('contents.is_online', '=', 1, 'AND')
+			->where('contents.is_deleted', '=', 0, 'AND')
+			->where('contents.parent_id', '=', null, 'AND')
+//			->where('content_translations.slug', '=', $slug, 'AND')
+//			->first();
+			->orderBy('order')
+			->get();
+//dd($page);
+
+/*
+			return static::whereIsCurrent(1)
+							->whereIsOnline(1)
+							->whereIsDeleted(0)
+							->whereParentId(NULL)
+							->where('slug', '<>', 'home-page')
+							->where('slug', '<>', 'search')
+							->where('slug', '<>', 'terms-conditions')
+							->orderBy('order')
+							->get();
+*/
+		// });
+
+		// return $roots;
+	}
+
+
+
+	public static function getStaticRoots($locale_id)
+	{
+		// $roots = Cache::rememberForever('roots', function()
+		// {
+		$page = DB::table('contents')
+			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
+			->where('content_translations.locale_id', '=', $locale_id)
+			->where('contents.is_online', '=', 1, 'AND')
+			->where('contents.is_deleted', '=', 0, 'AND')
+			->where('contents.parent_id', '=', null, 'AND')
+//			->where('content_translations.slug', '=', $slug, 'AND')
+//			->first();
+			->orderBy('order')
+			->get();
+//dd($page);
+		return $page;
+	}
+
 
 }

@@ -1,12 +1,19 @@
 <?php
 namespace App\Modules\Himawari\Providers;
 
-use App\Providers\MenuServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-use Auth;
+use App\Modules\Himawari\Http\Domain\Models\Content as Content;
+
+// use Auth;
+// use Cache;
+use Config;
+// use DB;
 use Menu;
+// use Session;
+// use View;
 
-class HimawariMenuProvider extends MenuServiceProvider {
+class HimawariMenuProvider extends ServiceProvider {
 
 	/**
 	 * Bootstrap any application services.
@@ -16,6 +23,35 @@ class HimawariMenuProvider extends MenuServiceProvider {
 	public function boot()
 	{
 
+
+		Menu::handler('top')->hydrate(function()
+			{
+			$pages = Content::get();
+//dd($pages);
+			return $pages;
+			},
+			function($children, $item)
+			{
+				if($item->depth < 1) {
+					$children->add($item->translate(Config::get('app.locale'))->slug, $item->translate(Config::get('app.locale'))->title, Menu::items($item->as));
+				}
+			});
+
+
+
+		Menu::handler('right')->hydrate(function()
+			{
+			$pages = Content::get();
+//dd($pages);
+			return $pages;
+			},
+			function($children, $item)
+			{
+				$children->add($item->translate(Config::get('app.locale'))->slug, $item->translate(Config::get('app.locale'))->title, Menu::items($item->as));
+			});
+
+
+/*
 // navbar menu
 //		if ( (Auth::user()->can('manage_admin')) || (Auth::user()->can('manage_himawari')) ) {
 		$menu = Menu::get('navbar');
@@ -24,10 +60,9 @@ class HimawariMenuProvider extends MenuServiceProvider {
 		$menu->pages->add('Print Statuses', 'admin/print_statuses');
 		$menu->sortBy('order');
 //		}
-
 // right side drop down
 //		$menu = Menu::get('admin');
-
+*/
 	}
 
 	/**
