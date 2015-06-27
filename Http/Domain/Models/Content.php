@@ -26,7 +26,7 @@ class Content extends Node implements TranslatableContract {
 
 
 // Translation Model -------------------------------------------------------
-	protected $translator = 'App\Models\ContentTranslation';
+	protected $translator = 'App\Modules\Himawari\Http\Domain\Models\ContentTranslation';
 
 
 // DEFINE Hidden -------------------------------------------------------

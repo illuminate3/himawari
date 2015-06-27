@@ -1,15 +1,13 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Modules\Himawari\Http\Controllers;
 
-use App\Models\Content;
-use App\Models\Repositories\ContentRepository;
-//use App\Models\Nifty\Page;
-//use App\Models\Repositories\PageRepository;
+use App\Modules\Himawari\Http\Domain\Models\Content;
+use App\Modules\Himawari\Http\Domain\Repositories\ContentRepository;
 
 use App\Helpers\Nifty\NiftyMenus;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\DeleteRequest;
+use App\Modules\Himawari\Http\Requests\DeleteRequest;
 // use App\Http\Requests\PageCreateRequest;
 // use App\Http\Requests\PageUpdateRequest;
 
@@ -26,7 +24,7 @@ use Route;
 use Theme;
 
 
-class FrontendController extends Controller {
+class FrontendController extends HimawariController {
 
 
 	public function __construct(
@@ -94,7 +92,7 @@ class FrontendController extends Controller {
 // 			$secMenu = $secMenu;
 
 
-			return View('nifty.frontends.index', compact(
+			return View('himawari::frontends.index', compact(
 //				'mainMenu',
 //				'secMenu'
 				'page'

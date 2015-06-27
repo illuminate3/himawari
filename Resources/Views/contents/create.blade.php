@@ -6,12 +6,18 @@
 @stop
 
 @section('styles')
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.1/chosen.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
 @stop
 
 @section('scripts')
+	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.1/chosen.jquery.min.js') }}"></script>
 @stop
 
 @section('inline-scripts')
+	jQuery(document).ready(function($) {
+		$(".chosen-select").chosen();
+	});
 @stop
 
 
@@ -119,7 +125,18 @@
 
 	<div class="form-group">
 		{!! Form::label('parent_id', trans('kotoba::cms.parent'), ['class' => 'control-label']) !!}
-		{!! Form::select('parent_id', $pagelist, Input::old('parent_id'), ['class' => 'form-control', 'id' => 'parent_id']) !!}
+		{{-- Form::select('parent_id', $pagelist, Input::old('parent_id'), ['class' => 'form-control', 'id' => 'parent_id']) --}}
+		{!!
+			Form::select(
+				'parent_id',
+				$pagelist,
+				Input::old('parent_id'),
+				array(
+					'class' => 'form-control chosen-select',
+					'id' => 'parent_id'
+				)
+			)
+		!!}
 	</div>
 
 	<div class="form-group">
