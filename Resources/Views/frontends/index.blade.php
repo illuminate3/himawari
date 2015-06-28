@@ -1,8 +1,8 @@
-@extends('app')
+@extends('himawari::frontend.main')
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::general.content', 2) }} :: @parent
+{{{ $page->title }}} :: @parent
 @stop
 
 @section('styles')
@@ -17,11 +17,22 @@
 {{-- Content --}}
 @section('content')
 
-   <div class="col-sm-12">
-        <div class="editor-content">
-            {{ $page->content }}
-        </div>
-    </div>
+
+<div class="row">
+	<h1>
+		{{ $page->title }}
+	</h1>
+</div>
+
+<div class="row">
+	<h2>
+		{{ $page->summary }}
+	</h2>
+</div>
+
+<div class="row">
+	{{ $page->content }}
+</div>
 
 
 @stop

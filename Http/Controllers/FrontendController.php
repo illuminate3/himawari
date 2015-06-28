@@ -86,8 +86,17 @@ class FrontendController extends HimawariController {
 //			return View::make('frontends.page', ['page' => $this->currentPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 
 			$page = $this->currentPage;
+/*
+    0 => "meta_description"
+    1 => "meta_keywords"
+    2 => "meta_title"
+    3 => "content"
+    4 => "slug"
+    5 => "summary"
+    6 => "title"
+*/
 
-//dd($page->title);
+//dd($page);
 // 			$mainMenu = $mainMenu;
 // 			$secMenu = $secMenu;
 
@@ -99,7 +108,7 @@ class FrontendController extends HimawariController {
 				));
 		}
 		else
-			App::abort(404404);
+			App::abort(404);
 	}
 
 
@@ -125,6 +134,7 @@ dd('index');
 
 	public function contact_us()
 	{
+dd('contact_us');
 		if ( $contact_us = Page::getPage( $slug = 'contact-us' ) ) {
 			$mainMenu = NiftyMenus::getMainMenu( $contact_us );
 			$root = $contact_us->getRoot();
@@ -137,6 +147,7 @@ dd('index');
 
 	public function do_contact_us()
 	{
+dd('do_contact_us');
 		$inputs = [];
 		foreach(Input::all() as $key=>$input)
 		{
@@ -181,6 +192,7 @@ dd('index');
 
 	public function previewPage($hashedId)
 	{
+dd('previewPage');
 		$id = $this->hashIds->decrypt($hashedId)[0];
 
 		if ( $id ) {
@@ -197,6 +209,7 @@ dd('index');
 
 	public function get_blog()
 	{
+dd('get_blog');
 		if ( $blog = Page::getPage( $slug = 'blog' ) ) {
 			$mainMenu = NiftyMenus::getMainMenu( $blog );
 			$root = $blog->getRoot();
@@ -212,6 +225,7 @@ dd('index');
 
 	public function get_post()
 	{
+dd('get_post');
 		$slugs = explode( '/', Route::current()->parameter('any') );
 		$lastSlug = $slugs[count($slugs)-1];
 
@@ -232,6 +246,7 @@ dd('index');
 
 	public function previewPost($hashedId)
 	{
+dd('previewPost');
 		$id = $this->hashIds->decrypt($hashedId)[0];
 
 		if ( $id ) {
@@ -251,6 +266,7 @@ dd('index');
 
 	public function do_search()
 	{
+dd('do_search');
 		$term = Sanitiser::trimInput( Input::get('term') );
 		$results = Search::getSearchResults($term);
 
