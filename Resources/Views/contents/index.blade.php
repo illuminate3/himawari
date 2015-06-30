@@ -50,6 +50,7 @@ oTable =
 		<tr>
 			<th>{{ trans('kotoba::table.title') }}</th>
 			<th>{{ trans('kotoba::table.summary') }}</th>
+			<th>{{ trans('kotoba::table.position') }}</th>
 			<th>{{ trans('kotoba::table.online') }}</th>
 			<th>{{ trans('kotoba::table.deleted') }}</th>
 			<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
@@ -60,6 +61,7 @@ oTable =
 			<tr>
 				<td>{{ $content->title }}</td>
 				<td>{{ $content->summary }}</td>
+				<td>{{ $content->order }}</td>
 				<td>{{ $content->is_online }}</td>
 				<td>{{ $content->is_deleted }}</td>
 				<td>
