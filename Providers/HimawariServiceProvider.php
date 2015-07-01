@@ -29,6 +29,15 @@ class HimawariServiceProvider extends ServiceProvider
 		);
 
 		$this->registerNamespaces();
+
+/**
+ * Require some HTML macros
+ */
+//require app_path().'/Modules/Himawari/Lib/helpers.php';
+//require app_path().'/Modules/Himawari/Lib/composers.php';
+//require app_path().'/Modules/Himawari/Lib/macros.php';
+
+
 	}
 
 	/**
@@ -42,6 +51,7 @@ class HimawariServiceProvider extends ServiceProvider
 		View::addNamespace('himawari', __DIR__.'/../Resources/Views/');
 	}
 
+
 	/**
 	 * Boot the service provider.
 	 *
@@ -52,12 +62,11 @@ class HimawariServiceProvider extends ServiceProvider
 		$this->publishes([
 			__DIR__.'/../Config/himawari.php' => config_path('himawari.php'),
 		]);
-/**
- * Require some HTML macros
- */
-//require app_path().'/Modules/Himawari/Lib/helpers.php';
-//require app_path().'/Modules/Himawari/Lib/composers.php';
-//require app_path().'/Modules/Himawari/Lib/macros.php';
+
+		$this->publishes([
+			__DIR__ . '/../resources/assets/js' => base_path('public/assets/vendors/'),
+		], 'js');
+
 	}
 
 

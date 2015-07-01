@@ -2,7 +2,8 @@
 
 return [
 
-//vendor:publish --provider="App\Modules\ModuleManager\Providers\ModuleManagerServiceProvider" --tag="config"
+//vendor:publish --provider="App\Modules\Himawari\Providers\HimawariServiceProvider" --tag="config"
+//vendor:publish --provider="App\Modules\Himawari\Providers\HimawariServiceProvider" --tag="js"
 
 /*
 |--------------------------------------------------------------------------

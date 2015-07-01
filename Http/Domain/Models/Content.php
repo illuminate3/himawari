@@ -3,7 +3,11 @@ namespace App\Modules\Himawari\Http\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+// use Cviebrock\EloquentSluggable\SluggableInterface;
+// use Cviebrock\EloquentSluggable\SluggableTrait;
+
 use Laracasts\Presenter\PresentableTrait;
+
 use Vinkla\Translator\Translatable;
 use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
 
@@ -13,11 +17,12 @@ use DB;
 
 
 //class Content extends Node {
+//class Content extends Node implements TranslatableContract, SluggableInterface {
 class Content extends Node implements TranslatableContract {
-//class Content extends Model implements TranslatableContract {
 
-	use Translatable;
 	use PresentableTrait;
+// 	use SluggableTrait;
+	use Translatable;
 
 	protected $table = 'contents';
 
@@ -51,6 +56,13 @@ class Content extends Node implements TranslatableContract {
 		'summary',
 		'title'
 		];
+
+
+// Sluggable Item -------------------------------------------------------
+// 	protected $sluggable = [
+// 		'build_from' => 'title',
+// 		'save_to'    => 'slug',
+// 	];
 
 
 // Translated Columns -------------------------------------------------------

@@ -4,7 +4,8 @@
 	"keywords": ["Himawari", "CMS", "Rakko"],
 	"require": {
 		"vespakoen/menu": "3.*",
-		"baum/baum": "~1.1"
+		"baum/baum": "~1.1",
+		"cviebrock/eloquent-sluggable": ">=3.0.0-beta"
 	},
 	"config": {
 		"preferred-install": "dist"
