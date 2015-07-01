@@ -8,11 +8,13 @@ use App\Modules\Himawari\Http\Domain\Repositories\BaseRepository as BaseReposito
 
 use App\Modules\General\Http\Domain\Models\Locale;
 use App\Modules\Himawari\Http\Domain\Models\Content;
+use App\Modules\Himawari\Http\Domain\Models\ContentTranslation;
 
 use App;
 use DB;
 use Route;
 use Session;
+use Illuminate\Support\Str;
 
 
 class ContentRepository extends BaseRepository {
@@ -213,6 +215,8 @@ class ContentRepository extends BaseRepository {
 
 //				'slug'			=> $input['slug_'.$properties['id']],
 				'slug'			=> Str::slug($input['title_'.$properties['id']]),
+//'slug'			=> $this->makeSlugFromTitle($input['title_'.$properties['id']]),
+
 
 				'meta_title'			=> $input['meta_title_'.$properties['id']],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties['id']],
@@ -405,6 +409,15 @@ dd($content);
 //dd($page);
 		return $page;
 	}
+
+
+		public function makeSlugFromTitle($title)
+		{
+			$slug = Str::slug($title);
+			$count = ContentTranslation::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+
+			return $count ? "{$slug}-{$count}" : $slug;
+		}
 
 
 }
