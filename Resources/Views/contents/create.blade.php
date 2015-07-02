@@ -12,12 +12,14 @@
 
 @section('scripts')
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.1/chosen.jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 @stop
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
 		$(".chosen-select").chosen();
 	});
+	CKEDITOR.replace( 'content_1' );
 @stop
 
 

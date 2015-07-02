@@ -1,6 +1,7 @@
 <?php
 namespace App\Modules\Himawari\Providers;
 
+// use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 use App;
@@ -66,6 +67,11 @@ class HimawariServiceProvider extends ServiceProvider
 		$this->publishes([
 			__DIR__ . '/../resources/assets/vendors' => base_path('public/assets/vendors/'),
 		], 'js');
+
+// 		AliasLoader::getInstance()->alias(
+// 			'Menus',
+// 			'TypiCMS\Modules\Menus\Facades\Facade'
+// 		);
 
 	}
 
