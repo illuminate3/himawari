@@ -31,7 +31,7 @@ class CreateContentTranslationsTable extends Migration
 // 			$table->text('content')->nullable();
 
 			$table->string('title')->nullable();
-			$table->string('slug')->nullable();
+//			$table->string('slug')->nullable();
 			$table->string('summary')->nullable();
 			$table->text('content')->nullable();
 

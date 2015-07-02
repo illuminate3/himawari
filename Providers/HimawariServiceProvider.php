@@ -64,7 +64,7 @@ class HimawariServiceProvider extends ServiceProvider
 		]);
 
 		$this->publishes([
-			__DIR__ . '/../resources/assets/js' => base_path('public/assets/vendors/'),
+			__DIR__ . '/../resources/assets/vendors' => base_path('public/assets/vendors/'),
 		], 'js');
 
 	}

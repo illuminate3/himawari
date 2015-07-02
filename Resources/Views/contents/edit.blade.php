@@ -96,7 +96,12 @@
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.slug') }}</label>
+				<p>
+					{{ $content->slug }}
+				</p>
+{{--
 				<input type="text" class="form-control" name="{{ 'slug_'. $properties['id'] }}" id="{{ 'slug_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->slug }}">
+--}}
 			</div>
 
 			<div class="form-group">

@@ -91,10 +91,12 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="meta_{{$properties['locale']}}">
 
+{{--
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.slug') }}</label>
 				<input type="text" class="form-control" name="{{ 'slug_'. $properties['id'] }}" id="{{ 'slug_'. $properties['id'] }}" placeholder="{{ trans('kotoba::general.slug') }}">
 			</div>
+--}}
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>

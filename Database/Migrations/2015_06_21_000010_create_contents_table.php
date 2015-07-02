@@ -31,9 +31,9 @@ class CreateContentsTable extends Migration
 			$table->integer('depth')->nullable();
 
 // 			$table->string('title', 255)->nullable();
-// 			$table->string('slug', 255)->nullable();
 // 			$table->string('summary',512)->nullable();
 // 			$table->text('content')->nullable();
+			$table->string('slug')->nullable();
 
 			$table->text('featured_image', 255)->nullable();
 			$table->text('link', 255)->nullable();
