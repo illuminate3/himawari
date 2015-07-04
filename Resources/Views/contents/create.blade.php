@@ -157,7 +157,7 @@
 			Form::select(
 				'user_id',
 				$users,
-				null,
+				$user_id,
 				array(
 					'class' => 'form-control chosen-select'
 				)

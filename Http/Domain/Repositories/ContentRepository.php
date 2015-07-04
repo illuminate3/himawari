@@ -11,6 +11,7 @@ use App\Modules\Himawari\Http\Domain\Models\Content;
 use App\Modules\Himawari\Http\Domain\Models\ContentTranslation;
 
 use App;
+use Auth;
 use DB;
 use Lang;
 use Route;
@@ -70,12 +71,15 @@ class ContentRepository extends BaseRepository {
 		$print_statuses = $this->getPrintStatuses();
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
+$user_id = Auth::user()->id;
+
 		return compact(
 			'lang',
 			'locales',
 			'pagelist',
 			'print_statuses',
-			'users'
+			'users',
+			'user_id'
 			);
 	}
 
