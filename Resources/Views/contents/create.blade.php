@@ -19,29 +19,15 @@
 	jQuery(document).ready(function($) {
 		$(".chosen-select").chosen();
 	});
-	CKEDITOR.replace( 'content_1' );
+	CKEDITOR.replace( 'ckeditor' );
 @stop
 
 
 {{-- Content --}}
 @section('content')
 
-<div class="row">
-<h1>
-	<p class="pull-right">
-	<a href="/admin/contents" class="btn btn-default" title="{{ trans('kotoba::button.back') }}">
-		<i class="fa fa-chevron-left fa-fw"></i>
-		{{ trans('kotoba::button.back') }}
-	</a>
-	</p>
-	<i class="fa fa-edit fa-lg"></i>
-	{{ trans('kotoba::general.command.create') }}
-	<hr>
-</h1>
-</div>
 
-
-<div class="row">
+<div class="row margin-top-lg">
 {!! Form::open([
 	'url' => 'admin/contents',
 	'method' => 'POST',
@@ -49,8 +35,20 @@
 ]) !!}
 
 
-<div class="col-sm-9">
+<!-- Nav tabs -->
+<ul class="nav nav-tabs nav-justified" role="tablist">
+	<li role="presentation" class="active"><a href="#content" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
+	<li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
+	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::cms.settings', 2) }}</a></li>
+</ul>
 
+
+<!-- Tab panes -->
+<div class="tab-content padding">
+
+
+	<div role="tabpanel" class="tab-pane active" id="content">
+	<div class="tab-content">
 	@if (count($locales))
 
 	<ul class="nav nav-tabs">
@@ -61,19 +59,8 @@
 		@endforeach
 	</ul>
 
-	<div class="tab-content padding-lg margin-bottom-xl">
 	@foreach( $locales as $locale => $properties)
-	<div role="tabpanel" class="tab-pane fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
-
-	<!-- Nav tabs -->
-	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#content_{{$properties['locale']}}" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
-		<li role="presentation"><a href="#meta_{{$properties['locale']}}" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
-	</ul>
-
-	<!-- Tab panes -->
-	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="content_{{$properties['locale']}}">
+	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.title') }}</label>
@@ -87,49 +74,65 @@
 
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
 			</div>
 
-		</div>
-		<div role="tabpanel" class="tab-pane" id="meta_{{$properties['locale']}}">
-
-{{--
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::general.slug') }}</label>
-				<input type="text" class="form-control" name="{{ 'slug_'. $properties['id'] }}" id="{{ 'slug_'. $properties['id'] }}" placeholder="{{ trans('kotoba::general.slug') }}">
-			</div>
---}}
-
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_title_'. $properties['id'] }}" id="{{ 'meta_title_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_title') }}">
-			</div>
-
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::cms.meta_keywords') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_keywords_'. $properties['id'] }}" id="{{ 'meta_keywords_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_keywords') }}">
-			</div>
-
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_description') }}">
-			</div>
-
-		</div>
-
-	</div>
-
-	</div><!-- ./ panel -->
+	</div><!-- ./ $lang panel -->
 	@endforeach
-	</div>
+
 	@endif
+	</div>
+	</div><!-- ./ content panel -->
 
-</div><!-- ./ col -->
-<div class="col-sm-3">
+	<div role="tabpanel" class="tab-pane" id="meta">
+	<div class="tab-content">
+	@if (count($locales))
 
+	<ul class="nav nav-tabs">
+		@foreach( $locales as $locale => $properties)
+			<li class="@if ($locale == $lang)active @endif">
+				<a href="#{{ $properties['id'] }}" data-target="#{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
+			</li>
+		@endforeach
+	</ul>
+
+	@foreach( $locales as $locale => $properties)
+	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
+
+		<div class="form-group">
+			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_title_'. $properties['id'] }}" id="{{ 'meta_title_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_title') }}">
+		</div>
+
+		<div class="form-group">
+			<label for="title">{{ trans('kotoba::cms.meta_keywords') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_keywords_'. $properties['id'] }}" id="{{ 'meta_keywords_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_keywords') }}">
+		</div>
+
+		<div class="form-group">
+			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_description') }}">
+		</div>
+
+	</div><!-- ./ $lang panel -->
+	@endforeach
+
+	@endif
+	</div>
+	</div><!-- ./ meta panel -->
+
+
+	<div role="tabpanel" class="tab-pane" id="settings">
+	<div class="tab-content padding">
+
+		<div class="form-group">
+			<label for="title">{{ trans('kotoba::cms.parent') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_description') }}">
+		</div>
 	<div class="form-group">
+
+
 		{!! Form::label('parent_id', trans('kotoba::cms.parent'), ['class' => 'control-label']) !!}
-		{{-- Form::select('parent_id', $pagelist, Input::old('parent_id'), ['class' => 'form-control', 'id' => 'parent_id']) --}}
 		{!!
 			Form::select(
 				'parent_id',
@@ -155,7 +158,7 @@
 
 	<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
 		{!! Form::label('link', Lang::choice('kotoba::cms.link', 1), $errors->first('link'), ['class' => 'control-label']) !!}
-		{!! Form::text('link', Input::old('link'), ['id' => 'link', 'class' => 'form-control', 'placeholder' => 'http://...']) !!}
+		{!! Form::text('link', Input::old('link'), ['id' => 'link', 'class' => 'form-control chosen-select', 'placeholder' => 'http://...']) !!}
 	</div>
 {{--
 	<div class="form-group">
@@ -169,14 +172,20 @@
 	</div>
 --}}
 
-</div><!-- ./ col -->
+	</div>
+	</div><!-- ./ settings panel -->
+
+
+</div><!-- ./ tab panes -->
 
 
 <hr>
 
 
 <div class="form-group">
+<div class="col-sm-12">
 	<input class="btn btn-success btn-block" type="submit" value="{{ trans('kotoba::button.save') }}">
+</div>
 </div>
 
 <div class="row">

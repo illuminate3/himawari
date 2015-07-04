@@ -12,12 +12,14 @@
 
 @section('scripts')
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.1/chosen.jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 @stop
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
 		$(".chosen-select").chosen();
 	});
+	CKEDITOR.replace( 'ckeditor' );
 @stop
 
 
@@ -33,28 +35,25 @@
 	</a>
 	</p>
 	<i class="fa fa-edit fa-lg"></i>
-	{{ trans('kotoba::general.command.edit') }}
+	{{ trans('kotoba::general.command.create') }}
 	<hr>
 </h1>
 </div>
 
 
 <div class="row">
-{!! Form::model(
-	$content,
-	[
-		'route' => ['admin.contents.update', $content->id],
-		'method' => 'PATCH',
-		'class' => 'form'
-	]
-) !!}
+{!! Form::open([
+	'url' => 'admin/contents',
+	'method' => 'POST',
+	'class' => 'form-horizontal'
+]) !!}
 
 
 <div class="col-sm-9">
 
 	@if (count($locales))
 
-	<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs nav-justified">
 		@foreach( $locales as $locale => $properties)
 			<li class="@if ($locale == $lang)active @endif">
 				<a href="#{{ $properties['id'] }}" data-target="#{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
@@ -62,7 +61,7 @@
 		@endforeach
 	</ul>
 
-	<div class="tab-content padding-lg margin-bottom-xl">
+	<div class="tab-content padding-top-lg">
 	@foreach( $locales as $locale => $properties)
 	<div role="tabpanel" class="tab-pane fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
 
@@ -73,50 +72,47 @@
 	</ul>
 
 	<!-- Tab panes -->
-	<div class="tab-content">
+	<div class="tab-content padding-lg margin-bottom-xl">
 		<div role="tabpanel" class="tab-pane active" id="content_{{$properties['locale']}}">
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.title') }}</label>
-				<input type="text" class="form-control" name="{{ 'title_'. $properties['id'] }}" id="{{ 'title_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->title }}">
+				<input type="text" class="form-control" name="{{ 'title_'. $properties['id'] }}" id="{{ 'title_'. $properties['id'] }}" placeholder="{{ trans('kotoba::general.title') }}">
 			</div>
 
 			<div class="form-group">
 				<label for="summary">{{ trans('kotoba::cms.summary') }}</label>
-				<textarea class="form-control" rows="3" name="{{ 'summary_'. $properties['id'] }}" id="{{ 'summary_'. $properties['id'] }}">{{ $content->translate($properties['locale'])->summary }}</textarea>
+				<textarea class="form-control" rows="3" name="{{ 'summary_'. $properties['id'] }}" id="{{ 'summary_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.summary') }}"></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}">{{ $content->translate($properties['locale'])->content }}</textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
 			</div>
 
 		</div>
 		<div role="tabpanel" class="tab-pane" id="meta_{{$properties['locale']}}">
 
+{{--
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.slug') }}</label>
-				<p>
-					{{ $content->slug }}
-				</p>
-{{--
-				<input type="text" class="form-control" name="{{ 'slug_'. $properties['id'] }}" id="{{ 'slug_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->slug }}">
---}}
+				<input type="text" class="form-control" name="{{ 'slug_'. $properties['id'] }}" id="{{ 'slug_'. $properties['id'] }}" placeholder="{{ trans('kotoba::general.slug') }}">
 			</div>
+--}}
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_title_'. $properties['id'] }}" id="{{ 'meta_title_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_title }}">
+				<input type="text" class="form-control" name="{{ 'meta_title_'. $properties['id'] }}" id="{{ 'meta_title_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_title') }}">
 			</div>
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::cms.meta_keywords') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_keywords_'. $properties['id'] }}" id="{{ 'meta_keywords_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_keywords }}">
+				<input type="text" class="form-control" name="{{ 'meta_keywords_'. $properties['id'] }}" id="{{ 'meta_keywords_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_keywords') }}">
 			</div>
 
 			<div class="form-group">
-				<label for="title">{{ trans('kotoba::cms.meta_description') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_description }}">
+				<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
+				<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_description') }}">
 			</div>
 
 		</div>
@@ -173,7 +169,7 @@
 	</div>
 --}}
 
-</div>
+</div><!-- ./ col -->
 
 
 <hr>
@@ -185,25 +181,16 @@
 </div>
 </div>
 
-
 <div class="row">
-<div class="col-sm-4">
+<div class="col-sm-6">
 	<a href="/admin/contents" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
 		<i class="fa fa-times fa-fw"></i>
 		{{ trans('kotoba::button.cancel') }}
 	</a>
 </div>
 
-<div class="col-sm-4">
+<div class="col-sm-6">
 	<input class="btn btn-default btn-block" type="reset" value="{{ trans('kotoba::button.reset') }}">
-</div>
-
-<div class="col-sm-4">
-<!-- Button trigger modal -->
-	<a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-block" title="{{ trans('kotoba::button.delete') }}">
-		<i class="fa fa-trash-o fa-fw"></i>
-		{{ trans('kotoba::general.command.delete') }}
-	</a>
 </div>
 </div>
 
@@ -212,12 +199,4 @@
 
 
 </div> <!-- ./ row -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	@include('_partials.modal')
-</div>
-
-
 @stop
