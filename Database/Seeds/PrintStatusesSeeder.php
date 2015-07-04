@@ -13,16 +13,16 @@ class PrintStatusesSeeder extends Seeder {
 
 		$seeds = array(
 			array(
-				'name'					=> 'Published',
+				'name'					=> 'Draft',
+				'description'			=> 'Page is a draft'
+			),
+			array(
+				'name'					=> 'Publish',
 				'description'			=> 'Page has been Published'
 			),
 			array(
 				'name'					=> 'Unpublish',
 				'description'			=> 'Page has been unpublished'
-			),
-			array(
-				'name'					=> 'Draft',
-				'description'			=> 'Page is a draft'
 			),
 			array(
 				'name'					=> 'Archieve',

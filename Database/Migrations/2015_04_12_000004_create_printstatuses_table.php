@@ -9,7 +9,7 @@ class CreatePrintStatusesTable extends Migration
 	public function __construct()
 	{
 		// Get the prefix
-		$this->prefix = Config::get('shisan.shisan_db.prefix', '');
+		$this->prefix = Config::get('himawari.himawari_db.prefix', '');
 	}
 
 	/**

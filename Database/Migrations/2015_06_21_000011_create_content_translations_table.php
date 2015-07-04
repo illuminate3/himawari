@@ -9,7 +9,7 @@ class CreateContentTranslationsTable extends Migration
 	public function __construct()
 	{
 		// Get the prefix
-		$this->prefix = Config::get('general.general_db.prefix', '');
+		$this->prefix = Config::get('himawari.himawari_db.prefix', '');
 	}
 
 	/**

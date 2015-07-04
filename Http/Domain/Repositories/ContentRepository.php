@@ -12,6 +12,7 @@ use App\Modules\Himawari\Http\Domain\Models\ContentTranslation;
 
 use App;
 use DB;
+use Lang;
 use Route;
 use Session;
 use Illuminate\Support\Str;
@@ -63,10 +64,18 @@ class ContentRepository extends BaseRepository {
 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
 //dd($pagelist);
 
+		$users = $this->getUsers();
+		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//dd($users);
+		$print_statuses = $this->getPrintStatuses();
+		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
+
 		return compact(
 			'lang',
 			'locales',
-			'pagelist'
+			'pagelist',
+			'print_statuses',
+			'users'
 			);
 	}
 
@@ -233,6 +242,10 @@ class ContentRepository extends BaseRepository {
 		App::setLocale('en');
 		return;
 	}
+
+
+
+// Functions ----------------------------------------------------------------------------------------------------
 
 
 	public function getLocales()
@@ -410,6 +423,20 @@ dd($content);
 			->get();
 //dd($page);
 		return $page;
+	}
+
+
+	public function getUsers()
+	{
+		$users = DB::table('users')->lists('email', 'id');
+		return $users;
+	}
+
+
+	public function getPrintStatuses()
+	{
+		$print_statuses = DB::table('print_statuses')->lists('name', 'id');
+		return $print_statuses;
 	}
 
 

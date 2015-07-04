@@ -9,7 +9,7 @@ class CreateContentsTable extends Migration
 	public function __construct()
 	{
 		// Get the prefix
-		$this->prefix = Config::get('general.general_db.prefix', '');
+		$this->prefix = Config::get('himawari.himawari_db.prefix', '');
 	}
 
 	/**
@@ -37,6 +37,16 @@ class CreateContentsTable extends Migration
 
 			$table->text('featured_image', 255)->nullable();
 			$table->text('link', 255)->nullable();
+
+
+// 			$table->tinyInteger('print_status_id')->default(0);
+// 			$table->tinyInteger('is_published')->default(0);
+// 			$table->tinyInteger('is_featured')->default(0);
+// 			$table->tinyInteger('menu_id')->default(1);
+// 			$table->date('publish_start')->nullable();
+// 			$table->date('publish_end')->nullable();
+
+
 
 			$table->integer('order')->nullable();
 			$table->integer('version')->nullable();

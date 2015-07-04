@@ -6,18 +6,23 @@
 @stop
 
 @section('styles')
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/bootstrap-datepicker/css/datepicker3.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.1/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
 @stop
 
 @section('scripts')
+	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/datepicker-settings.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.1/chosen.jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 @stop
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
-		$(".chosen-select").chosen();
+		$(".chosen-select").chosen({
+			width: "100%"
+		});
 	});
 	CKEDITOR.replace( 'ckeditor' );
 @stop
@@ -39,7 +44,7 @@
 <ul class="nav nav-tabs nav-justified" role="tablist">
 	<li role="presentation" class="active"><a href="#content" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
 	<li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
-	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::cms.settings', 2) }}</a></li>
+	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::cms.setting', 2) }}</a></li>
 </ul>
 
 
@@ -63,6 +68,11 @@
 	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
 
 			<div class="form-group">
+				<label for="content">{{ trans('kotoba::cms.content') }}</label>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
+			</div>
+
+			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.title') }}</label>
 				<input type="text" class="form-control" name="{{ 'title_'. $properties['id'] }}" id="{{ 'title_'. $properties['id'] }}" placeholder="{{ trans('kotoba::general.title') }}">
 			</div>
@@ -70,11 +80,6 @@
 			<div class="form-group">
 				<label for="summary">{{ trans('kotoba::cms.summary') }}</label>
 				<textarea class="form-control" rows="3" name="{{ 'summary_'. $properties['id'] }}" id="{{ 'summary_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.summary') }}"></textarea>
-			</div>
-
-			<div class="form-group">
-				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
 			</div>
 
 	</div><!-- ./ $lang panel -->
@@ -125,13 +130,13 @@
 	<div role="tabpanel" class="tab-pane" id="settings">
 	<div class="tab-content padding">
 
-		<div class="form-group">
-			<label for="title">{{ trans('kotoba::cms.parent') }}</label>
-			<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" placeholder="{{ trans('kotoba::cms.meta_description') }}">
-		</div>
+
+
+<div class="row">
+<div class="col-sm-6">
+<div class="padding">
+
 	<div class="form-group">
-
-
 		{!! Form::label('parent_id', trans('kotoba::cms.parent'), ['class' => 'control-label']) !!}
 		{!!
 			Form::select(
@@ -147,8 +152,47 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('is_online', Lang::choice('kotoba::account.user', 1), ['class' => 'control-label']) !!}
+		{!!
+			Form::select(
+				'user_id',
+				$users,
+				null,
+				array(
+					'class' => 'form-control chosen-select'
+				)
+			)
+		!!}
+	</div>
+
+	<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
+		{!! Form::label('link', Lang::choice('kotoba::cms.link', 1), $errors->first('link'), ['class' => 'control-label']) !!}
+		{!! Form::text('link', Input::old('link'), ['id' => 'link', 'class' => 'form-control', 'placeholder' => 'http://...']) !!}
+	</div>
+
+
+</div>
+</div><!-- ./ col-6 -->
+<div class="col-sm-6">
+<div class="padding">
+
+	<div class="form-group">
 		{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 		{!! Form::select('is_online', [0 => Lang::choice('kotoba::cms.draft', 1), 1 => trans('kotoba::cms.publish')], Input::old('is_online'), ['class' => 'form-control', 'id' => 'is_online']) !!}
+	</div>
+
+	<div class="form-group">
+		{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+		{!!
+			Form::select(
+				'print_status_id',
+				$print_statuses,
+				null,
+				array(
+					'class' => 'form-control chosen-select'
+				)
+			)
+		!!}
 	</div>
 
 	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
@@ -156,10 +200,53 @@
 		{!! Form::text('order', Input::old('order'), ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
 
-	<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
-		{!! Form::label('link', Lang::choice('kotoba::cms.link', 1), $errors->first('link'), ['class' => 'control-label']) !!}
-		{!! Form::text('link', Input::old('link'), ['id' => 'link', 'class' => 'form-control chosen-select', 'placeholder' => 'http://...']) !!}
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_start" name="publish_start" class="form-control">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
 	</div>
+
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_end" name="publish_end" class="form-control">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="is_featured" class="col-sm-2 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+		<div class="col-sm-10">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="is_featured">
+				</label>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+</div><!-- ./ col-6 -->
+</div><!-- ./ row -->
+
+
+
+
+
+
+
+
+
+
+
+
 {{--
 	<div class="form-group">
 		{!! Form::label('featured_image', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
