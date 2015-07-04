@@ -71,7 +71,7 @@ class ContentRepository extends BaseRepository {
 		$print_statuses = $this->getPrintStatuses();
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
-$user_id = Auth::user()->id;
+		$user_id = Auth::user()->id;
 
 		return compact(
 			'lang',
@@ -142,14 +142,22 @@ $user_id = Auth::user()->id;
 	{
 //dd($input);
 
+		$print_status_id = $input['print_status_id'];
+		$is_online = 1;
+		if ( $print_status_id != 2 ) {
+			$is_online = 0;
+		}
+
 		$values = [
 //			'name'			=> $input['name'],
 			'is_current'		=> 1,
-			'is_online'			=> $input['is_online'],
+//			'is_online'			=> $input['is_online'],
+			'is_online'			=> $is_online,
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
 			'slug'				=> $input['title_1'],
-			'user_id'			=> 1
+//			'user_id'			=> 1
+			'user_id'			=>  $input['user_id']
 		];
 //dd($values);
 
@@ -187,7 +195,7 @@ $user_id = Auth::user()->id;
 
 		$this->manageBaum($input['parent_id'], null);
 
-		App::setLocale('en');
+		App::setLocale(Session::get('locale'), Config::get('app.fallback_locale'));
 		return;
 	}
 
@@ -203,16 +211,24 @@ $user_id = Auth::user()->id;
 	{
 //dd($input);
 
+		$print_status_id = $input['print_status_id'];
+		$is_online = 1;
+		if ( $print_status_id != 2 ) {
+			$is_online = 0;
+		}
+
 		$content = Content::find($id);
 
 		$values = [
 //			'name'			=> $input['name'],
 			'is_current'		=> 1,
-			'is_online'			=> $input['is_online'],
+//			'is_online'			=> $input['is_online'],
+			'is_online'			=> $is_online,
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
 			'slug'				=> $input['title_1'],
-			'user_id'			=> 1
+//			'user_id'			=> 1
+			'user_id'			=>  $input['user_id']
 		];
 
 		$content->update($values);
@@ -243,7 +259,7 @@ $user_id = Auth::user()->id;
 
 		$this->manageBaum($input['parent_id'], $id);
 
-		App::setLocale('en');
+		App::setLocale(Session::get('locale'), Config::get('app.fallback_locale'));
 		return;
 	}
 
@@ -254,16 +270,8 @@ $user_id = Auth::user()->id;
 
 	public function getLocales()
 	{
-
-// 		$config = App::make('config');
-// 		$locales = (array) $config->get('languages.supportedLocales', []);
- 		$locales = Locale::all();
-// 		$locales = DB::table('locales')
-// 			->lists('locale');
-
-//dd($locales);
-
-	return $locales;
+		$locales = Locale::all();
+		return $locales;
 	}
 
 

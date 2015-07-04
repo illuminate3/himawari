@@ -44,7 +44,7 @@
 <ul class="nav nav-tabs nav-justified" role="tablist">
 	<li role="presentation" class="active"><a href="#content" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
 	<li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
-	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::cms.setting', 2) }}</a></li>
+	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::general.setting', 2) }}</a></li>
 </ul>
 
 
@@ -59,13 +59,13 @@
 	<ul class="nav nav-tabs">
 		@foreach( $locales as $locale => $properties)
 			<li class="@if ($locale == $lang)active @endif">
-				<a href="#{{ $properties['id'] }}" data-target="#{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
+				<a href="#{{ $properties['id'] }}" data-target="#content_{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
 			</li>
 		@endforeach
 	</ul>
 
 	@foreach( $locales as $locale => $properties)
-	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
+	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="content_{{{ $properties['id'] }}}">
 
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
@@ -96,13 +96,13 @@
 	<ul class="nav nav-tabs">
 		@foreach( $locales as $locale => $properties)
 			<li class="@if ($locale == $lang)active @endif">
-				<a href="#{{ $properties['id'] }}" data-target="#{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
+				<a href="#{{ $properties['id'] }}" data-target="#meta_{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
 			</li>
 		@endforeach
 	</ul>
 
 	@foreach( $locales as $locale => $properties)
-	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
+	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="meta_{{{ $properties['id'] }}}">
 
 		<div class="form-group">
 			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
