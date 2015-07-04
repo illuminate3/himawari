@@ -221,8 +221,8 @@
 	</div>
 
 	<div class="form-group">
-		<label for="is_featured" class="col-sm-2 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
-		<div class="col-sm-10">
+		<label for="is_featured" class="col-sm-1 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+		<div class="col-sm-11">
 			<div class="checkbox">
 				<label>
 					<input type="checkbox" name="is_featured">
