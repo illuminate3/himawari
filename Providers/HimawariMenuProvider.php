@@ -23,11 +23,6 @@ class HimawariMenuProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-
-		Plugin::register('Featured', 'App\Plugins\Featured');
-		Plugin::register('MenuNavigation', 'App\Plugins\MenuNavigation');
-		Plugin::register('Timed', 'App\Plugins\Timed');
-
 /*
 // navbar menu
 //		if ( (Auth::user()->can('manage_admin')) || (Auth::user()->can('manage_himawari')) ) {
@@ -54,6 +49,10 @@ class HimawariMenuProvider extends ServiceProvider {
 	public function register()
 	{
 //
+
+		Plugin::register('Featured', 'App\Plugins\Featured');
+		Plugin::register('Timed', 'App\Plugins\Timed');
+
 	}
 
 

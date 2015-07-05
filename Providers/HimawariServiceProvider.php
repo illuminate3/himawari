@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Himawari\Providers;
 
-// use Illuminate\Foundation\AliasLoader;
+//use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 use App;
@@ -30,6 +30,7 @@ class HimawariServiceProvider extends ServiceProvider
 		);
 
 		$this->registerNamespaces();
+		$this->registerProviders();
 
 /**
  * Require some HTML macros
@@ -62,17 +63,44 @@ class HimawariServiceProvider extends ServiceProvider
 	{
 		$this->publishes([
 			__DIR__.'/../Config/himawari.php' => config_path('himawari.php'),
+			__DIR__ . '/../Publish/assets/vendors' => base_path('public/assets/vendors/'),
+			__DIR__ . '/../Publish/Plugins' => base_path('app/Plugins/'),
+			__DIR__ . '/../Publish/views/plugins/' => base_path('resources/views/plugins/'),
 		]);
 
 		$this->publishes([
-			__DIR__ . '/../resources/assets/vendors' => base_path('public/assets/vendors/'),
+			__DIR__ . '/../Publish/assets/vendors' => base_path('public/assets/vendors/'),
 		], 'js');
 
-// 		AliasLoader::getInstance()->alias(
-// 			'Menus',
-// 			'TypiCMS\Modules\Menus\Facades\Facade'
-// 		);
+		$this->publishes([
+			__DIR__ . '/../Publish/Plugins' => base_path('app/Plugins/'),
+		], 'plugins');
 
+		$this->publishes([
+			__DIR__ . '/../Publish/views/plugins/' => base_path('resources/views/plugins/'),
+		], 'views');
+
+/*
+		AliasLoader::getInstance()->alias(
+			'Menus',
+			'TypiCMS\Modules\Menus\Facades\Facade'
+		);
+*/
+
+	}
+
+
+	/**
+	* add Prvoiders
+	*
+	* @return void
+	*/
+	private function registerProviders()
+	{
+		$app = $this->app;
+
+		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
+		$app->register('Baum\Providers\BaumServiceProvider');
 	}
 
 

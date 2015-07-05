@@ -179,19 +179,27 @@
 <div class="col-sm-6">
 <div class="padding">
 
-	<div class="form-group">
-		{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
-		{!!
-			Form::select(
-				'print_status_id',
-				$print_statuses,
-				$content->print_status_id,
-				array(
-					'class' => 'form-control chosen-select'
+	@if (Auth::user()->can('manage_admin'))
+		<div class="form-group">
+			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+			{!!
+				Form::select(
+					'print_status_id',
+					$print_statuses,
+					$content->print_status_id,
+					array(
+						'class' => 'form-control chosen-select'
+					)
 				)
-			)
-		!!}
-	</div>
+			!!}
+		</div>
+	@else
+		<div class="form-group">
+			{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+			{!! Form::hidden('print_status_id', 1) !!}
+			{{ Lang::choice('kotoba::cms.draft', 1) }}
+		</div>
+	@endif
 
 	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
 		{!! Form::label('order', trans('kotoba::cms.position'), $errors->first('order'), ['class' => 'control-label']) !!}
