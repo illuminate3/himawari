@@ -31,7 +31,7 @@
 </div>
 
 <div class="row">
-	{{ $page->content }}
+	{!! $page->content !!}
 </div>
 
 

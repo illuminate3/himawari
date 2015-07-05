@@ -16,7 +16,7 @@
 			</div>
 			<div class="col-sm-4">
 
-				{{-- Plugin::MenuNavigation() --}}
+				{!! Plugin::Featured() !!}
 
 {{--
 				<ul class="pull-right">

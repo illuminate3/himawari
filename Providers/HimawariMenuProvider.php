@@ -24,35 +24,8 @@ class HimawariMenuProvider extends ServiceProvider {
 	public function boot()
 	{
 
-Plugin::register('MenuNavigation', 'App\Plugins\MenuNavigation');
-/*
-		Menu::handler('top')->hydrate(function()
-			{
-//			$pages = Content::get();
-			$pages = Content::orderBy('order')->get();
-//dd($pages);
-			return $pages;
-			},
-			function($children, $item)
-			{
-				if($item->depth < 1) {
-					$children->add($item->translate(Config::get('app.locale'))->slug, $item->translate(Config::get('app.locale'))->title, Menu::items($item->as));
-				}
-			});
-
-
-
-		Menu::handler('right')->hydrate(function()
-			{
-			$pages = Content::get();
-//dd($pages);
-			return $pages;
-			},
-			function($children, $item)
-			{
-				$children->add($item->translate(Config::get('app.locale'))->slug, $item->translate(Config::get('app.locale'))->title, Menu::items($item->as));
-			});
-*/
+		Plugin::register('Featured', 'App\Plugins\Featured');
+		Plugin::register('MenuNavigation', 'App\Plugins\MenuNavigation');
 
 /*
 // navbar menu
