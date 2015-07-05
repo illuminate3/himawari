@@ -156,12 +156,23 @@ class ContentRepository extends BaseRepository {
 
 		if ( !isset($input['is_featured']) ) {
 			$is_featured = 0;
+		} else {
+			$is_featured = $input['is_featured'];
 		}
-		if ( $input['publish_end'] == null ) {
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+		} else {
+			$is_timed = $input['is_timed'];
+		}
+		if ( $input['publish_end'] == '' ) {
 			$publish_end = null;
+		} else {
+			$publish_end = $input['publish_end'];
 		}
-		if ( $input['publish_start'] == null ) {
+		if ( $input['publish_start'] == '' ) {
 			$publish_start = null;
+		} else {
+			$publish_start = $input['publish_start'];
 		}
 
 		$values = [
@@ -171,6 +182,7 @@ class ContentRepository extends BaseRepository {
 //			'is_online'			=> $is_online,
 //			'is_featured'		=> $input['is_featured'],
 			'is_featured'		=> $is_featured,
+			'is_timed'			=> $is_timed,
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
 			'print_status_id'	=> $input['print_status_id'],
@@ -236,12 +248,23 @@ class ContentRepository extends BaseRepository {
 
 		if ( !isset($input['is_featured']) ) {
 			$is_featured = 0;
+		} else {
+			$is_featured = $input['is_featured'];
 		}
-		if ( $input['publish_end'] == null ) {
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+		} else {
+			$is_timed = $input['is_timed'];
+		}
+		if ( $input['publish_end'] == '' ) {
 			$publish_end = null;
+		} else {
+			$publish_end = $input['publish_end'];
 		}
-		if ( $input['publish_start'] == null ) {
+		if ( $input['publish_start'] == '' ) {
 			$publish_start = null;
+		} else {
+			$publish_start = $input['publish_start'];
 		}
 
 		$content = Content::find($id);
@@ -253,6 +276,7 @@ class ContentRepository extends BaseRepository {
 //			'is_online'			=> $is_online,
 //			'is_featured'		=> $input['is_featured'],
 			'is_featured'		=> $is_featured,
+			'is_timed'			=> $is_timed,
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
 			'print_status_id'	=> $input['print_status_id'],

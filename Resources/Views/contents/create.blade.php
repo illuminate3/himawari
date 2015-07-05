@@ -195,6 +195,28 @@
 		{!! Form::text('order', Input::old('order'), ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
 
+	<div class="form-group">
+		<label for="is_featured" class="col-sm-1 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+		<div class="col-sm-11">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="is_featured" name="is_featured" value="1">
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="is_timed" class="col-sm-1 control-label">{{ trans('kotoba::cms.is_timed') }}</label>
+		<div class="col-sm-11">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="is_timed" name="is_timed" value="1">
+				</label>
+			</div>
+		</div>
+	</div>
+
 	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
 		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
 		<div id="datepicker-container">
@@ -211,17 +233,6 @@
 			<div class="input-group date">
 				<input type="text" id="publish_end" name="publish_end" class="form-control">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label for="is_featured" class="col-sm-1 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
-		<div class="col-sm-11">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="is_featured" name="is_featured" value="1">
-				</label>
 			</div>
 		</div>
 	</div>

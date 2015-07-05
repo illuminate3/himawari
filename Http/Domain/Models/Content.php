@@ -46,6 +46,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 // 		'is_deleted',
 // 		'is_online',
 		'is_featured',
+		'is_timed',
 		'order',
 		'publish_start',
 		'publish_end',
@@ -206,6 +207,37 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 					   ->first();
 
 		return $page;
+	}
+
+
+	public function scopeIsFeatured($query)
+	{
+		return $query->where('is_featured', '=', 1);
+	}
+
+
+	public function scopeIsTimed($query)
+	{
+		return $query->where('is_timed', '=', 1);
+	}
+
+
+	public function scopePublishEnd($query)
+	{
+	//	$today = new DateTime();
+	//dd($today);
+		$date = date("Y-m-d");
+	//dd($date);
+	//	return $query->where('created_at', '>', $today->modify('-7 days'));
+		return $query->where('publish_end', '>=', $date);
+	}
+
+
+	public function scopePublishStart($query)
+	{
+		$date = date("Y-m-d");
+	//dd($date);
+		return $query->where('publish_start', '<=', $date);
 	}
 
 

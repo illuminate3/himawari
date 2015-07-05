@@ -26,6 +26,7 @@ class HimawariMenuProvider extends ServiceProvider {
 
 		Plugin::register('Featured', 'App\Plugins\Featured');
 		Plugin::register('MenuNavigation', 'App\Plugins\MenuNavigation');
+		Plugin::register('Timed', 'App\Plugins\Timed');
 
 /*
 // navbar menu

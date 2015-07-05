@@ -68,4 +68,23 @@ class Himawari extends Presenter {
 	}
 
 
+	/**
+	 * timed checkbox
+	 *
+	 * @return string
+	 */
+	public function timed()
+	{
+//dd('loaded');
+		$return = '';
+
+		$timed = $this->entity->is_timed;
+//dd($timed);
+		if ( $timed == 1 ) {
+			$return = "checked";
+		}
+
+		return $return;
+	}
+
 }
