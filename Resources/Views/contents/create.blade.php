@@ -220,7 +220,7 @@
 		<div class="col-sm-11">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" name="is_featured">
+					<input type="checkbox" id="is_featured" name="is_featured" value="1">
 				</label>
 			</div>
 		</div>

@@ -114,6 +114,7 @@ class ContentRepository extends BaseRepository {
 	public function edit($id)
 	{
 		$content = $this->model->find($id);
+//dd($content);
 
 		$lang = Session::get('locale');
 		$locales = $this->getLocales();
@@ -125,11 +126,21 @@ class ContentRepository extends BaseRepository {
 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
 //dd($pagelist);
 
+		$users = $this->getUsers();
+		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//dd($users);
+		$print_statuses = $this->getPrintStatuses();
+		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
+
+//		$user_id = Auth::user()->id;
+
 		return compact(
 			'content',
 			'lang',
 			'locales',
-			'pagelist'
+			'pagelist',
+			'print_statuses',
+			'users'
 			);
 	}
 
@@ -143,25 +154,30 @@ class ContentRepository extends BaseRepository {
 	{
 //dd($input);
 
-/*
-		$print_status_id = $input['print_status_id'];
-		$is_online = 1;
-		if ( $print_status_id != 2 ) {
-			$is_online = 0;
+		if ( !isset($input['is_featured']) ) {
+			$is_featured = 0;
 		}
-*/
+		if ( $input['publish_end'] == null ) {
+			$publish_end = null;
+		}
+		if ( $input['publish_start'] == null ) {
+			$publish_start = null;
+		}
 
 		$values = [
 //			'name'			=> $input['name'],
 //			'is_current'		=> 1,
 //			'is_online'			=> $input['is_online'],
 //			'is_online'			=> $is_online,
-			'is_featured'		=> $input['is_featured'],
+//			'is_featured'		=> $input['is_featured'],
+			'is_featured'		=> $is_featured,
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
 			'print_status_id'	=> $input['print_status_id'],
-			'publish_end'		=> $input['publish_end'],
-			'publish_start'		=> $input['publish_start'],
+//			'publish_end'		=> $input['publish_end'],
+//			'publish_start'		=> $input['publish_start'],
+			'publish_end'		=> $publish_end,
+			'publish_start'		=> $publish_start,
 			'slug'				=> $input['title_1'],
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
@@ -218,13 +234,15 @@ class ContentRepository extends BaseRepository {
 	{
 //dd($input);
 
-/*
-		$print_status_id = $input['print_status_id'];
-		$is_online = 1;
-		if ( $print_status_id != 2 ) {
-			$is_online = 0;
+		if ( !isset($input['is_featured']) ) {
+			$is_featured = 0;
 		}
-*/
+		if ( $input['publish_end'] == null ) {
+			$publish_end = null;
+		}
+		if ( $input['publish_start'] == null ) {
+			$publish_start = null;
+		}
 
 		$content = Content::find($id);
 
@@ -233,12 +251,15 @@ class ContentRepository extends BaseRepository {
 //			'is_current'		=> 1,
 //			'is_online'			=> $input['is_online'],
 //			'is_online'			=> $is_online,
-			'is_featured'		=> $input['is_featured'],
+//			'is_featured'		=> $input['is_featured'],
+			'is_featured'		=> $is_featured,
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
 			'print_status_id'	=> $input['print_status_id'],
-			'publish_end'		=> $input['publish_end'],
-			'publish_start'		=> $input['publish_start'],
+//			'publish_end'		=> $input['publish_end'],
+//			'publish_start'		=> $input['publish_start'],
+			'publish_end'		=> $publish_end,
+			'publish_start'		=> $publish_start,
 			'slug'				=> $input['title_1'],
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
@@ -341,9 +362,14 @@ class ContentRepository extends BaseRepository {
 	public function getPageID($slug)
 	{
 //dd($slug);
+/*
 		$page_ID = DB::table('content_translations')
 			->where('content_translations.slug', '=', $slug)
 			->pluck('content_id');
+*/
+		$page_ID = DB::table('contents')
+			->where('slug', '=', $slug)
+			->pluck('id');
 //dd($page_ID);
 
 		return $page_ID;
@@ -378,7 +404,8 @@ class ContentRepository extends BaseRepository {
 //			->where('contents.is_current', '=', 1, 'AND')
 			->where('contents.is_online', '=', 1, 'AND')
 			->where('contents.is_deleted', '=', 0, 'AND')
-			->where('content_translations.slug', '=', $slug, 'AND')
+//			->where('content_translations.slug', '=', $slug, 'AND')
+			->where('contents.slug', '=', $slug, 'AND')
 			->pluck('contents.id');
 //dd($page);
 
@@ -461,6 +488,7 @@ dd($content);
 	public function getPrintStatuses()
 	{
 		$print_statuses = DB::table('print_statuses')->lists('name', 'id');
+//dd($print_statuses);
 		return $print_statuses;
 	}
 

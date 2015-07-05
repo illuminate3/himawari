@@ -6,40 +6,33 @@
 @stop
 
 @section('styles')
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/bootstrap-datepicker/css/datepicker3.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.1/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
 @stop
 
 @section('scripts')
+	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/datepicker-settings.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.1/chosen.jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 @stop
 
 @section('inline-scripts')
 	jQuery(document).ready(function($) {
-		$(".chosen-select").chosen();
+		$(".chosen-select").chosen({
+			width: "100%"
+		});
 	});
+	CKEDITOR.replace( 'ckeditor' );
 @stop
 
 
 {{-- Content --}}
 @section('content')
 
-<div class="row">
-<h1>
-	<p class="pull-right">
-	<a href="/admin/contents" class="btn btn-default" title="{{ trans('kotoba::button.back') }}">
-		<i class="fa fa-chevron-left fa-fw"></i>
-		{{ trans('kotoba::button.back') }}
-	</a>
-	</p>
-	<i class="fa fa-edit fa-lg"></i>
-	{{ trans('kotoba::general.command.edit') }}
-	<hr>
-</h1>
-</div>
 
-
-<div class="row">
+<div class="row margin-top-lg">
 {!! Form::model(
 	$content,
 	[
@@ -50,31 +43,37 @@
 ) !!}
 
 
-<div class="col-sm-9">
+<!-- Nav tabs -->
+<ul class="nav nav-tabs nav-justified" role="tablist">
+	<li role="presentation" class="active"><a href="#content" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
+	<li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
+	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::general.setting', 2) }}</a></li>
+</ul>
 
+
+<!-- Tab panes -->
+<div class="tab-content padding">
+
+
+	<div role="tabpanel" class="tab-pane active" id="content">
+	<div class="tab-content">
 	@if (count($locales))
 
 	<ul class="nav nav-tabs">
 		@foreach( $locales as $locale => $properties)
 			<li class="@if ($locale == $lang)active @endif">
-				<a href="#{{ $properties['id'] }}" data-target="#{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
+				<a href="#{{ $properties['id'] }}" data-target="#content_{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
 			</li>
 		@endforeach
 	</ul>
 
-	<div class="tab-content padding-lg margin-bottom-xl">
 	@foreach( $locales as $locale => $properties)
-	<div role="tabpanel" class="tab-pane fade @if ($locale == $lang)in active @endif" id="{{{ $properties['id'] }}}">
+	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="content_{{{ $properties['id'] }}}">
 
-	<!-- Nav tabs -->
-	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#content_{{$properties['locale']}}" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
-		<li role="presentation"><a href="#meta_{{$properties['locale']}}" aria-controls="meta" role="tab" data-toggle="tab">{{ trans('kotoba::cms.meta') }}</a></li>
-	</ul>
-
-	<!-- Tab panes -->
-	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="content_{{$properties['locale']}}">
+			<div class="form-group">
+				<label for="content">{{ trans('kotoba::cms.content') }}</label>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}">{{ $content->translate($properties['locale'])->content }}</textarea>
+			</div>
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.title') }}</label>
@@ -86,59 +85,67 @@
 				<textarea class="form-control" rows="3" name="{{ 'summary_'. $properties['id'] }}" id="{{ 'summary_'. $properties['id'] }}">{{ $content->translate($properties['locale'])->summary }}</textarea>
 			</div>
 
-			<div class="form-group">
-				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}">{{ $content->translate($properties['locale'])->content }}</textarea>
-			</div>
-
-		</div>
-		<div role="tabpanel" class="tab-pane" id="meta_{{$properties['locale']}}">
-
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::general.slug') }}</label>
-				<p>
-					{{ $content->slug }}
-				</p>
-{{--
-				<input type="text" class="form-control" name="{{ 'slug_'. $properties['id'] }}" id="{{ 'slug_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->slug }}">
---}}
-			</div>
-
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_title_'. $properties['id'] }}" id="{{ 'meta_title_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_title }}">
-			</div>
-
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::cms.meta_keywords') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_keywords_'. $properties['id'] }}" id="{{ 'meta_keywords_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_keywords }}">
-			</div>
-
-			<div class="form-group">
-				<label for="title">{{ trans('kotoba::cms.meta_description') }}</label>
-				<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_description }}">
-			</div>
-
-		</div>
-
-	</div>
-
-	</div><!-- ./ panel -->
+	</div><!-- ./ $lang panel -->
 	@endforeach
-	</div>
-	@endif
 
-</div><!-- ./ col -->
-<div class="col-sm-3">
+	@endif
+	</div>
+	</div><!-- ./ content panel -->
+
+	<div role="tabpanel" class="tab-pane" id="meta">
+	<div class="tab-content">
+	@if (count($locales))
+
+	<ul class="nav nav-tabs">
+		@foreach( $locales as $locale => $properties)
+			<li class="@if ($locale == $lang)active @endif">
+				<a href="#{{ $properties['id'] }}" data-target="#meta_{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
+			</li>
+		@endforeach
+	</ul>
+
+	@foreach( $locales as $locale => $properties)
+	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="meta_{{{ $properties['id'] }}}">
+
+		<div class="form-group">
+			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_title_'. $properties['id'] }}" id="{{ 'meta_title_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_title }}">
+		</div>
+
+		<div class="form-group">
+			<label for="title">{{ trans('kotoba::cms.meta_keywords') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_keywords_'. $properties['id'] }}" id="{{ 'meta_keywords_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_keywords }}">
+		</div>
+
+		<div class="form-group">
+			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_description }}">
+		</div>
+
+	</div><!-- ./ $lang panel -->
+	@endforeach
+
+	@endif
+	</div>
+	</div><!-- ./ meta panel -->
+
+
+	<div role="tabpanel" class="tab-pane" id="settings">
+	<div class="tab-content padding">
+
+
+
+<div class="row">
+<div class="col-sm-6">
+<div class="padding">
 
 	<div class="form-group">
 		{!! Form::label('parent_id', trans('kotoba::cms.parent'), ['class' => 'control-label']) !!}
-		{{-- Form::select('parent_id', $pagelist, Input::old('parent_id'), ['class' => 'form-control', 'id' => 'parent_id']) --}}
 		{!!
 			Form::select(
 				'parent_id',
 				$pagelist,
-				Input::old('parent_id'),
+				$content->parent_id,
 				array(
 					'class' => 'form-control chosen-select',
 					'id' => 'parent_id'
@@ -148,19 +155,96 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
-		{!! Form::select('is_online', [0 => Lang::choice('kotoba::cms.draft', 1), 1 => trans('kotoba::cms.publish')], Input::old('is_online'), ['class' => 'form-control', 'id' => 'is_online']) !!}
-	</div>
-
-	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
-		{!! Form::label('order', trans('kotoba::cms.position'), $errors->first('order'), ['class' => 'control-label']) !!}
-		{!! Form::text('order', Input::old('order'), ['id' => 'order', 'class' => 'form-control']) !!}
+		{!! Form::label('is_online', Lang::choice('kotoba::account.user', 1), ['class' => 'control-label']) !!}
+		{!!
+			Form::select(
+				'user_id',
+				$users,
+				$content->user_id,
+				array(
+					'class' => 'form-control chosen-select'
+				)
+			)
+		!!}
 	</div>
 
 	<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
 		{!! Form::label('link', Lang::choice('kotoba::cms.link', 1), $errors->first('link'), ['class' => 'control-label']) !!}
 		{!! Form::text('link', Input::old('link'), ['id' => 'link', 'class' => 'form-control', 'placeholder' => 'http://...']) !!}
 	</div>
+
+
+</div>
+</div><!-- ./ col-6 -->
+<div class="col-sm-6">
+<div class="padding">
+
+	<div class="form-group">
+		{!! Form::label('is_online', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
+		{!!
+			Form::select(
+				'print_status_id',
+				$print_statuses,
+				$content->print_status_id,
+				array(
+					'class' => 'form-control chosen-select'
+				)
+			)
+		!!}
+	</div>
+
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.position'), $errors->first('order'), ['class' => 'control-label']) !!}
+		{!! Form::text('order', $content->order, ['id' => 'order', 'class' => 'form-control']) !!}
+	</div>
+
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_start" name="publish_start" class="form-control" value="{{ $content->publish_start }}">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_end" name="publish_end" class="form-control" value="{{ $content->publish_end }}">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="is_featured" class="col-sm-1 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+		<div class="col-sm-11">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="is_featured" name="is_featured" value="1" {{ $content->present()->featured }}>
+				</label>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+</div><!-- ./ col-6 -->
+</div><!-- ./ row -->
+
+
+
+
+
+
+
+
+
+
+
+
 {{--
 	<div class="form-group">
 		{!! Form::label('featured_image', Lang::choice('kotoba::cms.image', 1), ['class' => 'control-label']) !!}
@@ -173,20 +257,26 @@
 	</div>
 --}}
 
-</div>
+	</div>
+	</div><!-- ./ settings panel -->
+
+
+</div><!-- ./ tab panes -->
 
 
 <hr>
 
 
-<div class="form-group">
+<div class="row">
 <div class="col-sm-12">
 	<input class="btn btn-success btn-block" type="submit" value="{{ trans('kotoba::button.save') }}">
 </div>
 </div>
 
+<br>
 
 <div class="row">
+
 <div class="col-sm-4">
 	<a href="/admin/contents" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
 		<i class="fa fa-times fa-fw"></i>
@@ -205,6 +295,7 @@
 		{{ trans('kotoba::general.command.delete') }}
 	</a>
 </div>
+
 </div>
 
 
@@ -212,12 +303,4 @@
 
 
 </div> <!-- ./ row -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	@include('_partials.modal')
-</div>
-
-
 @stop

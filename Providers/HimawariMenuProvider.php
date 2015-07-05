@@ -9,7 +9,8 @@ use App\Modules\Himawari\Http\Domain\Models\Content as Content;
 // use Cache;
 use Config;
 // use DB;
-use Menu;
+//use Menu;
+use Plugin;
 // use Session;
 // use View;
 
@@ -23,10 +24,12 @@ class HimawariMenuProvider extends ServiceProvider {
 	public function boot()
 	{
 
-
+Plugin::register('MenuNavigation', 'App\Plugins\MenuNavigation');
+/*
 		Menu::handler('top')->hydrate(function()
 			{
-			$pages = Content::get();
+//			$pages = Content::get();
+			$pages = Content::orderBy('order')->get();
 //dd($pages);
 			return $pages;
 			},
@@ -49,7 +52,7 @@ class HimawariMenuProvider extends ServiceProvider {
 			{
 				$children->add($item->translate(Config::get('app.locale'))->slug, $item->translate(Config::get('app.locale'))->title, Menu::items($item->as));
 			});
-
+*/
 
 /*
 // navbar menu

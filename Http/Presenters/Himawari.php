@@ -30,9 +30,8 @@ class Himawari extends Presenter {
 	}
 
 
-
 	/**
-	 * Present asset_status
+	 * Present print_status
 	 *
 	 * @return string
 	 */
@@ -50,26 +49,23 @@ class Himawari extends Presenter {
 
 
 	/**
-	 * Present the profiles
+	 * featured checkbox
 	 *
 	 * @return string
 	 */
-	public function site($site_id)
+	public function featured()
 	{
-		$return   = '';
-//dd($sites);
+//dd('loaded');
+		$return = '';
 
-		if ( $site_id == null ) {
-			$return = trans('kotoba::general.empty');
-		} else {
-			$site = DB::table('sites')
-				->where('id', '=', $site_id)
-				->pluck('name');
+		$featured = $this->entity->is_featured;
+//dd($featured);
+		if ( $featured == 1 ) {
+			$return = "checked";
 		}
 
-		return $site;
+		return $return;
 	}
-
 
 
 }

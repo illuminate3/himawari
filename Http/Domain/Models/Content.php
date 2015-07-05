@@ -43,9 +43,13 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 // DEFINE Fillable -------------------------------------------------------
 	protected $fillable = [
-		'is_deleted',
-		'is_online',
+// 		'is_deleted',
+// 		'is_online',
+		'is_featured',
 		'order',
+		'publish_start',
+		'publish_end',
+		'print_status_id',
 		'slug',
 		'user_id',
 		// Translatable columns
