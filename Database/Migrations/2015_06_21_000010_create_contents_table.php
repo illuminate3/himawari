@@ -39,21 +39,20 @@ class CreateContentsTable extends Migration
 			$table->text('link', 255)->nullable();
 
 
-// 			$table->tinyInteger('print_status_id')->default(0);
+			$table->tinyInteger('print_status_id')->default(0);
 // 			$table->tinyInteger('is_published')->default(0);
-// 			$table->tinyInteger('is_featured')->default(0);
+			$table->tinyInteger('is_featured')->default(0);
 // 			$table->tinyInteger('menu_id')->default(1);
-// 			$table->date('publish_start')->nullable();
-// 			$table->date('publish_end')->nullable();
-
-
+			$table->date('publish_start')->nullable();
+			$table->date('publish_end')->nullable();
 
 			$table->integer('order')->nullable();
-			$table->integer('version')->nullable();
-			$table->boolean('is_online')->default(0);
-			$table->boolean('is_current')->default(0);
-			$table->boolean('is_latest')->default(1);
-			$table->boolean('is_deleted')->default(0);
+
+// 			$table->integer('version')->nullable();
+// 			$table->boolean('is_online')->default(0);
+// 			$table->boolean('is_current')->default(0);
+// 			$table->boolean('is_latest')->default(1);
+// 			$table->boolean('is_deleted')->default(0);
 
 			$table->index('parent_id');
 			$table->index('lft');

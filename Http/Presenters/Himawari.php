@@ -5,7 +5,9 @@ use Laracasts\Presenter\Presenter;
 
 use DB;
 
+
 class Himawari extends Presenter {
+
 
 	/**
 	 * Present name
@@ -34,10 +36,16 @@ class Himawari extends Presenter {
 	 *
 	 * @return string
 	 */
-	public function asset_status($asset_status_id)
+	public function print_status($print_status_id)
 	{
-//dd($asset_status_id);
-		return $asset_status_id ? trans('kotoba::general.active') : trans('kotoba::general.deactivated');
+//dd($print_status_id);
+//		return $print_status_id ? trans('kotoba::general.active') : trans('kotoba::general.deactivated');
+		$print_status = DB::table('print_statuses')
+			->where('id', '=', $print_status_id)
+			->pluck('name');
+
+		return $print_status;
+
 	}
 
 
@@ -57,73 +65,11 @@ class Himawari extends Presenter {
 			$site = DB::table('sites')
 				->where('id', '=', $site_id)
 				->pluck('name');
-				}
-
-			return $site;
 		}
+
+		return $site;
 	}
 
 
-
-/*
-
-	public function content($id)
-	{
-		$content = DB::table('catalog')
-			->where('id', '=', $id)
-			->pluck('name');
-//dd($content);
-		if ($content == null ) {
-			$content = '--- --- --- --- --- ---';
-		}
-//dd($content);
-
-		return $content;
-	}
-
-	public function number($id)
-	{
-		$number = DB::table('catalog')
-			->where('id', '=', $id)
-			->pluck('number');
-//dd($number);
-		if ($number == null ) {
-			$number = '--- --- ---';
-		}
-//dd($number);
-
-		return $number;
-	}
-
-	public function location($zone_id, $rack_id)
-	{
-//dd($zone);
-//dd($rack);
-		$zone = '';
-		$rack = '';
-		$location = '';
-
-		if ($zone_id != null ) {
-			$zone = DB::table('zones')
-				->where('id', '=', $zone_id)
-				->pluck('name');
-		//dd($zone);
-
-			$location = $zone;
-		}
-		if ($rack_id != null ) {
-			$rack = DB::table('racks')
-				->where('id', '=', $rack_id)
-				->first();
-		//dd($rack);
-		//		$racked = $rack->zone . '-' . $rack->aisle . '-' . $rack->level . '-' . $rack->slot;
-				$racked = $rack->aisle . '-' . $rack->level . '-' . $rack->slot;
-
-				$location = $zone . '-' . $racked;
-		}
-
-		return $location;
-	}
 
 }
-*/

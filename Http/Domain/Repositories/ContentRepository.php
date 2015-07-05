@@ -12,6 +12,7 @@ use App\Modules\Himawari\Http\Domain\Models\ContentTranslation;
 
 use App;
 use Auth;
+use Config;
 use DB;
 use Lang;
 use Route;
@@ -142,19 +143,25 @@ class ContentRepository extends BaseRepository {
 	{
 //dd($input);
 
+/*
 		$print_status_id = $input['print_status_id'];
 		$is_online = 1;
 		if ( $print_status_id != 2 ) {
 			$is_online = 0;
 		}
+*/
 
 		$values = [
 //			'name'			=> $input['name'],
-			'is_current'		=> 1,
+//			'is_current'		=> 1,
 //			'is_online'			=> $input['is_online'],
-			'is_online'			=> $is_online,
+//			'is_online'			=> $is_online,
+			'is_featured'		=> $input['is_featured'],
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
+			'print_status_id'	=> $input['print_status_id'],
+			'publish_end'		=> $input['publish_end'],
+			'publish_start'		=> $input['publish_start'],
 			'slug'				=> $input['title_1'],
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
@@ -211,21 +218,27 @@ class ContentRepository extends BaseRepository {
 	{
 //dd($input);
 
+/*
 		$print_status_id = $input['print_status_id'];
 		$is_online = 1;
 		if ( $print_status_id != 2 ) {
 			$is_online = 0;
 		}
+*/
 
 		$content = Content::find($id);
 
 		$values = [
 //			'name'			=> $input['name'],
-			'is_current'		=> 1,
+//			'is_current'		=> 1,
 //			'is_online'			=> $input['is_online'],
-			'is_online'			=> $is_online,
+//			'is_online'			=> $is_online,
+			'is_featured'		=> $input['is_featured'],
 			'link'				=> $input['link'],
 			'order'				=> $input['order'],
+			'print_status_id'	=> $input['print_status_id'],
+			'publish_end'		=> $input['publish_end'],
+			'publish_start'		=> $input['publish_start'],
 			'slug'				=> $input['title_1'],
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']

@@ -52,7 +52,9 @@ oTable =
 			<th>{{ trans('kotoba::table.summary') }}</th>
 			<th>{{ trans('kotoba::table.position') }}</th>
 			<th>{{ trans('kotoba::table.online') }}</th>
+{{--
 			<th>{{ trans('kotoba::table.deleted') }}</th>
+--}}
 			<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 		</tr>
 	</thead>
@@ -62,8 +64,10 @@ oTable =
 				<td>{{ $content->title }}</td>
 				<td>{{ $content->summary }}</td>
 				<td>{{ $content->order }}</td>
-				<td>{{ $content->is_online }}</td>
+				<td>{{ $content->present()->print_status($content->print_status_id) }}</td>
+{{--
 				<td>{{ $content->is_deleted }}</td>
+--}}
 				<td>
 					<a href="/admin/contents/{{ $content->id }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
 						<i class="fa fa-pencil fa-fw"></i>

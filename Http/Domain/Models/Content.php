@@ -27,7 +27,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 	protected $table = 'contents';
 
 // Presenter -------------------------------------------------------
-	protected $presenter = 'App\Http\Presenters\General';
+	protected $presenter = 'App\Modules\Himawari\Http\Presenters\Himawari';
 
 
 // Translation Model -------------------------------------------------------
