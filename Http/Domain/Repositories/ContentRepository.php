@@ -511,7 +511,7 @@ dd($content);
 
 	public function getPrintStatuses()
 	{
-		$print_statuses = DB::table('print_statuses')->lists('name', 'id');
+		$print_statuses = DB::table('prints')->lists('name', 'id');
 //dd($print_statuses);
 		return $print_statuses;
 	}

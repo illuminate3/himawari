@@ -11,8 +11,12 @@ use App\Modules\Himawari\Http\Requests\PrintStatusUpdateRequest;
 
 use Datatables;
 use Flash;
+use Session;
+use Theme;
+
 
 class PrintStatusesController extends HimawariController {
+
 
 	/**
 	 * Status Repository
@@ -22,10 +26,10 @@ class PrintStatusesController extends HimawariController {
 	protected $status;
 
 	public function __construct(
-			PrintStatusRepository $status
+			PrintStatusRepository $status_repo
 		)
 	{
-		$this->status = $status;
+		$this->status_repo = $status_repo;
 // middleware
 		$this->middleware('auth');
 		$this->middleware('admin');
@@ -38,7 +42,17 @@ class PrintStatusesController extends HimawariController {
 	 */
 	public function index()
 	{
-		return View('himawari::print_statuses.index');
+		$lang = Session::get('locale');
+//		$locales = $this->status_repo->getLocales();
+		$print_statuses = $this->status_repo->all();
+//dd($lang);
+
+		return Theme::View('himawari::print_statuses.index',
+			compact(
+				'lang',
+//				'locales',
+				'print_statuses'
+				));
 	}
 
 	/**

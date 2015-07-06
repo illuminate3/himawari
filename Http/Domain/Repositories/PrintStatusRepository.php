@@ -15,7 +15,7 @@ class PrintStatusRepository extends BaseRepository {
 	 *
 	 * @var App\Modules\ModuleManager\Http\Domain\Models\Module
 	 */
-	protected $status;
+	protected $print_status;
 
 	/**
 	 * Create a new ModuleRepository instance.
@@ -24,10 +24,10 @@ class PrintStatusRepository extends BaseRepository {
 	 * @return void
 	 */
 	public function __construct(
-		PrintStatus $status
+		PrintStatus $print_status
 		)
 	{
-		$this->model = $status;
+		$this->model = $print_status;
 	}
 
 	/**

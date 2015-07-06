@@ -39,7 +39,7 @@ class Himawari extends Presenter {
 	{
 //dd($print_status_id);
 //		return $print_status_id ? trans('kotoba::general.active') : trans('kotoba::general.deactivated');
-		$print_status = DB::table('print_statuses')
+		$print_status = DB::table('prints')
 			->where('id', '=', $print_status_id)
 			->pluck('name');
 

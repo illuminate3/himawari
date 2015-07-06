@@ -4,9 +4,16 @@ namespace App\Modules\Himawari\Http\Domain\Models;
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
 
-class PrintStatus extends Model {
+use Vinkla\Translator\Translatable;
+use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
+
+
+class PrintStatus extends Model implements TranslatableContract {
+
 
 	use PresentableTrait;
+	use Translatable;
+
 
 	/**
 	 * The database table used by the model.
@@ -15,25 +22,48 @@ class PrintStatus extends Model {
 	 */
 	protected $table = 'print_statuses';
 
+// Presenter -------------------------------------------------------
 	protected $presenter = 'App\Modules\Himawari\Http\Presenters\Himawari';
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-//	protected $hidden = ['password', 'remember_token'];
+
+// Translation Model -------------------------------------------------------
+	protected $translator = 'App\Modules\Himawari\Http\Domain\Models\PrintStatusTranslation';
+
+
+// DEFINE Hidden -------------------------------------------------------
+	protected $hidden = [
+		'created_at',
+		'updated_at'
+		];
+
 
 // DEFINE Fillable -------------------------------------------------------
-/*
-			$table->string('name',100)->index();
-			$table->string('description')->nullable();
-*/
 	protected $fillable = [
-		'id',
+		// Translatable columns
 		'name',
 		'description'
 		];
+
+
+// Translated Columns -------------------------------------------------------
+	protected $translatedAttributes = [
+		'name',
+		'description'
+		];
+
+
+// DEFINE Functions --------------------------------------------------
+
+	public function getNameAttribute()
+	{
+		return $this->name;
+	}
+
+	public function getDescriptionAttribute()
+	{
+		return $this->description;
+	}
+
 
 // DEFINE Relationships --------------------------------------------------
 

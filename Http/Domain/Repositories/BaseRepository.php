@@ -1,7 +1,10 @@
 <?php
 namespace App\Modules\Himawari\Http\Domain\Repositories;
 
+use App\Modules\General\Http\Domain\Models\Locale;
+
 abstract class BaseRepository {
+
 
 	/**
 	 * The Model instance.
@@ -41,5 +44,19 @@ abstract class BaseRepository {
 	{
 		return $this->model->findOrFail($id);
 	}
+
+
+	public function getLocales()
+	{
+ 		$locales = Locale::all();
+//dd($locales);
+
+	if ( empty($locales) ) {
+		throw new LocalesNotDefinedException('Please make sure you have run "php artisan config:publish dimsav/laravel-translatable" ' . ' and that the locales configuration is defined.');
+	}
+
+	return $locales;
+	}
+
 
 }
