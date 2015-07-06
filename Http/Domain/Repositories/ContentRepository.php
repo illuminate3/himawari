@@ -58,7 +58,7 @@ class ContentRepository extends BaseRepository {
 	{
 		$lang = Session::get('locale');
 		$locales = $this->getLocales();
-		$locale_id = 1;
+		$locale_id = $this->getLocaleID($lang);
 //dd($locales);
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
@@ -69,7 +69,7 @@ class ContentRepository extends BaseRepository {
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
 //dd($users);
-		$print_statuses = $this->getPrintStatuses();
+		$print_statuses = $this->getPrintStatuses($locale_id);
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
 		$user_id = Auth::user()->id;
@@ -118,7 +118,7 @@ class ContentRepository extends BaseRepository {
 
 		$lang = Session::get('locale');
 		$locales = $this->getLocales();
-		$locale_id = 1;
+		$locale_id = $this->getLocaleID($lang);
 //dd($locales);
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
@@ -129,7 +129,7 @@ class ContentRepository extends BaseRepository {
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
 //dd($users);
-		$print_statuses = $this->getPrintStatuses();
+		$print_statuses = $this->getPrintStatuses($locale_id);
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
 //		$user_id = Auth::user()->id;
@@ -174,6 +174,9 @@ class ContentRepository extends BaseRepository {
 		} else {
 			$publish_start = $input['publish_start'];
 		}
+		if ( ($input['print_status_id'] == 3 || $input['print_status_id'] == 4) ) {
+			$is_published = 1;
+		}
 
 		$values = [
 //			'name'			=> $input['name'],
@@ -181,6 +184,7 @@ class ContentRepository extends BaseRepository {
 //			'is_online'			=> $input['is_online'],
 //			'is_online'			=> $is_online,
 //			'is_featured'		=> $input['is_featured'],
+			'is_published'		=> $is_published,
 			'is_featured'		=> $is_featured,
 			'is_timed'			=> $is_timed,
 			'link'				=> $input['link'],
@@ -266,6 +270,9 @@ class ContentRepository extends BaseRepository {
 		} else {
 			$publish_start = $input['publish_start'];
 		}
+		if ( ($input['print_status_id'] == 3 || $input['print_status_id'] == 4) ) {
+			$is_published = 1;
+		}
 
 		$content = Content::find($id);
 
@@ -275,6 +282,7 @@ class ContentRepository extends BaseRepository {
 //			'is_online'			=> $input['is_online'],
 //			'is_online'			=> $is_online,
 //			'is_featured'		=> $input['is_featured'],
+			'is_published'		=> $is_published,
 			'is_featured'		=> $is_featured,
 			'is_timed'			=> $is_timed,
 			'link'				=> $input['link'],
@@ -330,6 +338,16 @@ class ContentRepository extends BaseRepository {
 	{
 		$locales = Locale::all();
 		return $locales;
+	}
+
+	public function getLocaleID($lang)
+	{
+
+		$locale_id = DB::table('locales')
+			->where('locale', '=', $lang)
+			->pluck('id');
+
+		return $locale_id;
 	}
 
 
@@ -509,10 +527,22 @@ dd($content);
 	}
 
 
-	public function getPrintStatuses()
+	public function getPrintStatuses($locale_id)
 	{
-		$print_statuses = DB::table('prints')->lists('name', 'id');
+//		$print_statuses = DB::table('prints')->lists('name', 'id');
 //dd($print_statuses);
+/*
+		$print_statuses = DB::table('print_statuses')
+			->join('print_statuses', 'print_statuses.id', '=', 'print_status_translations.print_status_id')
+			->where('print_status_translations.locale_id', '=', $locale_id)
+			->orderBy('print_status_translations.id')
+			->get();
+*/
+		$print_statuses = DB::table('print_status_translations')
+			->where('locale_id', '=', $locale_id)
+			->orderBy('id')
+			->lists('name', 'id');
+
 		return $print_statuses;
 	}
 

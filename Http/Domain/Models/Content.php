@@ -210,6 +210,14 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	}
 
 
+	public function scopeInPrint($query)
+	{
+		return $query->where('is_published', '=', 1);
+// 			->where('print_status_id', '>', 2)
+// 			->where('print_status_id', '<', 5, 'OR');
+	}
+
+
 	public function scopeIsFeatured($query)
 	{
 		return $query->where('is_featured', '=', 1);
