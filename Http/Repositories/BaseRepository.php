@@ -1,7 +1,8 @@
 <?php
-namespace App\Modules\Himawari\Http\Domain\Repositories;
 
-use App\Modules\General\Http\Domain\Models\Locale;
+namespace App\Modules\Himawari\Http\Repositories;
+
+use App\Modules\General\Http\Models\Locale;
 
 abstract class BaseRepository {
 
@@ -23,6 +24,7 @@ abstract class BaseRepository {
 		return $this->model->all();
 	}
 
+
 	/**
 	 * Destroy a model.
 	 *
@@ -33,6 +35,7 @@ abstract class BaseRepository {
 	{
 		$this->getById($id)->delete();
 	}
+
 
 	/**
 	 * Get Model by id.

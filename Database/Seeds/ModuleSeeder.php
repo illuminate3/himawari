@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Modules\Himawari\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 Use DB, Eloquent, Model, Schema;
+
 
 class ModuleSeeder extends Seeder {
 

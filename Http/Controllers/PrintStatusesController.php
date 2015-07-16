@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Controllers;
 
-use App\Modules\Himawari\Http\Domain\Models\PrintStatus;
-use App\Modules\Himawari\Http\Domain\Repositories\PrintStatusRepository;
+use App\Modules\Himawari\Http\Models\PrintStatus;
+use App\Modules\Himawari\Http\Repositories\PrintStatusRepository;
 
 use Illuminate\Http\Request;
 use App\Modules\Himawari\Http\Requests\DeleteRequest;
@@ -35,6 +36,7 @@ class PrintStatusesController extends HimawariController {
 		$this->middleware('admin');
 	}
 
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -55,6 +57,7 @@ class PrintStatusesController extends HimawariController {
 				));
 	}
 
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -64,6 +67,7 @@ class PrintStatusesController extends HimawariController {
 	{
 		return view('himawari::print_statuses.create',  $this->status->create());
 	}
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -80,6 +84,7 @@ class PrintStatusesController extends HimawariController {
 		return redirect('admin/print_statuses');
 	}
 
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -92,6 +97,7 @@ class PrintStatusesController extends HimawariController {
 //
 // 		return View::make('HR::statuses.show', compact('status'));
 	}
+
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -119,6 +125,7 @@ class PrintStatusesController extends HimawariController {
 //		return View('himawari::print_statuses.edit',  $this->status->edit($id));
 	}
 
+
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -137,6 +144,7 @@ class PrintStatusesController extends HimawariController {
 		return redirect('admin/print_statuses');
 	}
 
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -149,6 +157,7 @@ class PrintStatusesController extends HimawariController {
 
 		return Redirect::route('admin.print_statuses.index');
 	}
+
 
 	/**
 	* Datatables data

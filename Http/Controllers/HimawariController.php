@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+
 
 class HimawariController extends Controller
 {

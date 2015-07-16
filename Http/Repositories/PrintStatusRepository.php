@@ -1,26 +1,28 @@
 <?php
-namespace App\Modules\Himawari\Http\Domain\Repositories;
 
-use App\Modules\Himawari\Http\Domain\Models\PrintStatus;
+namespace App\Modules\Himawari\Http\Repositories;
+
+use App\Modules\Himawari\Http\Models\PrintStatus;
 
 use DB;
 //use Hash, DB, Auth;
 //use DateTime;
 //use File, Auth;
 
+
 class PrintStatusRepository extends BaseRepository {
 
 	/**
 	 * The Module instance.
 	 *
-	 * @var App\Modules\ModuleManager\Http\Domain\Models\Module
+	 * @var App\Modules\ModuleManager\Http\Models\Module
 	 */
 	protected $print_status;
 
 	/**
 	 * Create a new ModuleRepository instance.
 	 *
-   	 * @param  App\Modules\ModuleManager\Http\Domain\Models\Module $module
+   	 * @param  App\Modules\ModuleManager\Http\Models\Module $module
 	 * @return void
 	 */
 	public function __construct(
@@ -29,6 +31,7 @@ class PrintStatusRepository extends BaseRepository {
 	{
 		$this->model = $print_status;
 	}
+
 
 	/**
 	 * Get role collection.
@@ -42,6 +45,7 @@ class PrintStatusRepository extends BaseRepository {
 
 		return compact('');
 	}
+
 
 	/**
 	 * Get user collection.
@@ -57,6 +61,7 @@ class PrintStatusRepository extends BaseRepository {
 		return compact('status');
 	}
 
+
 	/**
 	 * Get user collection.
 	 *
@@ -71,6 +76,7 @@ class PrintStatusRepository extends BaseRepository {
 		return compact('status');
 	}
 
+
 	/**
 	 * Get all models.
 	 *
@@ -82,6 +88,7 @@ class PrintStatusRepository extends BaseRepository {
 		$this->model = new PrintStatus;
 		$this->model->create($input);
 	}
+
 
 	/**
 	 * Update a role.

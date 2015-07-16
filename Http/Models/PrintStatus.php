@@ -1,5 +1,6 @@
 <?php
-namespace App\Modules\Himawari\Http\Domain\Models;
+
+namespace App\Modules\Himawari\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
@@ -27,7 +28,7 @@ class PrintStatus extends Model implements TranslatableContract {
 
 
 // Translation Model -------------------------------------------------------
-	protected $translator = 'App\Modules\Himawari\Http\Domain\Models\PrintStatusTranslation';
+	protected $translator = 'App\Modules\Himawari\Http\Models\PrintStatusTranslation';
 
 
 // DEFINE Hidden -------------------------------------------------------

@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Config;
+
 
 class ContentUpdateRequest extends FormRequest {
 
@@ -15,6 +17,7 @@ class ContentUpdateRequest extends FormRequest {
 	{
 		return true;
 	}
+
 
 	/**
 	 * Get the validation rules that apply to the request.

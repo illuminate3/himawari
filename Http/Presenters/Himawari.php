@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Presenters;
 
 use Laracasts\Presenter\Presenter;
@@ -86,5 +87,6 @@ class Himawari extends Presenter {
 
 		return $return;
 	}
+
 
 }

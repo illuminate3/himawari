@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+
 class CreateContentTranslationsTable extends Migration
 {
 
@@ -11,6 +12,7 @@ class CreateContentTranslationsTable extends Migration
 		// Get the prefix
 		$this->prefix = Config::get('himawari.himawari_db.prefix', '');
 	}
+
 
 	/**
 	 * Run the migrations.
@@ -52,6 +54,7 @@ class CreateContentTranslationsTable extends Migration
 
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.

@@ -1,14 +1,15 @@
 <?php
-namespace App\Modules\Himawari\Http\Domain\Repositories;
+
+namespace App\Modules\Himawari\Http\Repositories;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Modules\Himawari\Http\Domain\Repositories\BaseRepository as BaseRepository;
+use App\Modules\Himawari\Http\Repositories\BaseRepository as BaseRepository;
 
-use App\Modules\General\Http\Domain\Models\Locale;
-use App\Modules\Himawari\Http\Domain\Models\Content;
-use App\Modules\Himawari\Http\Domain\Models\ContentTranslation;
+use App\Modules\General\Http\Models\Locale;
+use App\Modules\Himawari\Http\Models\Content;
+use App\Modules\Himawari\Http\Models\ContentTranslation;
 
 use App;
 use Auth;
@@ -26,14 +27,14 @@ class ContentRepository extends BaseRepository {
 	/**
 	 * The Module instance.
 	 *
-	 * @var App\Modules\ModuleManager\Http\Domain\Models\Module
+	 * @var App\Modules\ModuleManager\Http\Models\Module
 	 */
 	protected $content;
 
 	/**
 	 * Create a new ModuleRepository instance.
 	 *
-   	 * @param  App\Modules\ModuleManager\Http\Domain\Models\Module $module
+   	 * @param  App\Modules\ModuleManager\Http\Models\Module $module
 	 * @return void
 	 */
 	public function __construct(

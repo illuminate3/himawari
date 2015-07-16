@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+
 class CreatePrintStatusesTable extends Migration
 {
 
@@ -11,6 +12,7 @@ class CreatePrintStatusesTable extends Migration
 		// Get the prefix
 		$this->prefix = Config::get('himawari.himawari_db.prefix', '');
 	}
+
 
 	/**
 	 * Run the migrations.
@@ -69,6 +71,7 @@ class CreatePrintStatusesTable extends Migration
 		});
 
 	}
+
 
 	/**
 	 * Reverse the migrations.

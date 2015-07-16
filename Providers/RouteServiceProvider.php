@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Modules\Himawari\Providers;
 
 use Caffeinated\Modules\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
 
 		//
 	}
+
 
 	/**
 	 * Define the routes for the module.

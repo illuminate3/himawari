@@ -38,7 +38,7 @@ function()
 // Route::resource('pages', 'PagesController', array('except' => array('show')));
 //
 // Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
-// 	->where('slug', App\Modules\Himawari\Http\Domain\Models\Page::$slugPattern);
+// 	->where('slug', App\Modules\Himawari\Http\Models\Page::$slugPattern);
 
 
 // Controllers
@@ -119,7 +119,7 @@ Route::group(array('prefix' => 'pages'), function () {
 // The slug route should be registered last since it will capture any slug-like
 // route
 Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
-	->where('slug', App\Modules\Himawari\Http\Domain\Models\Page::$slugPattern);
+	->where('slug', App\Modules\Himawari\Http\Models\Page::$slugPattern);
 */
 
 /*

@@ -1,5 +1,6 @@
 <?php
-namespace App\Modules\Himawari\Http\Domain\Models;
+
+namespace App\Modules\Himawari\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,7 +32,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 
 // Translation Model -------------------------------------------------------
-	protected $translator = 'App\Modules\Himawari\Http\Domain\Models\ContentTranslation';
+	protected $translator = 'App\Modules\Himawari\Http\Models\ContentTranslation';
 
 
 // DEFINE Hidden -------------------------------------------------------

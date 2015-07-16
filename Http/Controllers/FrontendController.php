@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Controllers;
 
-use App\Modules\Himawari\Http\Domain\Models\Content;
-use App\Modules\Himawari\Http\Domain\Repositories\ContentRepository;
+use App\Modules\Himawari\Http\Models\Content;
+use App\Modules\Himawari\Http\Repositories\ContentRepository;
 
 use App\Helpers\Nifty\NiftyMenus;
 

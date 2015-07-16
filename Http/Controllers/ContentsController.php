@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Controllers;
 
-use App\Modules\Himawari\Http\Domain\Models\Content;
-use App\Modules\Himawari\Http\Domain\Repositories\ContentRepository;
+use App\Modules\Himawari\Http\Models\Content;
+use App\Modules\Himawari\Http\Repositories\ContentRepository;
 
 use Illuminate\Http\Request;
 use App\Modules\Himawari\Http\Requests\DeleteRequest;
@@ -64,6 +65,7 @@ class ContentsController extends HimawariController {
 		return Theme::View('himawari::contents.create',  $this->content->create());
 	}
 
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -81,6 +83,7 @@ class ContentsController extends HimawariController {
 		return redirect('admin/contents');
 	}
 
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -93,6 +96,7 @@ class ContentsController extends HimawariController {
 //
 // 		return View::make('HR::contents.show', compact('content'));
 	}
+
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -122,6 +126,7 @@ class ContentsController extends HimawariController {
 			));
 	}
 
+
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -141,6 +146,7 @@ class ContentsController extends HimawariController {
 		return redirect('admin/contents');
 	}
 
+
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -155,6 +161,7 @@ class ContentsController extends HimawariController {
 		Flash::success( trans('kotoba::cms.success.content_delete') );
 		return redirect('admin/contents');
 	}
+
 
 	/**
 	* Datatables data
