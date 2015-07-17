@@ -13,6 +13,12 @@ class PrintStatusesSeeder extends Seeder {
 		// Uncomment the below to wipe the table clean before populating
 //		DB::table('print_statuses')->truncate();
 
+		$locale_id = DB::table('locales')
+			->where('name', '=', 'English')
+			->where('locale', '=', 'en', 'AND')
+			->pluck('id');
+
+
 		$print_statuses = array(
 		[
 			'id'					=> 1
@@ -32,50 +38,26 @@ class PrintStatusesSeeder extends Seeder {
 			'name'					=> 'Draft',
 			'description'			=> 'Page is a draft',
 			'print_status_id'		=> 1,
-			'locale_id'				=> 1
-		],
-		[
-			'name'					=> 'Draft',
-			'description'			=> 'Page is a draft',
-			'print_status_id'		=> 1,
-			'locale_id'				=> 2
+			'locale_id'				=> $locale_id
 		],
 		[
 			'name'					=> 'Publish',
 			'description'			=> 'Page is a draft',
 			'print_status_id'		=> 2,
-			'locale_id'				=> 1
-		],
-		[
-			'name'					=> 'Publish',
-			'description'			=> 'Page has been Published',
-			'print_status_id'		=> 2,
-			'locale_id'				=> 2
+			'locale_id'				=> $locale_id
 		],
 		[
 			'name'					=> 'Unpublish',
 			'description'			=> 'Page is a draft',
 			'print_status_id'		=> 3,
-			'locale_id'				=> 1
-		],
-		[
-			'name'					=> 'Unpublish',
-			'description'			=> 'Page has been unpublished',
-			'print_status_id'		=> 3,
-			'locale_id'				=> 2
+			'locale_id'				=> $locale_id
 		],
 		[
 			'name'					=> 'Archieve',
 			'description'			=> 'Page has been archieved',
 			'print_status_id'		=> 4,
-			'locale_id'				=> 1
+			'locale_id'				=> $locale_id
 		],
-		[
-			'name'					=> 'Archieve',
-			'description'			=> 'Page has been archieved',
-			'print_status_id'		=> 4,
-			'locale_id'				=> 2
-		]
 		);
 
 		// Uncomment the below to run the seeder
@@ -86,12 +68,14 @@ class PrintStatusesSeeder extends Seeder {
 		DB::table('print_statuses')->delete();
 			$statement = "ALTER TABLE print_statuses AUTO_INCREMENT = 1;";
 			DB::unprepared($statement);
-		DB::table('print_statuses')->insert( $print_statuses );
 
 // Create Menu Translations
 		DB::table('print_status_translations')->delete();
 			$statement = "ALTER TABLE print_status_translations AUTO_INCREMENT = 1;";
 			DB::unprepared($statement);
+
+// Insert Data
+		DB::table('print_statuses')->insert( $print_statuses );
 		DB::table('print_status_translations')->insert( $print_status_translations );
 
 

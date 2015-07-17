@@ -32,8 +32,10 @@ class PrintStatusesController extends HimawariController {
 	{
 		$this->status_repo = $status_repo;
 // middleware
-		$this->middleware('auth');
-		$this->middleware('admin');
+		parent::__construct();
+// middleware
+// 		$this->middleware('auth');
+// 		$this->middleware('admin');
 	}
 
 

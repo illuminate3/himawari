@@ -20,14 +20,9 @@ class HimawariController extends Controller
 	 */
 	public function __construct()
 	{
-/*
-		parent::__construct();
-		$this->middleware('csrf');
+// middleware
 		$this->middleware('auth');
-*/
-		$this->middleware('auth');
-//		$this->middleware('admin');
-
+		$this->middleware('admin');
 	}
 
 

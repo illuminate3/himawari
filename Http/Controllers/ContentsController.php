@@ -34,7 +34,10 @@ class ContentsController extends HimawariController {
 	{
 		$this->content = $content;
 // middleware
-//		$this->middleware('admin');
+		parent::__construct();
+// middleware
+// 		$this->middleware('auth');
+// 		$this->middleware('admin');
 	}
 
 

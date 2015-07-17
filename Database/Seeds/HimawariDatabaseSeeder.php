@@ -17,7 +17,7 @@ class HimawariDatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('App\Modules\Himawari\Database\Seeds\ModuleSeeder');
+//		$this->call('App\Modules\Himawari\Database\Seeds\ModuleSeeder');
 		$this->call('App\Modules\Himawari\Database\Seeds\PrintStatusesSeeder');
 
 	}
