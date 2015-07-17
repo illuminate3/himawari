@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Input;
 
 //use Datatables;
 use Flash;
+use Session;
 use Theme;
 
 
@@ -50,8 +51,8 @@ class ContentsController extends HimawariController {
 	{
 		$contents = $this->content->all();
 //dd($contents);
-		$locale = Session::get('locale');
-		$locale_id = $this->getLocaleID($lang);
+		$lang = Session::get('locale');
+		$locale_id = $this->content->getLocaleID($lang);
 
 		return Theme::View('himawari::contents.index',
 			compact(
