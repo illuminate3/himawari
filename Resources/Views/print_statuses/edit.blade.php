@@ -44,20 +44,37 @@
 ) !!}
 
 
-<div class="form-group">
-<div class="input-group">
-	<span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-		<input type="text" id="name" name="name" value="{{ $status->name }}" placeholder="{{ trans('kotoba::account.name') }}" class="form-control" autofocus="autofocus">
-</div>
-</div>
+	<div class="tab-content">
 
+	@if (count($languages))
 
-<div class="form-group">
-<div class="input-group">
-	<span class="input-group-addon"><i class="fa fa-info fa-fw"></i></span>
-		<input type="text" id="description" name="description" value="{{ $status->description }}" placeholder="{{ trans('kotoba::general.description') }}" class="form-control">
-</div>
-</div>
+	<ul class="nav nav-tabs">
+		@foreach( $languages as $language)
+			<li class="@if ($language->locale == $lang)active @endif">
+				<a href="#{{ $language->id }}" data-target="#lang_{{ $language->id }}" data-toggle="tab">{{{ $language->name }}}</a>
+			</li>
+		@endforeach
+	</ul>
+
+	@foreach( $languages as $language)
+	<div role="tabpanel" class="tab-pane padding fade @if ($language->locale == $lang)in active @endif" id="lang_{{{ $language->id }}}">
+
+			<div class="form-group">
+				<label for="title">{{ trans('kotoba::account.name') }}</label>
+				<input type="text" class="form-control" name="{{ 'name_'. $language->id }}" id="{{ 'name_'. $language->id }}" value="{{  $status->translate($language->locale)->name }}">
+			</div>
+
+			<div class="form-group">
+				<label for="title">{{ trans('kotoba::general.description') }}</label>
+				<input type="text" class="form-control" name="{{ 'description_'. $language->id }}" id="{{ 'description_'. $language->id }}" value="{{  $status->translate($language->locale)->description }}">
+			</div>
+
+	</div><!-- ./ $lang panel -->
+	@endforeach
+
+	@endif
+
+	</div>
 
 
 <hr>

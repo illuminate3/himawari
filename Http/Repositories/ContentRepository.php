@@ -59,7 +59,7 @@ class ContentRepository extends BaseRepository {
 	public function create()
 	{
 		$lang = Session::get('locale');
-		$locales = $this->getLocales();
+//		$locales = $this->getLocales();
 		$locale_id = $this->getLocaleID($lang);
 //dd($locales);
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
@@ -93,7 +93,7 @@ class ContentRepository extends BaseRepository {
 
 		return compact(
 			'lang',
-			'locales',
+//			'locales',
 			'pagelist',
 			'print_statuses',
 			'users',
@@ -134,7 +134,7 @@ class ContentRepository extends BaseRepository {
 //dd($content);
 
 		$lang = Session::get('locale');
-		$locales = $this->getLocales();
+//		$locales = $this->getLocales();
 		$locale_id = $this->getLocaleID($lang);
 //dd($locales);
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
@@ -158,7 +158,7 @@ class ContentRepository extends BaseRepository {
 		return compact(
 			'content',
 			'lang',
-			'locales',
+//			'locales',
 			'pagelist',
 			'print_statuses',
 			'users'

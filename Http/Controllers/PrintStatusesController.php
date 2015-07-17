@@ -67,7 +67,7 @@ class PrintStatusesController extends HimawariController {
 	 */
 	public function create()
 	{
-		return view('himawari::print_statuses.create',  $this->status_repo->create());
+		return Theme::View('himawari::print_statuses.create',  $this->status_repo->create());
 	}
 
 
@@ -110,6 +110,7 @@ class PrintStatusesController extends HimawariController {
 	public function edit($id)
 	{
 		$status = $this->status_repo->edit($id);
+		$lang = Session::get('locale');
 
 		$modal_title = trans('kotoba::general.command.delete');
 		$modal_body = trans('kotoba::general.ask.delete');
@@ -120,6 +121,7 @@ class PrintStatusesController extends HimawariController {
 		return Theme::View('himawari::print_statuses.edit',
 			compact(
 				'status',
+				'lang',
 				'modal_title',
 				'modal_body',
 				'modal_route',

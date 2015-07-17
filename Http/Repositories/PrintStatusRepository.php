@@ -5,9 +5,7 @@ namespace App\Modules\Himawari\Http\Repositories;
 use App\Modules\Himawari\Http\Models\PrintStatus;
 
 use DB;
-//use Hash, DB, Auth;
-//use DateTime;
-//use File, Auth;
+use Session;
 
 
 class PrintStatusRepository extends BaseRepository {
@@ -42,8 +40,9 @@ class PrintStatusRepository extends BaseRepository {
 	{
 //		$allPermissions =  $this->permission->all()->lists('name', 'id');
 //dd($allPermissions);
+		$lang = Session::get('locale');
 
-		return compact('');
+		return compact('lang');
 	}
 
 

@@ -50,11 +50,15 @@ class ContentsController extends HimawariController {
 	{
 		$contents = $this->content->all();
 //dd($contents);
-//		$locale = Session::get('locale');
-		$locale = 'en';
-		$locale_id = 1;
+		$locale = Session::get('locale');
+		$locale_id = $this->getLocaleID($lang);
 
-		return Theme::View('himawari::contents.index', compact('contents', 'locales', 'locale_id'));
+		return Theme::View('himawari::contents.index',
+			compact(
+				'contents',
+				'locales',
+				'locale_id'
+			));
 	}
 
 
