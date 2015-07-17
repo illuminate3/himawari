@@ -73,7 +73,8 @@ class PrintStatusRepository extends BaseRepository {
 		$status = $this->model->find($id);
 //dd($module);
 
-		return compact('status');
+		return $status;
+//		return compact('status');
 	}
 
 

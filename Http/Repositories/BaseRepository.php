@@ -2,7 +2,7 @@
 
 namespace App\Modules\Himawari\Http\Repositories;
 
-use App\Modules\General\Http\Models\Locale;
+use App\Modules\Core\Http\Models\Locale;
 
 abstract class BaseRepository {
 

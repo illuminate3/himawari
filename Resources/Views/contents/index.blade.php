@@ -62,7 +62,7 @@ oTable =
 		@foreach ($contents as $content)
 			<tr>
 				<td>{{ $content->title }}</td>
-				<td>{{ $content->summary }}</td>
+				<td>{!! $content->summary !!}</td>
 				<td>{{ $content->order }}</td>
 				<td>{{ $content->present()->print_status($content->print_status_id) }}</td>
 {{--

@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Modules\Himawari\Http\Repositories\BaseRepository as BaseRepository;
 
-use App\Modules\General\Http\Models\Locale;
+use App\Modules\Core\Http\Models\Locale;
 use App\Modules\Himawari\Http\Models\Content;
 use App\Modules\Himawari\Http\Models\ContentTranslation;
 
 use App;
 use Auth;
+use Cache;
 use Config;
 use DB;
 use Lang;
@@ -63,13 +64,28 @@ class ContentRepository extends BaseRepository {
 //dd($locales);
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
-		$pagelist = $this->getParents($locale_id, null);
-		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
+// 		$pagelist = $this->getParents($locale_id, null);
+// 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
 //dd($pagelist);
+		$all_pagelist = $this->getParents($locale_id, null);
+		$pagelist = array('' => trans('kotoba::cms.no_parent'));
+		$pagelist = new Collection($pagelist);
+		$pagelist = $pagelist->merge($all_pagelist);
+
+
+
 
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
 //dd($users);
+//		$all_menus = $this->menu->all()->lists('name', 'id');
+// 		$all_users = $this->getUsers();
+// 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1));
+// 		$users = new Collection($users);
+// 		$users = $users->merge($all_users);
+
+
+
 		$print_statuses = $this->getPrintStatuses($locale_id);
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
@@ -123,9 +139,13 @@ class ContentRepository extends BaseRepository {
 //dd($locales);
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
-		$pagelist = $this->getParents($locale_id, $id);
-		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
+// 		$pagelist = $this->getParents($locale_id, $id);
+// 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
 //dd($pagelist);
+		$all_pagelist = $this->getParents($locale_id, null);
+		$pagelist = array('' => trans('kotoba::cms.no_parent'));
+		$pagelist = new Collection($pagelist);
+		$pagelist = $pagelist->merge($all_pagelist);
 
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
@@ -160,21 +180,31 @@ class ContentRepository extends BaseRepository {
 		} else {
 			$is_featured = $input['is_featured'];
 		}
+
+		if ( !isset($input['is_published']) ) {
+			$is_published = 0;
+		} else {
+			$is_published = $input['is_published'];
+		}
+
 		if ( !isset($input['is_timed']) ) {
 			$is_timed = 0;
 		} else {
 			$is_timed = $input['is_timed'];
 		}
+
 		if ( $input['publish_end'] == '' ) {
 			$publish_end = null;
 		} else {
 			$publish_end = $input['publish_end'];
 		}
+
 		if ( $input['publish_start'] == '' ) {
 			$publish_start = null;
 		} else {
 			$publish_start = $input['publish_start'];
 		}
+
 		if ( ($input['print_status_id'] == 3 || $input['print_status_id'] == 4) ) {
 			$is_published = 1;
 		}
@@ -195,7 +225,8 @@ class ContentRepository extends BaseRepository {
 //			'publish_start'		=> $input['publish_start'],
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
-			'slug'				=> $input['title_1'],
+//			'slug'				=> $input['title_1'],
+//			'slug'				=> Str::slug($input['title_'.$properties->id]),
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
 		];
@@ -203,31 +234,26 @@ class ContentRepository extends BaseRepository {
 
 		$content = Content::create($values);
 
-		$locales = $this->getLocales();
+		$locales = Cache::get('locales');
+		$original_locale = Session::get('locale');
 
 		foreach($locales as $locale => $properties)
 		{
-			App::setLocale($properties['locale']);
 
-/*
-			if ( !isset($input['status_'.$properties['id']]) ) {
-				$status = 0;
-			} else {
-				$status = $input['status_'.$properties['id']];
-			}
-*/
+			App::setLocale($properties->locale);
 
 			$values = [
-				'content'		=> $input['content_'.$properties['id']],
-				'summary'		=> $input['summary_'.$properties['id']],
-				'title'			=> $input['title_'.$properties['id']],
+				'content'		=> $input['content_'.$properties->id],
+				'summary'		=> $input['summary_'.$properties->id],
+				'title'			=> $input['title_'.$properties->id],
 
-//				'slug'			=> $input['slug_'.$properties['id']],
-//				'slug'			=> Str::slug($input['title_'.$properties['id']]),
+//				'slug'			=> $input['slug_'.$properties->id],
+//				'slug'			=> Str::slug($input['title_'.$properties->id]),
+				'slug'			=> Str::slug($input['title_'.$properties->id]),
 
-				'meta_title'			=> $input['meta_title_'.$properties['id']],
-				'meta_keywords'			=> $input['meta_keywords_'.$properties['id']],
-				'meta_description'		=> $input['meta_description_'.$properties['id']]
+				'meta_title'			=> $input['meta_title_'.$properties->id],
+				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
+				'meta_description'		=> $input['meta_description_'.$properties->id]
 			];
 
 			$content->update($values);
@@ -235,7 +261,7 @@ class ContentRepository extends BaseRepository {
 
 		$this->manageBaum($input['parent_id'], null);
 
-		App::setLocale(Session::get('locale'), Config::get('app.fallback_locale'));
+		App::setLocale($original_locale, Config::get('app.fallback_locale'));
 		return;
 	}
 
@@ -256,21 +282,31 @@ class ContentRepository extends BaseRepository {
 		} else {
 			$is_featured = $input['is_featured'];
 		}
+
+		if ( !isset($input['is_published']) ) {
+			$is_published = 0;
+		} else {
+			$is_published = $input['is_published'];
+		}
+
 		if ( !isset($input['is_timed']) ) {
 			$is_timed = 0;
 		} else {
 			$is_timed = $input['is_timed'];
 		}
+
 		if ( $input['publish_end'] == '' ) {
 			$publish_end = null;
 		} else {
 			$publish_end = $input['publish_end'];
 		}
+
 		if ( $input['publish_start'] == '' ) {
 			$publish_start = null;
 		} else {
 			$publish_start = $input['publish_start'];
 		}
+
 		if ( ($input['print_status_id'] == 3 || $input['print_status_id'] == 4) ) {
 			$is_published = 1;
 		}
@@ -293,40 +329,41 @@ class ContentRepository extends BaseRepository {
 //			'publish_start'		=> $input['publish_start'],
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
-			'slug'				=> $input['title_1'],
+//			'slug'				=> $input['title_1'],
+//			'slug'				=> Str::slug($input['title_'.$properties->id]),
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
 		];
 
 		$content->update($values);
 
-		$locales = $this->getLocales();
+		$locales = Cache::get('locales');
+		$original_locale = Session::get('locale');
 
 		foreach($locales as $locale => $properties)
 		{
-			App::setLocale($properties['locale']);
+
+			App::setLocale($properties->locale);
 
 			$values = [
-				'content'		=> $input['content_'.$properties['id']],
-				'summary'		=> $input['summary_'.$properties['id']],
-				'title'			=> $input['title_'.$properties['id']],
+				'content'		=> $input['content_'.$properties->id],
+				'summary'		=> $input['summary_'.$properties->id],
+				'title'			=> $input['title_'.$properties->id],
 
-//				'slug'			=> $input['slug_'.$properties['id']],
-//				'slug'			=> Str::slug($input['title_'.$properties['id']]),
-//'slug'			=> $this->makeSlugFromTitle($input['title_'.$properties['id']]),
+				'slug'			=> Str::slug($input['title_'.$properties->id]),
 
-
-				'meta_title'			=> $input['meta_title_'.$properties['id']],
-				'meta_keywords'			=> $input['meta_keywords_'.$properties['id']],
-				'meta_description'		=> $input['meta_description_'.$properties['id']]
+				'meta_title'			=> $input['meta_title_'.$properties->id],
+				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
+				'meta_description'		=> $input['meta_description_'.$properties->id]
 			];
 
 			$content->update($values);
+
 		}
 
 		$this->manageBaum($input['parent_id'], $id);
 
-		App::setLocale(Session::get('locale'), Config::get('app.fallback_locale'));
+		App::setLocale($original_locale, Config::get('app.fallback_locale'));
 		return;
 	}
 

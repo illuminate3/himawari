@@ -7,14 +7,14 @@
 
 @section('styles')
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/bootstrap-datepicker/css/datepicker3.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.1/chosen.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.2/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
 @stop
 
 @section('scripts')
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/bootstrap-datepicker/js/datepicker-settings.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.1/chosen.jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.2/chosen.jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/ckeditor/ckeditor.js') }}"></script>
 @stop
 
@@ -57,75 +57,83 @@
 
 	<div role="tabpanel" class="tab-pane active" id="content">
 	<div class="tab-content">
-	@if (count($locales))
+
+
+	@if (count($languages))
 
 	<ul class="nav nav-tabs">
-		@foreach( $locales as $locale => $properties)
-			<li class="@if ($locale == $lang)active @endif">
-				<a href="#{{ $properties['id'] }}" data-target="#content_{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
+		@foreach( $languages as $language)
+			<li class="@if ($language->locale == $lang)active @endif">
+				<a href="#{{ $language->id }}" data-target="#lang_{{ $language->id }}" data-toggle="tab">{{{ $language->name }}}</a>
 			</li>
 		@endforeach
 	</ul>
 
-	@foreach( $locales as $locale => $properties)
-	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="content_{{{ $properties['id'] }}}">
-
+	@foreach( $languages as $language)
+	<div role="tabpanel" class="tab-pane padding fade @if ($language->locale == $lang)in active @endif" id="lang_{{{ $language->id }}}">
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
-				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $properties['id'] }}" id="{{ 'content_'. $properties['id'] }}">{{ $content->translate($properties['locale'])->content }}</textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}">{{ $content->translate($language->locale)->content }}</textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="title">{{ trans('kotoba::general.title') }}</label>
-				<input type="text" class="form-control" name="{{ 'title_'. $properties['id'] }}" id="{{ 'title_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->title }}">
+				<input type="text" class="form-control" name="{{ 'title_'. $language->id }}" id="{{ 'title_'. $language->id }}" value="{{  $content->translate($language->locale)->title }}">
 			</div>
 
 			<div class="form-group">
 				<label for="summary">{{ trans('kotoba::cms.summary') }}</label>
-				<textarea class="form-control" rows="3" name="{{ 'summary_'. $properties['id'] }}" id="{{ 'summary_'. $properties['id'] }}">{{ $content->translate($properties['locale'])->summary }}</textarea>
+				<textarea class="form-control ckeditor" rows="3" name="{{ 'summary_'. $language->id }}" id="{{ 'summary_'. $language->id }}">{{ $content->translate($language->locale)->summary }}</textarea>
 			</div>
 
 	</div><!-- ./ $lang panel -->
 	@endforeach
 
 	@endif
+
+
 	</div>
 	</div><!-- ./ content panel -->
 
 	<div role="tabpanel" class="tab-pane" id="meta">
 	<div class="tab-content">
-	@if (count($locales))
+
+
+	@if (count($languages))
 
 	<ul class="nav nav-tabs">
-		@foreach( $locales as $locale => $properties)
-			<li class="@if ($locale == $lang)active @endif">
-				<a href="#{{ $properties['id'] }}" data-target="#meta_{{ $properties['id'] }}" data-toggle="tab">{{{ $properties['native'] }}}</a>
+		@foreach( $languages as $language)
+			<li class="@if ($language->locale == $lang)active @endif">
+				<a href="#{{ $language->id }}" data-target="#meta_{{ $language->id }}" data-toggle="tab">{{{ $language->name }}}</a>
 			</li>
 		@endforeach
 	</ul>
 
-	@foreach( $locales as $locale => $properties)
-	<div role="tabpanel" class="tab-pane padding fade @if ($locale == $lang)in active @endif" id="meta_{{{ $properties['id'] }}}">
+	@foreach( $languages as $language)
+	<div role="tabpanel" class="tab-pane padding fade @if ($language->locale == $lang)in active @endif" id="meta_{{{ $language->id }}}">
 
 		<div class="form-group">
 			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
-			<input type="text" class="form-control" name="{{ 'meta_title_'. $properties['id'] }}" id="{{ 'meta_title_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_title }}">
+			<input type="text" class="form-control" name="{{ 'meta_title_'. $language->id }}" id="{{ 'meta_title_'. $language->id }}" value="{{  $content->translate($language->locale)->meta_title }}">
 		</div>
 
 		<div class="form-group">
 			<label for="title">{{ trans('kotoba::cms.meta_keywords') }}</label>
-			<input type="text" class="form-control" name="{{ 'meta_keywords_'. $properties['id'] }}" id="{{ 'meta_keywords_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_keywords }}">
+			<input type="text" class="form-control" name="{{ 'meta_keywords_'. $language->id }}" id="{{ 'meta_keywords_'. $language->id }}" value="{{  $content->translate($language->locale)->meta_keywords }}">
 		</div>
 
 		<div class="form-group">
-			<label for="title">{{ trans('kotoba::cms.meta_title') }}</label>
-			<input type="text" class="form-control" name="{{ 'meta_description_'. $properties['id'] }}" id="{{ 'meta_description_'. $properties['id'] }}" value="{{ $content->translate($properties['locale'])->meta_description }}">
+			<label for="title">{{ trans('kotoba::cms.meta_description') }}</label>
+			<input type="text" class="form-control" name="{{ 'meta_description_'. $language->id }}" id="{{ 'meta_description_'. $language->id }}" value="{{  $content->translate($language->locale)->meta_description }}">
 		</div>
 
 	</div><!-- ./ $lang panel -->
 	@endforeach
 
 	@endif
+
+
+
 	</div>
 	</div><!-- ./ meta panel -->
 
