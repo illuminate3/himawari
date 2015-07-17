@@ -34,17 +34,10 @@ class WidgetServiceProvider extends ServiceProvider {
 	public function register()
 	{
 
-// 		Plugin::register('Featured', 'App\Plugins\Featured');
-// 		Plugin::register('Timed', 'App\Plugins\Timed');
-
-
 // Individually
-// 		Widget::register('MenuAdmin', 'App\Widgets\MenuAdmin');
-// 		Widget::register('MenuFooter', 'App\Widgets\MenuFooter');
-//
-// 		if ( Module::exists('himawari') ) {
-// 			Widget::register('MenuNavigation', 'App\Widgets\MenuNavigation');
-// 		}
+		Widget::register('MenuAdmin', 'App\Widgets\MenuNavigation');
+		Widget::register('MenuFooter', 'App\Widgets\Featured');
+		Widget::register('MenuFooter', 'App\Widgets\Timed');
 
 	}
 

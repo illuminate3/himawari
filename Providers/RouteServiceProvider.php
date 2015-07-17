@@ -8,6 +8,7 @@ use Illuminate\Routing\Router;
 
 class RouteServiceProvider extends ServiceProvider
 {
+
 	/**
 	 * This namespace is applied to the controller routes in your module's routes file.
 	 *
@@ -44,4 +45,6 @@ class RouteServiceProvider extends ServiceProvider
 			require (config('modules.path').'/Himawari/Http/routes.php');
 		});
 	}
+
+
 }

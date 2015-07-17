@@ -1,35 +1,20 @@
 <?php
 
-namespace App\Modules\Himawari\Database\Seeds;
+namespace App\Modules\Core\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-Use DB, Eloquent, Model, Schema;
+Use DB;
+use Schema;
 
 
 class ModuleSeeder extends Seeder {
 
+
 	public function run()
 	{
 
-// Module Information
-// 		$module = array(
-// 			'name'					=> 'Himawari',
-// 			'slug'					=> 'himawari',
-// 			'version'				=> '1.0',
-// 			'description'			=> 'CMS for Rakko',
-// 			'enabled'				=> 1,
-// 			'order'					=> 12
-// 		);
 
-// Insert Module Information
-// 		if (Schema::hasTable('modules'))
-// 		{
-//
-// 			DB::table('modules')->insert( $module );
-//
-// 		}
-
-// Permission Information
+// Permissions -------------------------------------------------------------
 		$permissions = array(
 			[
 				'name'				=> 'Manage Himawari CMS',
@@ -38,9 +23,74 @@ class ModuleSeeder extends Seeder {
 			],
 		 );
 
-// Insert Permissions
-		DB::table('permissions')->insert( $permissions );
+		if (Schema::hasTable('permissions'))
+		{
+			DB::table('permissions')->insert( $permissions );
+		}
 
+
+// Links -------------------------------------------------------------------
+// Locales
+
+		$link_names = array([
+			'menu_id'				=> 1, // admin menu
+			'position'				=> 3,
+		]);
+
+		if (Schema::hasTable('menulinks'))
+		{
+			DB::table('menulinks')->insert( $link_names );
+		}
+
+		$last_insert_id = DB::getPdo()->lastInsertId();
+		$locale_id = DB::table('locales')
+			->where('name', '=', 'English')
+			->where('locale', '=', 'en', 'AND')
+			->pluck('id');
+
+		$ink_name_trans = array([
+			'status'				=> 1,
+			'title'					=> 'Contents',
+			'url'					=> '/admin/contents',
+			'menulink_id'			=> $last_insert_id,
+			'locale_id'				=> $locale_id // English ID
+		]);
+
+		if (Schema::hasTable('menulinks'))
+		{
+			DB::table('menulink_translations')->insert( $ink_name_trans );
+		}
+
+
+// Settings
+		$link_names = array([
+			'menu_id'				=> 1, // admin menu
+			'position'				=> 7,
+		]);
+
+		if (Schema::hasTable('menulinks'))
+		{
+			DB::table('menulinks')->insert( $link_names );
+		}
+
+		$last_insert_id = DB::getPdo()->lastInsertId();
+		$locale_id = DB::table('locales')
+			->where('name', '=', 'English')
+			->where('locale', '=', 'en', 'AND')
+			->pluck('id');
+
+		$ink_name_trans = array([
+			'status'				=> 1,
+			'title'					=> 'Print Statuses',
+			'url'					=> '/admin/print_statuses',
+			'menulink_id'			=> $last_insert_id,
+			'locale_id'				=> $locale_id // English ID
+		]);
+
+		if (Schema::hasTable('menulinks'))
+		{
+			DB::table('menulink_translations')->insert( $ink_name_trans );
+		}
 
 	} // run
 

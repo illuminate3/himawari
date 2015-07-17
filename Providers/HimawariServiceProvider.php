@@ -15,6 +15,7 @@ use View;
 
 class HimawariServiceProvider extends ServiceProvider
 {
+
 	/**
 	 * Register the Himawari module service provider.
 	 *
@@ -29,14 +30,6 @@ class HimawariServiceProvider extends ServiceProvider
 		$this->registerNamespaces();
 		$this->registerProviders();
 
-/**
- * Require some HTML macros
- */
-//require app_path().'/Modules/Himawari/Lib/helpers.php';
-//require app_path().'/Modules/Himawari/Lib/composers.php';
-//require app_path().'/Modules/Himawari/Lib/macros.php';
-
-
 	}
 
 
@@ -47,7 +40,6 @@ class HimawariServiceProvider extends ServiceProvider
 	 */
 	protected function registerNamespaces()
 	{
-//		Lang::addNamespace('himawari', __DIR__.'/../Resources/Lang/');
 		View::addNamespace('himawari', __DIR__.'/../Resources/Views/');
 	}
 
@@ -61,28 +53,25 @@ class HimawariServiceProvider extends ServiceProvider
 	{
 		$this->publishes([
 			__DIR__.'/../Config/himawari.php' => config_path('himawari.php'),
-			__DIR__ . '/../Publish/assets/vendors' => base_path('public/assets/vendors/'),
-			__DIR__ . '/../Resources/Assets/Views/' => public_path('themes/') . Theme::getActive() . '/views/',
+			__DIR__ . '/../Resources/Assets/Images' => base_path('public/assets/images/'),
+			__DIR__ . '/../Resources/Views/' => public_path('themes/') . Theme::getActive() . '/views/modules/himawari/',
+			__DIR__ . '/../Resources/Assets/Views/Widgets' => public_path('themes/') . Theme::getActive() . '/views/widgets/',
 		]);
 
-		$this->publishes([
-			__DIR__ . '/../Publish/assets/vendors' => base_path('public/assets/vendors/'),
-		], 'js');
-
-/*
-
-		$this->mergeConfigFrom(
-			__DIR__.'/../Config/himawari.php', 'himawari'
-		);
 
 		$this->publishes([
-			__DIR__ . '/../Publish/Plugins' => base_path('app/Plugins/'),
-		], 'plugins');
-*/
+			__DIR__.'/../Config/himawari.php' => config_path('himawari.php'),
+		], 'configs');
 
 		$this->publishes([
-			__DIR__ . '/../Resources/Assets/Views/' => public_path('themes/') . Theme::getActive() . '/views/',
+			__DIR__ . '/../Resources/Assets/Images' => base_path('public/assets/images/'),
+		], 'images');
+
+		$this->publishes([
+			__DIR__ . '/../Resources/Views/' => public_path('themes/') . Theme::getActive() . '/views/modules/himawari/',
+			__DIR__ . '/../Resources/Assets/Views/Widgets' => public_path('themes/') . Theme::getActive() . '/views/widgets/',
 		], 'views');
+
 
 /*
 		AliasLoader::getInstance()->alias(
@@ -103,7 +92,7 @@ class HimawariServiceProvider extends ServiceProvider
 	{
 		$app = $this->app;
 
-		App::register('App\Modules\Himawari\Providers\RouteServiceProvider');
+		$app->register('App\Modules\Himawari\Providers\RouteServiceProvider');
 		$app->register('App\Modules\Menus\Providers\WidgetServiceProvider');
 		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');

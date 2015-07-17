@@ -13,28 +13,6 @@ class PrintStatusesSeeder extends Seeder {
 		// Uncomment the below to wipe the table clean before populating
 //		DB::table('print_statuses')->truncate();
 
-/*
-		$seeds = array(
-			array(
-				'name'					=> 'Draft',
-				'description'			=> 'Page is a draft'
-			),
-			array(
-				'name'					=> 'Publish',
-				'description'			=> 'Page has been Published'
-			),
-			array(
-				'name'					=> 'Unpublish',
-				'description'			=> 'Page has been unpublished'
-			),
-			array(
-				'name'					=> 'Archieve',
-				'description'			=> 'Page has been archieved'
-			)
-		);
-*/
-
-
 		$print_statuses = array(
 		[
 			'id'					=> 1

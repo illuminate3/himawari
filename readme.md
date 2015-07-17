@@ -1,4 +1,4 @@
-# Kagi (Authentification / Authorization) : Laravel 5.1.x Beta Development
+# Himawari (CMS) : Laravel 5.1.x Beta Development
 
 
 ## Status / Version
@@ -8,62 +8,43 @@ Beta Development
 
 ## Description
 
-This module is to solve Authentification / Authorization for users.
-This module does not management User information.
+This module provides a base CMS as in page management.
 
 
 ## Functionality
 
 
-### Permissions
-Permission Mangment
+### Contents
+Mulit-lingual Content Management
 
 
-### Roles
-Role Management
-
-
-### Users
-An extension of the very basic User Model that is provided with the Rakko Platform.
+### Print Statuses
+Simple print designations such as draft, edit, in print and such.
 
 
 ## Routes
 
-* /admin/permissions
-* /admin/roles
-* /admin/users
-
-
-* auth/login
-* social/login
+* /admin/contents
+* /admin/print_statuses
+* /{page}
 
 
 ## Install
 
-### .env file
-```
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-GITHUB_REDIRECT=http://www.site.com/social/login
-
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GOOGLE_REDIRECT=http://www.site.com/social/login
-```
 
 ### publish commands
 
 General Publish "ALL" method
 ```
-php artisan vendor:publish --provider="App\Modules\Kagi\Providers\KagiServiceProvider"
+php artisan vendor:publish --provider="App\Modules\Kagi\Providers\HimawariServiceProvider"
 ```
 
 Specific Publish tags
 ```
-php artisan vendor:publish --provider="App\Modules\Kagi\Providers\KagiServiceProvider" --tag="configs"
-php artisan vendor:publish --provider="App\Modules\Kagi\Providers\KagiServiceProvider" --tag="images"
-php artisan vendor:publish --provider="App\Modules\Kagi\Providers\KagiServiceProvider" --tag="vendors"
-php artisan vendor:publish --provider="App\Modules\Kagi\Providers\KagiServiceProvider" --tag="views"
+php artisan vendor:publish --provider="App\Modules\Himawari\Providers\HimawariServiceProvider" --tag="configs"
+php artisan vendor:publish --provider="App\Modules\Himawari\Providers\HimawariServiceProvider" --tag="images"
+php artisan vendor:publish --provider="App\Modules\Himawari\Providers\HimawariServiceProvider" --tag="vendors"
+php artisan vendor:publish --provider="App\Modules\Himawari\Providers\HimawariServiceProvider" --tag="views"
 ```
 
 
@@ -72,12 +53,12 @@ php artisan vendor:publish --provider="App\Modules\Kagi\Providers\KagiServicePro
 Intended to be used with:
 
 * https://github.com/illuminate3/rakkoII
-* https://github.com/illuminate3/profiles
+* https://github.com/illuminate3/Kagi
 
 The Following are packages that are specific to this module:
 
-* https://github.com/caffeinated/shinobi
-* https://github.com/laravel/socialite
+* https://github.com/etrepat/baum
+* https://github.com/cviebrock/eloquent-sluggable
 
 
 ## Screen Shots
