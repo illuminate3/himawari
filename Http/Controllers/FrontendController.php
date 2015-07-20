@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Input;
 
 use Carbon\Carbon;
 use Config;
-//use Datatables;
 use Flash;
 use Hashids\Hashids;
 use Session;
@@ -44,8 +43,11 @@ class FrontendController extends HimawariController {
 //		$this->hashIds = new Hashids( Config::get('app.key'), 8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' );
 
 		$this->page = Route::current()->parameter('page');
+//dd($this->page);
 		$slugs = explode('/', $this->page);
+//dd($slugs);
 		$lastSlug = Route::current()->getName() == 'search' ? 'search' : $slugs[count($slugs)-1];
+//dd($lastSlug);
 
 //		$this->currentPage = Page::getPage( $slug = $lastSlug );
 //		$this->currentPage = Content::getPage( $slug = $lastSlug );
@@ -53,6 +55,7 @@ class FrontendController extends HimawariController {
 //		$this->currentPage = new \Illuminate\Support\Collection($this->currentPage);
 
 		$page_ID = $this->content_repo->getPageID($slug = $lastSlug);
+//dd($page_ID);
 		$this->currentPage = $this->content_repo->getContent($page_ID);
 //dd($this->currentPage);
 
@@ -102,11 +105,10 @@ class FrontendController extends HimawariController {
 // 			$secMenu = $secMenu;
 
 
-			return View('himawari::frontend.index', compact(
-//				'mainMenu',
-//				'secMenu'
+		return Theme::View('himawari::frontend.index',
+			compact(
 				'page'
-				));
+			));
 		}
 		else
 			App::abort(404);

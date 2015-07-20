@@ -1,4 +1,4 @@
-@extends('himawari::frontend.main')
+@extends($theme_front)
 
 {{-- Web site Title --}}
 @section('title')
@@ -26,7 +26,7 @@
 
 <div class="row">
 	<h2>
-		{{ $page->summary }}
+		{!! $page->summary !!}
 	</h2>
 </div>
 

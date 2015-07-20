@@ -226,7 +226,7 @@ class ContentRepository extends BaseRepository {
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
 //			'slug'				=> $input['title_1'],
-//			'slug'				=> Str::slug($input['title_'.$properties->id]),
+			'slug'				=> Str::slug($input['title_'.$properties->id]),
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
 		];
@@ -249,7 +249,7 @@ class ContentRepository extends BaseRepository {
 
 //				'slug'			=> $input['slug_'.$properties->id],
 //				'slug'			=> Str::slug($input['title_'.$properties->id]),
-				'slug'			=> Str::slug($input['title_'.$properties->id]),
+//				'slug'			=> Str::slug($input['title_'.$properties->id]),
 
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
@@ -330,7 +330,7 @@ class ContentRepository extends BaseRepository {
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
 //			'slug'				=> $input['title_1'],
-//			'slug'				=> Str::slug($input['title_'.$properties->id]),
+			'slug'				=> Str::slug($input['title_'.$properties->id]),
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
 		];
@@ -350,7 +350,7 @@ class ContentRepository extends BaseRepository {
 				'summary'		=> $input['summary_'.$properties->id],
 				'title'			=> $input['title_'.$properties->id],
 
-				'slug'			=> Str::slug($input['title_'.$properties->id]),
+//				'slug'			=> Str::slug($input['title_'.$properties->id]),
 
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
