@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Config::get('general.title') }} :: @parent
+{{ Config::get('core.title') }} :: @parent
 @stop
 
 @section('styles')
@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="content">
 			<a href="/">
-				<img src="/assets/images/himwari.png" class="img-responsive">
+				<img src="/assets/images/himwari_2.png" class="img-responsive">
 			</a>
 			<div class="title">
 				<a href="/">
