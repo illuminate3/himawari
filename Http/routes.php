@@ -1,19 +1,34 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
-| Module Routes
+| Origami
 |--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for the module.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
 */
 
-Route::get('welcome/himawari', array(
-	'uses'=>'HimawariController@welcome'
-	));
+
+// Resources
+// Controllers
+
+
+Route::group(['prefix' => 'himawari'], function() {
+	Route::get('welcome', [
+		'uses'=>'HimawariController@welcome'
+	]);
+});
+
+
+// API DATA
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+*/
+
+
 
 /*
 Route::group(

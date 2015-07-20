@@ -213,8 +213,9 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 
 	public function scopeInPrint($query)
 	{
-		return $query->where('is_published', '=', 1);
-// 			->where('print_status_id', '>', 2)
+		return $query
+//			->where('is_published', '=', 1);
+			->where('print_status_id', '=', 2);
 // 			->where('print_status_id', '<', 5, 'OR');
 	}
 
@@ -228,6 +229,18 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	public function scopeIsTimed($query)
 	{
 		return $query->where('is_timed', '=', 1);
+	}
+
+
+	public function scopeNotFeatured($query)
+	{
+		return $query->where('is_featured', '=', 0);
+	}
+
+
+	public function scopeNotTimed($query)
+	{
+		return $query->where('is_timed', '=', 0);
 	}
 
 

@@ -89,17 +89,18 @@
 <br>
 
 <div class="row">
-<div class="col-sm-4">
+<div class="col-sm-6">
 	<a href="/admin/print_statuses" class="btn btn-default btn-block" title="{{ trans('kotoba::button.cancel') }}">
 		<i class="fa fa-times fa-fw"></i>
 		{{ trans('kotoba::button.cancel') }}
 	</a>
 </div>
 
-<div class="col-sm-4">
+<div class="col-sm-6">
 	<input class="btn btn-default btn-block" type="reset" value="{{ trans('kotoba::button.reset') }}">
 </div>
 
+{{--
 <div class="col-sm-4">
 <!-- Button trigger modal -->
 	<a data-toggle="modal" data-target="#myModal" class="btn btn-default btn-block" title="{{ trans('kotoba::button.delete') }}">
@@ -107,6 +108,8 @@
 		{{ trans('kotoba::general.command.delete') }}
 	</a>
 </div>
+--}}
+
 </div>
 
 
@@ -114,11 +117,12 @@
 
 </div> <!-- ./ row -->
 
-
+{{--
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	@include($activeTheme . '::' . '_partials.modal')
 </div>
+--}}
 
 
 @stop

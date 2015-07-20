@@ -7,9 +7,12 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
+use Theme;
+
 
 class HimawariController extends Controller
 {
+
 
 	use DispatchesCommands, ValidatesRequests;
 
@@ -33,7 +36,7 @@ class HimawariController extends Controller
 	 */
 	public function welcome()
 	{
-		return View('himawari::himawari');
+		return Theme::View('himawari::welcome.himawari');
 	}
 
 

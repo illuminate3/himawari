@@ -209,6 +209,8 @@ class ContentRepository extends BaseRepository {
 			$is_published = 1;
 		}
 
+		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
+
 		$values = [
 //			'name'			=> $input['name'],
 //			'is_current'		=> 1,
@@ -226,7 +228,7 @@ class ContentRepository extends BaseRepository {
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
 //			'slug'				=> $input['title_1'],
-			'slug'				=> Str::slug($input['title_'.$properties->id]),
+			'slug'				=> Str::slug($input['title_'.$app_locale_id]),
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
 		];
