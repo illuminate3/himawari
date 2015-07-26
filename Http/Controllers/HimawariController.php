@@ -3,9 +3,9 @@
 namespace App\Modules\Himawari\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Bus\DispatchesCommands;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+// use Illuminate\Foundation\Bus\DispatchesCommands;
+// use Illuminate\Routing\Controller as BaseController;
+// use Illuminate\Foundation\Validation\ValidatesRequests;
 
 use Theme;
 
@@ -14,7 +14,7 @@ class HimawariController extends Controller
 {
 
 
-	use DispatchesCommands, ValidatesRequests;
+// 	use DispatchesCommands, ValidatesRequests;
 
 	/**
 	 * Initializer.
