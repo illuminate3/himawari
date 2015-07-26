@@ -263,4 +263,10 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	}
 
 
+	public function scopeIsAccessPoint($query)
+	{
+		return $query->where('class', '=', 'nav-access');
+	}
+
+
 }
