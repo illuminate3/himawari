@@ -55,7 +55,7 @@ class ContentsController extends HimawariController {
 		$lang = Session::get('locale');
 		$locale_id = $this->content->getLocaleID($lang);
 
-		return Theme::View('himawari::contents.index',
+		return Theme::View('modules.himawari.contents.index',
 			compact(
 				'contents',
 				'locales',
@@ -71,7 +71,7 @@ class ContentsController extends HimawariController {
 	 */
 	public function create()
 	{
-		return Theme::View('himawari::contents.create',  $this->content->create());
+		return Theme::View('modules.himawari.contents.create',  $this->content->create());
 	}
 
 
@@ -124,7 +124,7 @@ class ContentsController extends HimawariController {
 		$model = 'content';
 //dd($model);
 
-		return View('himawari::contents.edit',
+		return View('modules.himawari.contents.edit',
 //		return Theme::View('contents.edit',
 			$this->content->edit($id),
 				compact(

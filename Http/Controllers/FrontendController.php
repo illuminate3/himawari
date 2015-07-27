@@ -105,7 +105,7 @@ class FrontendController extends HimawariController {
 // 			$secMenu = $secMenu;
 
 
-		return Theme::View('himawari::frontend.index',
+		return Theme::View('modules.himawari.frontend.index',
 			compact(
 				'page'
 			));

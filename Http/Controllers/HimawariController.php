@@ -36,7 +36,7 @@ class HimawariController extends Controller
 	 */
 	public function welcome()
 	{
-		return Theme::View('himawari::welcome.himawari');
+		return Theme::View('modules.himawari.welcome.himawari');
 	}
 
 

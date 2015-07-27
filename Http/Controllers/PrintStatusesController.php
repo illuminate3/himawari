@@ -51,7 +51,7 @@ class PrintStatusesController extends HimawariController {
 		$print_statuses = $this->status_repo->all();
 //dd($lang);
 
-		return Theme::View('himawari::print_statuses.index',
+		return Theme::View('modules.himawari.print_statuses.index',
 			compact(
 				'lang',
 //				'locales',
@@ -67,7 +67,7 @@ class PrintStatusesController extends HimawariController {
 	 */
 	public function create()
 	{
-		return Theme::View('himawari::print_statuses.create',  $this->status_repo->create());
+		return Theme::View('modules.himawari.print_statuses.create',  $this->status_repo->create());
 	}
 
 
@@ -118,7 +118,7 @@ class PrintStatusesController extends HimawariController {
 		$modal_id = $id;
 		$model = '$status';
 
-		return Theme::View('himawari::print_statuses.edit',
+		return Theme::View('modules.himawari.print_statuses.edit',
 			compact(
 				'status',
 				'lang',
@@ -128,7 +128,7 @@ class PrintStatusesController extends HimawariController {
 				'modal_id',
 				'model'
 		));
-//		return View('himawari::print_statuses.edit',  $this->status->edit($id));
+//		return View('modules.himawari.print_statuses.edit',  $this->status->edit($id));
 	}
 
 
