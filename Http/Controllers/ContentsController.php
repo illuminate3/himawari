@@ -13,6 +13,7 @@ use App\Modules\Himawari\Http\Requests\ContentUpdateRequest;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 
+use Cache;
 //use Datatables;
 use Flash;
 use Session;
@@ -86,6 +87,7 @@ class ContentsController extends HimawariController {
 //dd($request);
 
 		$this->content->store($request->all());
+		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.content_create') );
 		return redirect('admin/contents');
@@ -149,6 +151,7 @@ class ContentsController extends HimawariController {
 //dd($request);
 
 		$this->content->update($request->all(), $id);
+		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.content_update') );
 		return redirect('admin/contents');
