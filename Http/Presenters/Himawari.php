@@ -54,6 +54,26 @@ class Himawari extends Presenter {
 	 *
 	 * @return string
 	 */
+	public function navigation()
+	{
+//dd('loaded');
+		$return = '';
+
+		$navigation = $this->entity->is_navigation;
+//dd($featured);
+		if ( $navigation == 1 ) {
+			$return = "checked";
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * featured checkbox
+	 *
+	 * @return string
+	 */
 	public function featured()
 	{
 //dd('loaded');

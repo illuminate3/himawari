@@ -175,6 +175,12 @@ class ContentRepository extends BaseRepository {
 	{
 //dd($input);
 
+		if ( !isset($input['class']) ) {
+			$class = null;
+		} else {
+			$class = $input['class'];
+		}
+
 		if ( !isset($input['is_featured']) ) {
 			$is_featured = 0;
 		} else {
@@ -185,6 +191,12 @@ class ContentRepository extends BaseRepository {
 			$is_published = 0;
 		} else {
 			$is_published = $input['is_published'];
+		}
+
+		if ( !isset($input['is_navigation']) ) {
+			$is_navigation = 0;
+		} else {
+			$is_navigation = $input['is_navigation'];
 		}
 
 		if ( !isset($input['is_timed']) ) {
@@ -220,7 +232,10 @@ class ContentRepository extends BaseRepository {
 			'is_published'		=> $is_published,
 			'is_featured'		=> $is_featured,
 			'is_timed'			=> $is_timed,
-			'link'				=> $input['link'],
+			'is_navigation'		=> $is_navigation,
+//			'link'				=> $input['link'],
+//			'class'				=> $input['class'],
+			'class'				=> $class,
 			'order'				=> $input['order'],
 			'print_status_id'	=> $input['print_status_id'],
 //			'publish_end'		=> $input['publish_end'],
@@ -236,7 +251,8 @@ class ContentRepository extends BaseRepository {
 
 		$content = Content::create($values);
 
-		$locales = Cache::get('locales');
+//		$locales = Cache::get('locales');
+		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
 		foreach($locales as $locale => $properties)
@@ -279,6 +295,12 @@ class ContentRepository extends BaseRepository {
 	{
 //dd($input);
 
+		if ( !isset($input['class']) ) {
+			$class = null;
+		} else {
+			$class = $input['class'];
+		}
+
 		if ( !isset($input['is_featured']) ) {
 			$is_featured = 0;
 		} else {
@@ -295,6 +317,12 @@ class ContentRepository extends BaseRepository {
 			$is_timed = 0;
 		} else {
 			$is_timed = $input['is_timed'];
+		}
+
+		if ( !isset($input['is_navigation']) ) {
+			$is_navigation = 0;
+		} else {
+			$is_navigation = $input['is_navigation'];
 		}
 
 		if ( $input['publish_end'] == '' ) {
@@ -314,6 +342,7 @@ class ContentRepository extends BaseRepository {
 		}
 
 		$content = Content::find($id);
+		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
 
 		$values = [
 //			'name'			=> $input['name'],
@@ -324,7 +353,10 @@ class ContentRepository extends BaseRepository {
 			'is_published'		=> $is_published,
 			'is_featured'		=> $is_featured,
 			'is_timed'			=> $is_timed,
-			'link'				=> $input['link'],
+			'is_navigation'		=> $is_navigation,
+//			'link'				=> $input['link'],
+//			'class'				=> $input['class'],
+			'class'				=> $class,
 			'order'				=> $input['order'],
 			'print_status_id'	=> $input['print_status_id'],
 //			'publish_end'		=> $input['publish_end'],
@@ -332,14 +364,16 @@ class ContentRepository extends BaseRepository {
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
 //			'slug'				=> $input['title_1'],
-			'slug'				=> Str::slug($input['title_'.$properties->id]),
+//			'slug'				=> Str::slug($input['title_'.$properties->id]),
+			'slug'				=> Str::slug($input['title_'.$app_locale_id]),
 //			'user_id'			=> 1
 			'user_id'			=>  $input['user_id']
 		];
 
 		$content->update($values);
 
-		$locales = Cache::get('locales');
+//		$locales = Cache::get('locales');
+		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
 		foreach($locales as $locale => $properties)

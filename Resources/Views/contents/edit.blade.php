@@ -177,8 +177,8 @@
 	</div>
 
 	<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
-		{!! Form::label('link', Lang::choice('kotoba::cms.link', 1), $errors->first('link'), ['class' => 'control-label']) !!}
-		{!! Form::text('link', Input::old('link'), ['id' => 'link', 'class' => 'form-control', 'placeholder' => 'http://...']) !!}
+		{!! Form::label('class', trans('kotoba::cms.class'), $errors->first('link'), ['class' => 'control-label']) !!}
+		{!! Form::text('class', Input::old('class'), ['id' => 'class', 'class' => 'form-control', 'placeholder' => trans('kotoba::cms.class')]) !!}
 	</div>
 
 
@@ -215,8 +215,19 @@
 	</div>
 
 	<div class="form-group">
-		<label for="is_featured" class="col-sm-1 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
-		<div class="col-sm-11">
+		<label for="is_navigation" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_navigation') }}</label>
+		<div class="col-sm-9">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="is_navigation" name="is_navigation" value="1" {{ $content->present()->navigation }}>
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="is_featured" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
+		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
 					<input type="checkbox" id="is_featured" name="is_featured" value="1" {{ $content->present()->featured }}>
@@ -226,8 +237,8 @@
 	</div>
 
 	<div class="form-group">
-		<label for="is_timed" class="col-sm-1 control-label">{{ trans('kotoba::cms.is_timed') }}</label>
-		<div class="col-sm-11">
+		<label for="is_timed" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_timed') }}</label>
+		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
 					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $content->present()->timed }}>

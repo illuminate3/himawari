@@ -48,6 +48,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 // 		'is_online',
 		'is_featured',
 		'is_timed',
+		'is_navigation',
 		'order',
 		'publish_start',
 		'publish_end',
@@ -58,6 +59,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		'meta_description',
 		'meta_keywords',
 		'meta_title',
+		'class',
 		'content',
 		'summary',
 		'title'
@@ -266,6 +268,12 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	public function scopeIsAccessPoint($query)
 	{
 		return $query->where('class', '=', 'nav-access');
+	}
+
+
+	public function scopeIsNavigation($query)
+	{
+		return $query->where('is_navigation', '=', 1);
 	}
 
 
