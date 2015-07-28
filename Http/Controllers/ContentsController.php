@@ -124,7 +124,7 @@ class ContentsController extends HimawariController {
 		$model = 'content';
 //dd($model);
 
-		return View('modules.himawari.contents.edit',
+		return Theme::View('modules.himawari.contents.edit',
 //		return Theme::View('contents.edit',
 			$this->content->edit($id),
 				compact(
