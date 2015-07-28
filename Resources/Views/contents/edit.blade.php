@@ -25,6 +25,9 @@
 		});
 	});
 	CKEDITOR.replace( 'ckeditor' );
+	CKEDITOR.editorConfig = function( config ) {
+		config.basicEntities = false;
+	};
 @stop
 
 
