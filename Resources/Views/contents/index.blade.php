@@ -50,6 +50,7 @@ oTable =
 		<tr>
 			<th>{{ trans('kotoba::table.title') }}</th>
 			<th>{{ trans('kotoba::table.summary') }}</th>
+			<th>{{ trans('kotoba::table.slug') }}</th>
 			<th>{{ trans('kotoba::table.position') }}</th>
 			<th>{{ trans('kotoba::table.online') }}</th>
 {{--
@@ -63,6 +64,7 @@ oTable =
 			<tr>
 				<td>{{ $content->title }}</td>
 				<td>{!! $content->summary !!}</td>
+				<td>{{ $content->slug }}</td>
 				<td>{{ $content->order }}</td>
 				<td>{{ $content->present()->print_status($content->print_status_id) }}</td>
 {{--
