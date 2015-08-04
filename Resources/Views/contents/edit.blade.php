@@ -27,6 +27,7 @@
 	CKEDITOR.replace( 'ckeditor' );
 	CKEDITOR.editorConfig = function( config ) {
 		config.basicEntities = false;
+		config.allowedContent=true;
 	};
 @stop
 
