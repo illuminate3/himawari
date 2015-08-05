@@ -58,6 +58,28 @@ oTable =
 			<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 		</tr>
 	</thead>
+
+{{--
+	<tbody>
+		@foreach ($contents as $key => $value)
+			<tr>
+				<td>{{ $value }}</td>
+
+				<td>
+					<a href="/admin/contents/{{ $key }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
+						<i class="fa fa-pencil fa-fw"></i>
+						{{ trans('kotoba::button.edit') }}
+					</a>
+					<a href="/admin/contents/{{ $key }}" class="btn btn-info" title="{{ trans('kotoba::button.view') }}">
+						<i class="fa fa-search fa-fw"></i>
+						{{ trans('kotoba::button.view') }}
+					</a>
+				</td>
+			</tr>
+		@endforeach
+	</tbody>
+--}}
+
 	<tbody>
 		@foreach ($contents as $content)
 			<tr>
@@ -66,9 +88,6 @@ oTable =
 				<td>{{ $content->slug }}</td>
 				<td>{{ $content->order }}</td>
 				<td>{{ $content->present()->print_status($content->print_status_id) }}</td>
-{{--
-				<td>{{ $content->is_deleted }}</td>
---}}
 				<td>
 					<a href="/admin/contents/{{ $content->id }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
 						<i class="fa fa-pencil fa-fw"></i>
@@ -78,8 +97,10 @@ oTable =
 			</tr>
 		@endforeach
 	</tbody>
+
 </table>
 </div>
+
 
 @else
 <div class="alert alert-info">
@@ -88,4 +109,6 @@ oTable =
 @endif
 
 </div>
+
+
 @stop

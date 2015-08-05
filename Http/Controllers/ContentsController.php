@@ -49,10 +49,13 @@ class ContentsController extends HimawariController {
 	 */
 	public function index()
 	{
-		$contents = $this->content->all();
-//dd($contents);
+
 		$lang = Session::get('locale');
 		$locale_id = $this->content->getLocaleID($lang);
+
+		$contents = $this->content->all();
+//		$contents = Content::getNestedList('title', 'id', '>> ');
+//dd($contents);
 
 		return Theme::View('modules.himawari.contents.index',
 			compact(
