@@ -18,7 +18,6 @@ use Theme;
 
 class PrintStatusesController extends HimawariController {
 
-
 	/**
 	 * Status Repository
 	 *
@@ -193,6 +192,5 @@ class PrintStatusesController extends HimawariController {
 
 			->make(true);
 	}
-
 
 }

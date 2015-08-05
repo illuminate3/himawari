@@ -18,7 +18,6 @@ class PrintStatusesSeeder extends Seeder {
 			->where('locale', '=', 'en', 'AND')
 			->pluck('id');
 
-
 		$print_statuses = array(
 		[
 			'id'					=> 1
@@ -63,7 +62,6 @@ class PrintStatusesSeeder extends Seeder {
 		// Uncomment the below to run the seeder
 //		DB::table('print_statuses')->insert($seeds);
 
-
 // Create Menus
 		DB::table('print_statuses')->delete();
 			$statement = "ALTER TABLE print_statuses AUTO_INCREMENT = 1;";
@@ -77,7 +75,6 @@ class PrintStatusesSeeder extends Seeder {
 // Insert Data
 		DB::table('print_statuses')->insert( $print_statuses );
 		DB::table('print_status_translations')->insert( $print_status_translations );
-
 
 	} // run
 

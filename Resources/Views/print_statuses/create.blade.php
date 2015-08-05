@@ -14,7 +14,6 @@
 @section('inline-scripts')
 @stop
 
-
 {{-- Content --}}
 @section('content')
 
@@ -32,14 +31,12 @@
 </h1>
 </div>
 
-
 <div class="row">
 {!! Form::open([
 	'url' => 'admin/print_statuses',
 	'method' => 'POST',
 	'class' => 'form'
 ]) !!}
-
 
 	<div class="tab-content">
 
@@ -73,9 +70,7 @@
 
 	</div>
 
-
 <hr>
-
 
 <div class="row">
 <div class="col-sm-12">
@@ -98,9 +93,7 @@
 </div>
 </div>
 
-
 {!! Form::close() !!}
-
 
 </div> <!-- ./ row -->
 @stop

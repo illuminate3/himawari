@@ -41,7 +41,6 @@ class CreateContentsTable extends Migration
 			$table->string('class', 50)->nullable();
 //			$table->text('link', 255)->nullable();
 
-
 			$table->tinyInteger('print_status_id')->default(0);
 //			$table->tinyInteger('is_published')->default(0);
 			$table->tinyInteger('is_featured')->default(0);
@@ -82,6 +81,5 @@ class CreateContentsTable extends Migration
 	{
 		Schema::drop($this->prefix . 'contents');
 	}
-
 
 }

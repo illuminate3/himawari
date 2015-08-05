@@ -22,7 +22,6 @@ use Theme;
 
 class ContentsController extends HimawariController {
 
-
 	/**
 	 * Content Repository
 	 *
@@ -202,6 +201,5 @@ class ContentsController extends HimawariController {
 
 			->make(true);
 	}
-
 
 }

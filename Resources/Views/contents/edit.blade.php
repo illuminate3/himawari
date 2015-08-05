@@ -31,10 +31,8 @@
 	};
 @stop
 
-
 {{-- Content --}}
 @section('content')
-
 
 <div class="row margin-top-lg">
 {!! Form::model(
@@ -46,7 +44,6 @@
 	]
 ) !!}
 
-
 <!-- Nav tabs -->
 <ul class="nav nav-tabs nav-justified" role="tablist">
 	<li role="presentation" class="active"><a href="#content" aria-controls="content" role="tab" data-toggle="tab">{{ trans('kotoba::cms.content') }}</a></li>
@@ -54,14 +51,11 @@
 	<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ Lang::choice('kotoba::general.setting', 2) }}</a></li>
 </ul>
 
-
 <!-- Tab panes -->
 <div class="tab-content padding">
 
-
 	<div role="tabpanel" class="tab-pane active" id="content">
 	<div class="tab-content">
-
 
 	@if (count($languages))
 
@@ -95,13 +89,11 @@
 
 	@endif
 
-
 	</div>
 	</div><!-- ./ content panel -->
 
 	<div role="tabpanel" class="tab-pane" id="meta">
 	<div class="tab-content">
-
 
 	@if (count($languages))
 
@@ -137,14 +129,11 @@
 	@endif
 
 
-
 	</div>
 	</div><!-- ./ meta panel -->
 
-
 	<div role="tabpanel" class="tab-pane" id="settings">
 	<div class="tab-content padding">
-
 
 
 <div class="row">
@@ -184,7 +173,6 @@
 		{!! Form::label('class', trans('kotoba::cms.class'), $errors->first('link'), ['class' => 'control-label']) !!}
 		{!! Form::text('class', Input::old('class'), ['id' => 'class', 'class' => 'form-control', 'placeholder' => trans('kotoba::cms.class')]) !!}
 	</div>
-
 
 </div>
 </div><!-- ./ col-6 -->
@@ -271,14 +259,9 @@
 		</div>
 	</div>
 
-
 </div>
 </div><!-- ./ col-6 -->
 </div><!-- ./ row -->
-
-
-
-
 
 
 
@@ -302,12 +285,9 @@
 	</div>
 	</div><!-- ./ settings panel -->
 
-
 </div><!-- ./ tab panes -->
 
-
 <hr>
-
 
 <div class="row">
 <div class="col-sm-12">
@@ -340,9 +320,7 @@
 
 </div>
 
-
 {!! Form::close() !!}
-
 
 </div> <!-- ./ row -->
 @stop

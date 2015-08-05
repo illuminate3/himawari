@@ -104,5 +104,4 @@ class PrintStatusRepository extends BaseRepository {
 		$status->update($input);
 	}
 
-
 }

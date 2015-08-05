@@ -26,7 +26,6 @@ use Theme;
 
 class FrontendController extends HimawariController {
 
-
 	public function __construct(
 			Content $content,
 			ContentRepository $content_repo
@@ -59,7 +58,6 @@ class FrontendController extends HimawariController {
 		$this->currentPage = $this->content_repo->getContent($page_ID);
 //dd($this->currentPage);
 
-
 //dd('here');
 //		$this->roots = Page::getRoots();
 //		$this->roots = Content::getRoots();
@@ -74,7 +72,6 @@ class FrontendController extends HimawariController {
 		// $this->latestNewsPosts = Post::getLatestNewsPosts($this->postItemsNum, $this->postsOrderBy);
 // 		$this->contact = ["Demo NiftyCMS", "demo@niftycms.com"];
 	}
-
 
 	public function get_page()
 	{
@@ -104,7 +101,6 @@ class FrontendController extends HimawariController {
 // 			$mainMenu = $mainMenu;
 // 			$secMenu = $secMenu;
 
-
 		return Theme::View('modules.himawari.frontend.index',
 			compact(
 				'page'
@@ -113,7 +109,6 @@ class FrontendController extends HimawariController {
 		else
 			App::abort(404);
 	}
-
 
 	public function index()
 	{

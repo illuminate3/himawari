@@ -32,5 +32,4 @@ class ContentCreateRequest extends FormRequest {
 		];
 	}
 
-
 }

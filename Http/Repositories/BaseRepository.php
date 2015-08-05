@@ -6,7 +6,6 @@ use App\Modules\Core\Http\Models\Locale;
 
 abstract class BaseRepository {
 
-
 	/**
 	 * The Model instance.
 	 *
@@ -48,7 +47,6 @@ abstract class BaseRepository {
 		return $this->model->findOrFail($id);
 	}
 
-
 	public function getLocales()
 	{
  		$locales = Locale::all();
@@ -60,6 +58,5 @@ abstract class BaseRepository {
 
 	return $locales;
 	}
-
 
 }

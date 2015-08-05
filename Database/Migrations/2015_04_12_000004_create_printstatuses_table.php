@@ -30,7 +30,6 @@ class CreatePrintStatusesTable extends Migration
 			$table->string('name')->nullable();
 			$table->string('description')->nullable();
 
-
 			$table->softDeletes();
 			$table->timestamps();
 

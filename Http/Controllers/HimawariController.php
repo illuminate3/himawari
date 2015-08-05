@@ -13,7 +13,6 @@ use Theme;
 class HimawariController extends Controller
 {
 
-
 // 	use DispatchesCommands, ValidatesRequests;
 
 	/**
@@ -38,6 +37,5 @@ class HimawariController extends Controller
 	{
 		return Theme::View('modules.himawari.welcome.himawari');
 	}
-
 
 }

@@ -16,7 +16,6 @@ use Baum\Node;
 use Cache;
 use DB;
 
-
 //class Content extends Node {
 class Content extends Node implements TranslatableContract, SluggableInterface {
 //class Content extends Node implements TranslatableContract {
@@ -30,17 +29,14 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 // Presenter -------------------------------------------------------
 	protected $presenter = 'App\Modules\Himawari\Http\Presenters\Himawari';
 
-
 // Translation Model -------------------------------------------------------
 	protected $translator = 'App\Modules\Himawari\Http\Models\ContentTranslation';
-
 
 // DEFINE Hidden -------------------------------------------------------
 	protected $hidden = [
 		'created_at',
 		'updated_at'
 		];
-
 
 // DEFINE Fillable -------------------------------------------------------
 	protected $fillable = [
@@ -65,13 +61,11 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		'title'
 		];
 
-
 // Sluggable Item -------------------------------------------------------
 	protected $sluggable = [
 		'build_from' => 'title',
 		'save_to'    => 'slug',
 	];
-
 
 // Translated Columns -------------------------------------------------------
 	protected $translatedAttributes = [
@@ -104,6 +98,13 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		return $this->title;
 	}
 
+
+// hasMany
+// BelongsTo
+// BelongsToMany
+
+
+
 	public static function getRoots()
 	{
 		// $roots = Cache::rememberForever('roots', function()
@@ -122,7 +123,6 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 		return $roots;
 	}
-
 
 	public static function getRootsSQL($locale_id)
 	{
@@ -182,7 +182,6 @@ dd($page);
 		// return $roots;
 	}
 
-
 	public static function getParentOptions($exceptId)
 	{
 //dd($exceptId);
@@ -200,7 +199,6 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 				->lists('title', 'id');
 	}
 
-
 	public static function getPage( $slug )
 	{
 	   $page =  static::whereIsCurrent(1)
@@ -212,7 +210,6 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $page;
 	}
 
-
 	public function scopeInPrint($query)
 	{
 		return $query
@@ -221,30 +218,25 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 // 			->where('print_status_id', '<', 5, 'OR');
 	}
 
-
 	public function scopeIsFeatured($query)
 	{
 		return $query->where('is_featured', '=', 1);
 	}
-
 
 	public function scopeIsTimed($query)
 	{
 		return $query->where('is_timed', '=', 1);
 	}
 
-
 	public function scopeNotFeatured($query)
 	{
 		return $query->where('is_featured', '=', 0);
 	}
 
-
 	public function scopeNotTimed($query)
 	{
 		return $query->where('is_timed', '=', 0);
 	}
-
 
 	public function scopePublishEnd($query)
 	{
@@ -256,7 +248,6 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $query->where('publish_end', '>=', $date);
 	}
 
-
 	public function scopePublishStart($query)
 	{
 		$date = date("Y-m-d");
@@ -264,17 +255,14 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $query->where('publish_start', '<=', $date);
 	}
 
-
 	public function scopeIsAccessPoint($query)
 	{
 		return $query->where('class', '=', 'nav-access');
 	}
 
-
 	public function scopeIsNavigation($query)
 	{
 		return $query->where('is_navigation', '=', 1);
 	}
-
 
 }

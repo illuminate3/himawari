@@ -14,7 +14,6 @@
 @section('inline-scripts')
 @stop
 
-
 {{-- Content --}}
 @section('content')
 
@@ -32,7 +31,6 @@
 </h1>
 </div>
 
-
 <div class="row">
 {!! Form::model(
 	$status,
@@ -42,7 +40,6 @@
 		'class' => 'form'
 	]
 ) !!}
-
 
 	<div class="tab-content">
 
@@ -76,9 +73,7 @@
 
 	</div>
 
-
 <hr>
-
 
 <div class="row">
 <div class="col-sm-12">
@@ -112,7 +107,6 @@
 
 </div>
 
-
 {!! Form::close() !!}
 
 </div> <!-- ./ row -->
@@ -123,6 +117,5 @@
 	@include($activeTheme . '::' . '_partials.modal')
 </div>
 --}}
-
 
 @stop

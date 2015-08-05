@@ -9,7 +9,6 @@ use DB;
 
 class Himawari extends Presenter {
 
-
 	/**
 	 * Present name
 	 *
@@ -107,6 +106,5 @@ class Himawari extends Presenter {
 
 		return $return;
 	}
-
 
 }

@@ -23,7 +23,6 @@ oTable =
 @stop
 
 
-
 {{-- Content --}}
 @section('content')
 
@@ -40,7 +39,6 @@ oTable =
 	<hr>
 </h1>
 </div>
-
 
 @if (count($contents))
 
@@ -82,13 +80,11 @@ oTable =
 </table>
 </div>
 
-
 @else
 <div class="alert alert-info">
 	{{ trans('kotoba::general.error.not_found') }}
 </div>
 @endif
-
 
 </div>
 @stop

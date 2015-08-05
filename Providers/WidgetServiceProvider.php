@@ -10,7 +10,6 @@ use Widget;
 
 class WidgetServiceProvider extends ServiceProvider {
 
-
 	/**
 	 * Bootstrap any application services.
 	 *
@@ -40,6 +39,5 @@ class WidgetServiceProvider extends ServiceProvider {
 		Widget::register('MenuFooter', 'App\Widgets\Timed');
 
 	}
-
 
 }

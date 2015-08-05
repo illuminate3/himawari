@@ -58,7 +58,6 @@ class HimawariServiceProvider extends ServiceProvider
 			__DIR__ . '/../Resources/Assets/Views/Widgets' => public_path('themes/') . Theme::getActive() . '/views/widgets/',
 		]);
 
-
 		$this->publishes([
 			__DIR__.'/../Config/himawari.php' => config_path('himawari.php'),
 		], 'configs');
@@ -71,7 +70,6 @@ class HimawariServiceProvider extends ServiceProvider
 			__DIR__ . '/../Resources/Views/' => public_path('themes/') . Theme::getActive() . '/views/modules/himawari/',
 			__DIR__ . '/../Resources/Assets/Views/Widgets' => public_path('themes/') . Theme::getActive() . '/views/widgets/',
 		], 'views');
-
 
 /*
 		AliasLoader::getInstance()->alias(
@@ -97,6 +95,5 @@ class HimawariServiceProvider extends ServiceProvider
 		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');
 	}
-
 
 }

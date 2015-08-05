@@ -11,10 +11,8 @@ use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
 
 class PrintStatus extends Model implements TranslatableContract {
 
-
 	use PresentableTrait;
 	use Translatable;
-
 
 	/**
 	 * The database table used by the model.
@@ -26,17 +24,14 @@ class PrintStatus extends Model implements TranslatableContract {
 // Presenter -------------------------------------------------------
 	protected $presenter = 'App\Modules\Himawari\Http\Presenters\Himawari';
 
-
 // Translation Model -------------------------------------------------------
 	protected $translator = 'App\Modules\Himawari\Http\Models\PrintStatusTranslation';
-
 
 // DEFINE Hidden -------------------------------------------------------
 	protected $hidden = [
 		'created_at',
 		'updated_at'
 		];
-
 
 // DEFINE Fillable -------------------------------------------------------
 	protected $fillable = [
@@ -45,13 +40,11 @@ class PrintStatus extends Model implements TranslatableContract {
 		'description'
 		];
 
-
 // Translated Columns -------------------------------------------------------
 	protected $translatedAttributes = [
 		'name',
 		'description'
 		];
-
 
 // DEFINE Functions --------------------------------------------------
 
@@ -65,8 +58,10 @@ class PrintStatus extends Model implements TranslatableContract {
 		return $this->description;
 	}
 
-
 // DEFINE Relationships --------------------------------------------------
 
+// hasMany
+// BelongsTo
+// BelongsToMany
 
 }

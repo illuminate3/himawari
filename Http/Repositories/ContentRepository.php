@@ -24,7 +24,6 @@ use Illuminate\Support\Str;
 
 class ContentRepository extends BaseRepository {
 
-
 	/**
 	 * The Module instance.
 	 *
@@ -74,7 +73,6 @@ class ContentRepository extends BaseRepository {
 
 
 
-
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
 //dd($users);
@@ -83,7 +81,6 @@ class ContentRepository extends BaseRepository {
 // 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1));
 // 		$users = new Collection($users);
 // 		$users = $users->merge($all_users);
-
 
 
 		$print_statuses = $this->getPrintStatuses($locale_id);
@@ -404,9 +401,7 @@ class ContentRepository extends BaseRepository {
 	}
 
 
-
 // Functions ----------------------------------------------------------------------------------------------------
-
 
 	public function getLocales()
 	{
@@ -423,7 +418,6 @@ class ContentRepository extends BaseRepository {
 
 		return $locale_id;
 	}
-
 
 	public function getContentID($name)
 	{
@@ -457,7 +451,6 @@ class ContentRepository extends BaseRepository {
 		return $parents;
 	}
 
-
 	public function manageBaum($parent_id, $id)
 	{
 //dd($parent_id);
@@ -474,7 +467,6 @@ class ContentRepository extends BaseRepository {
 
 	}
 
-
 	public function getPageID($slug)
 	{
 //dd($slug);
@@ -490,7 +482,6 @@ class ContentRepository extends BaseRepository {
 
 		return $page_ID;
 	}
-
 
 	public function getContent($page_ID)
 	{
@@ -528,7 +519,6 @@ class ContentRepository extends BaseRepository {
  		$content = Content::find($page);
 dd($content);
 
-
 /*
 	   $page =  static::whereIsCurrent(1)
 					   ->whereIsOnline(1)
@@ -538,7 +528,6 @@ dd($content);
 */
 		return $page;
 	}
-
 
 
 	public function getRoots($locale_id)
@@ -574,7 +563,6 @@ dd($content);
 	}
 
 
-
 	public static function getStaticRoots($locale_id)
 	{
 		// $roots = Cache::rememberForever('roots', function()
@@ -593,13 +581,11 @@ dd($content);
 		return $page;
 	}
 
-
 	public function getUsers()
 	{
 		$users = DB::table('users')->lists('email', 'id');
 		return $users;
 	}
-
 
 	public function getPrintStatuses($locale_id)
 	{
@@ -620,7 +606,6 @@ dd($content);
 		return $print_statuses;
 	}
 
-
 // 	public function makeSlugFromTitle($title)
 // 	{
 // 		$slug = Str::slug($title);
@@ -628,6 +613,5 @@ dd($content);
 //
 // 		return $count ? "{$slug}-{$count}" : $slug;
 // 	}
-
 
 }

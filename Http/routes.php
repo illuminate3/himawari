@@ -1,16 +1,13 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | Origami
 |--------------------------------------------------------------------------
 */
 
-
 // Resources
 // Controllers
-
 
 Route::group(['prefix' => 'himawari'], function() {
 	Route::get('welcome', [
@@ -18,16 +15,13 @@ Route::group(['prefix' => 'himawari'], function() {
 	]);
 });
 
-
 // API DATA
-
 
 /*
 |--------------------------------------------------------------------------
 | Admin
 |--------------------------------------------------------------------------
 */
-
 
 
 /*
@@ -55,7 +49,6 @@ function()
 // Route::get('{slug}', array('as' => 'page', 'uses' => 'PageController@show'))
 // 	->where('slug', App\Modules\Himawari\Http\Models\Page::$slugPattern);
 
-
 // Controllers
 
 // API DATA
@@ -63,7 +56,6 @@ function()
 // 	//	'as'=>'api.sites',
 // 		'uses'=>'SitesController@data'
 // 		));
-
 
 //Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 Route::group(['prefix' => 'admin'], function() {
@@ -96,7 +88,6 @@ Route::get('{page}', 'FrontendController@get_page')->where('page', '.*');
 
 
 
-
 // Route::get('/', 'PageController@show');
 // Route::get('/', array(
 // 	'as' => 'home',
@@ -117,7 +108,6 @@ Route::group(array('prefix' => 'pages'), function () {
 		'uses' => "PagesController@down",
 	));
 
-
 	Route::get('export', array(
 		'as' => 'pages.export',
 		'uses' => 'PagesController@export',
@@ -129,7 +119,6 @@ Route::group(array('prefix' => 'pages'), function () {
 	));
 
 });
-
 
 // The slug route should be registered last since it will capture any slug-like
 // route

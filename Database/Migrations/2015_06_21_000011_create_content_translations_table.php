@@ -66,5 +66,4 @@ class CreateContentTranslationsTable extends Migration
 		Schema::drop($this->prefix . 'content_translations');
 	}
 
-
 }

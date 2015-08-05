@@ -17,7 +17,6 @@
 {{-- Content --}}
 @section('content')
 
-
 <div class="row">
 	<h1>
 		{{ $page->title }}
@@ -33,6 +32,5 @@
 <div class="row">
 	{!! $page->content !!}
 </div>
-
 
 @stop
