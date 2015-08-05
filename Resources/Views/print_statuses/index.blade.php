@@ -1,25 +1,18 @@
 @extends($theme_back)
 
+
 {{-- Web site Title --}}
 @section('title')
 {{ Lang::choice('kotoba::cms.print_status', 2) }} :: @parent
 @stop
 
 @section('styles')
-	<link href="{{ asset('assets/vendors/DataTables-1.10.5/plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
 @stop
 
 @section('scripts')
-	<script src="{{ asset('assets/vendors/DataTables-1.10.5/media/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ asset('assets/vendors/DataTables-1.10.5/plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
 @stop
 
 @section('inline-scripts')
-$(document).ready(function() {
-oTable =
-	$('#table').DataTable({
-	});
-});
 @stop
 
 
@@ -28,12 +21,14 @@ oTable =
 
 <div class="row">
 <h1>
+{{--
 	<p class="pull-right">
 	<a href="/admin/print_statuses/create" class="btn btn-primary" title="{{ trans('kotoba::button.new') }}">
 		<i class="fa fa-plus fa-fw"></i>
 		{{ trans('kotoba::button.new') }}
 	</a>
 	</p>
+--}}
 	<i class="fa fa-paperclip fa-lg"></i>
 		{{ Lang::choice('kotoba::cms.print_status', 2) }}
 	<hr>
