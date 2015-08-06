@@ -100,8 +100,8 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 
 // hasMany
-// BelongsTo
-// BelongsToMany
+// belongsTo
+// belongsToMany
 
 
 

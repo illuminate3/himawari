@@ -61,7 +61,7 @@ class PrintStatus extends Model implements TranslatableContract {
 // DEFINE Relationships --------------------------------------------------
 
 // hasMany
-// BelongsTo
-// BelongsToMany
+// belongsTo
+// belongsToMany
 
 }

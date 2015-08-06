@@ -32,8 +32,10 @@
 	};
 @stop
 
+
 {{-- Content --}}
 @section('content')
+
 
 <div class="row margin-top-lg">
 {!! Form::model(

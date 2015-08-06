@@ -28,8 +28,10 @@
 	CKEDITOR.replace( 'ckeditor' );
 @stop
 
+
 {{-- Content --}}
 @section('content')
+
 
 <div class="row margin-top-lg">
 {!! Form::open([
