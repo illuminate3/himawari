@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Modules\Himawari\Http\Repositories\BaseRepository as BaseRepository;
 
+use App\Modules\Core\Http\Repositories\LocaleRepository;
+
 use App\Modules\Core\Http\Models\Locale;
 use App\Modules\Himawari\Http\Models\Content;
 use App\Modules\Himawari\Http\Models\ContentTranslation;
@@ -38,9 +40,11 @@ class ContentRepository extends BaseRepository {
 	 * @return void
 	 */
 	public function __construct(
-		Content $content
+			LocaleRepository $locale_repo,
+			Content $content
 		)
 	{
+		$this->locale_repo = $locale_repo;
 		$this->model = $content;
 
 		$this->id = Route::current()->parameter( 'id' );
@@ -57,10 +61,11 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function create()
 	{
+
 		$lang = Session::get('locale');
-//		$locales = $this->getLocales();
-		$locale_id = $this->getLocaleID($lang);
-//dd($locales);
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
 // 		$pagelist = $this->getParents($locale_id, null);
@@ -131,9 +136,9 @@ class ContentRepository extends BaseRepository {
 //dd($content);
 
 		$lang = Session::get('locale');
-//		$locales = $this->getLocales();
-		$locale_id = $this->getLocaleID($lang);
-//dd($locales);
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+
 //		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
 
 // 		$pagelist = $this->getParents($locale_id, $id);
@@ -218,7 +223,10 @@ class ContentRepository extends BaseRepository {
 			$is_published = 1;
 		}
 
-		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
+		$lang = Session::get('locale');
+		$app_locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+//		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
 
 		$values = [
 //			'name'			=> $input['name'],
@@ -339,7 +347,11 @@ class ContentRepository extends BaseRepository {
 		}
 
 		$content = Content::find($id);
-		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
+
+		$lang = Session::get('locale');
+		$app_locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+//		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
 
 		$values = [
 //			'name'			=> $input['name'],
@@ -409,15 +421,15 @@ class ContentRepository extends BaseRepository {
 		return $locales;
 	}
 
-	public function getLocaleID($lang)
-	{
-
-		$locale_id = DB::table('locales')
-			->where('locale', '=', $lang)
-			->pluck('id');
-
-		return $locale_id;
-	}
+// 	public function getLocaleID($lang)
+// 	{
+//
+// 		$locale_id = DB::table('locales')
+// 			->where('locale', '=', $lang)
+// 			->pluck('id');
+//
+// 		return $locale_id;
+// 	}
 
 	public function getContentID($name)
 	{

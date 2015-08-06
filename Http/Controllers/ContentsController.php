@@ -2,6 +2,8 @@
 
 namespace App\Modules\Himawari\Http\Controllers;
 
+use App\Modules\Core\Http\Repositories\LocaleRepository;
+
 use App\Modules\Himawari\Http\Models\Content;
 use App\Modules\Himawari\Http\Repositories\ContentRepository;
 
@@ -30,9 +32,11 @@ class ContentsController extends HimawariController {
 	protected $content;
 
 	public function __construct(
+			LocaleRepository $locale_repo,
 			ContentRepository $content
 		)
 	{
+		$this->locale_repo = $locale_repo;
 		$this->content = $content;
 // middleware
 		parent::__construct();
@@ -51,7 +55,9 @@ class ContentsController extends HimawariController {
 	{
 
 		$lang = Session::get('locale');
-		$locale_id = $this->content->getLocaleID($lang);
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+
 
 		$contents = $this->content->all();
 //		$contents = Content::getNestedList('title', 'id', '>> ');
