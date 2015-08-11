@@ -256,7 +256,7 @@ class ContentRepository extends BaseRepository {
 
 		$content = Content::create($values);
 
-//		$locales = Cache::get('locales');
+//		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
@@ -381,7 +381,7 @@ class ContentRepository extends BaseRepository {
 
 		$content->update($values);
 
-//		$locales = Cache::get('locales');
+//		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
