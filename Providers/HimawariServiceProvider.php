@@ -91,6 +91,7 @@ class HimawariServiceProvider extends ServiceProvider
 		$app = $this->app;
 
 		$app->register('App\Modules\Himawari\Providers\RouteServiceProvider');
+		$app->register('App\Modules\Himawari\Providers\ContentMacroServiceProvider');
 		$app->register('App\Modules\Menus\Providers\WidgetServiceProvider');
 		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');

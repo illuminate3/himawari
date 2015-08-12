@@ -58,14 +58,20 @@ class ContentsController extends HimawariController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-
 		$contents = $this->content->all();
 //		$contents = Content::getNestedList('title', 'id', '>> ');
 //dd($contents);
 
+		$list = Content::all();
+		$list = $list->toHierarchy();
+//dd($list);
+
+
 		return Theme::View('modules.himawari.contents.index',
 			compact(
 				'contents',
+				'list',
+				'lang',
 				'locales',
 				'locale_id'
 			));

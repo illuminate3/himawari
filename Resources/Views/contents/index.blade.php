@@ -58,29 +58,8 @@ oTable =
 			<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 		</tr>
 	</thead>
-
+	<tbody>
 {{--
-	<tbody>
-		@foreach ($contents as $key => $value)
-			<tr>
-				<td>{{ $value }}</td>
-
-				<td>
-					<a href="/admin/contents/{{ $key }}/edit" class="btn btn-success" title="{{ trans('kotoba::button.edit') }}">
-						<i class="fa fa-pencil fa-fw"></i>
-						{{ trans('kotoba::button.edit') }}
-					</a>
-					<a href="/admin/contents/{{ $key }}" class="btn btn-info" title="{{ trans('kotoba::button.view') }}">
-						<i class="fa fa-search fa-fw"></i>
-						{{ trans('kotoba::button.view') }}
-					</a>
-				</td>
-			</tr>
-		@endforeach
-	</tbody>
---}}
-
-	<tbody>
 		@foreach ($contents as $content)
 			<tr>
 				<td>{{ $content->title }}</td>
@@ -95,6 +74,10 @@ oTable =
 					</a>
 				</td>
 			</tr>
+		@endforeach
+--}}
+		@foreach($list as $item)
+			{!! Html::contentNodes($item, $lang) !!}
 		@endforeach
 	</tbody>
 
