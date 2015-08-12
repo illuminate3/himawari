@@ -36,7 +36,7 @@ Simple print designations such as draft, edit, in print and such.
 
 General Publish "ALL" method
 ```
-php artisan vendor:publish --provider="App\Modules\Kagi\Providers\HimawariServiceProvider"
+php artisan vendor:publish --provider="App\Modules\Himawari\Providers\HimawariServiceProvider"
 ```
 
 Specific Publish tags
