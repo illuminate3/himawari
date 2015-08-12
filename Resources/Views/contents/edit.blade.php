@@ -27,7 +27,7 @@
 	});
 	CKEDITOR.replace( 'ckeditor' );
 	CKEDITOR.editorConfig = function( config ) {
-		config.basicEntities = false;
+		config.extraAllowedContent = 'div(*)';
 		config.allowedContent=true;
 	};
 @stop

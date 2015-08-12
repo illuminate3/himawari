@@ -26,6 +26,10 @@
 		});
 	});
 	CKEDITOR.replace( 'ckeditor' );
+	CKEDITOR.editorConfig = function( config ) {
+		config.extraAllowedContent = 'div(*)';
+		config.allowedContent=true;
+	};
 @stop
 
 
