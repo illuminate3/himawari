@@ -2,15 +2,15 @@
 
 namespace App\Modules\Himawari\Http\Controllers;
 
+use App\Modules\Core\Http\Repositories\LocaleRepository;
+
 use App\Modules\Himawari\Http\Models\Content;
 use App\Modules\Himawari\Http\Repositories\ContentRepository;
 
-use App\Helpers\Nifty\NiftyMenus;
-
 use Illuminate\Http\Request;
 use App\Modules\Himawari\Http\Requests\DeleteRequest;
-// use App\Http\Requests\PageCreateRequest;
-// use App\Http\Requests\PageUpdateRequest;
+use App\Http\Requests\PageCreateRequest;
+use App\Http\Requests\PageUpdateRequest;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
@@ -27,17 +27,19 @@ use Theme;
 class FrontendController extends HimawariController {
 
 	public function __construct(
+			LocaleRepository $locale_repo,
 			Content $content,
 			ContentRepository $content_repo
 		)
 	{
 //dd('__construct');
+		$this->locale_repo = $locale_repo;
 		$this->content = $content;
 		$this->content_repo = $content_repo;
 
 		$lang = Session::get('locale');
-		$locales = $this->content_repo->getLocales();
-		$locale_id = 1;
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
 
 //		$this->hashIds = new Hashids( Config::get('app.key'), 8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' );
 

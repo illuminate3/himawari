@@ -6,6 +6,8 @@
 |--------------------------------------------------------------------------
 */
 
+Route::pattern('page', '[0-9a-z]+');
+
 // Resources
 // Controllers
 
@@ -21,27 +23,6 @@ Route::group(['prefix' => 'himawari'], function() {
 |--------------------------------------------------------------------------
 | Admin
 |--------------------------------------------------------------------------
-*/
-
-
-/*
-Route::group(
-[
-	'prefix' => LaravelLocalization::setLocale(),
-	'middleware' => [ 'localizationRedirect', 'localeSessionRedirect' ]
-],
-function()
-{
-	// ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP //
-// 	Route::get('/', function()
-// 	{
-// //dd(LaravelLocalization::getSupportedLocales());
-// //dd(LaravelLocalization::getSupportedLanguagesKeys());
-//dd(LaravelLocalization::getCurrentLocale());
-// 		return View::make('hello');
-// 	});
-
-});
 */
 
 // Route::resource('pages', 'PagesController', array('except' => array('show')));
@@ -60,8 +41,6 @@ function()
 //Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 Route::group(['prefix' => 'admin'], function() {
 
-	Route::pattern('id', '[0-9]+');
-
 // Controllers
 	Route::resource('contents', 'ContentsController');
 	Route::resource('print_statuses', 'PrintStatusesController');
@@ -77,22 +56,16 @@ Route::group(['prefix' => 'admin'], function() {
 // 		));
 
 // API DATA
-	Route::get('api/print_statuses', array(
-//		'as'=>'api.print_statuses',
-		'uses'=>'PrintStatusesController@data'
-		));
+// 	Route::get('api/print_statuses', array(
+// //		'as'=>'api.print_statuses',
+// 		'uses'=>'PrintStatusesController@data'
+// 		));
 
 });
 
 Route::get('{page}', 'FrontendController@get_page')->where('page', '.*');
 
 
-
-// Route::get('/', 'PageController@show');
-// Route::get('/', array(
-// 	'as' => 'home',
-// 	'uses' => 'PageController@show'
-// 	));
 
 /*
 Route::resource('pages', 'PagesController', array('except' => array('show')));

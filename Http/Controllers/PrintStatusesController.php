@@ -45,16 +45,18 @@ class PrintStatusesController extends HimawariController {
 	 */
 	public function index()
 	{
+
 		$lang = Session::get('locale');
-//		$locales = $this->status_repo->getLocales();
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+
 		$print_statuses = $this->status_repo->all();
-//dd($lang);
 
 		return Theme::View('modules.himawari.print_statuses.index',
 			compact(
+				'print_statuses',
 				'lang',
-//				'locales',
-				'print_statuses'
+				'locale_id'
 				));
 	}
 
@@ -79,7 +81,7 @@ class PrintStatusesController extends HimawariController {
 		PrintStatusCreateRequest $request
 		)
 	{
-		$this->status->store($request->all());
+		$this->status_repo->store($request->all());
 
 		Flash::success( trans('kotoba::general.success.status_create') );
 		return redirect('admin/print_statuses');
@@ -143,7 +145,7 @@ class PrintStatusesController extends HimawariController {
 		)
 	{
 //dd("update");
-		$this->status->update($request->all(), $id);
+		$this->status_repo->update($request->all(), $id);
 
 		Flash::success( trans('kotoba::general.success.status_update') );
 		return redirect('admin/print_statuses');

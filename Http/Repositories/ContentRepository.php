@@ -94,12 +94,12 @@ class ContentRepository extends BaseRepository {
 		$user_id = Auth::user()->id;
 
 		return compact(
-			'lang',
-//			'locales',
 			'pagelist',
 			'print_statuses',
 			'users',
-			'user_id'
+			'user_id',
+			'lang',
+			'locale_id'
 			);
 	}
 
@@ -414,22 +414,6 @@ class ContentRepository extends BaseRepository {
 
 
 // Functions ----------------------------------------------------------------------------------------------------
-
-	public function getLocales()
-	{
-		$locales = Locale::all();
-		return $locales;
-	}
-
-// 	public function getLocaleID($lang)
-// 	{
-//
-// 		$locale_id = DB::table('locales')
-// 			->where('locale', '=', $lang)
-// 			->pluck('id');
-//
-// 		return $locale_id;
-// 	}
 
 	public function getContentID($name)
 	{

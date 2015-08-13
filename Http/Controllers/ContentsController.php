@@ -72,7 +72,6 @@ class ContentsController extends HimawariController {
 				'contents',
 				'list',
 				'lang',
-				'locales',
 				'locale_id'
 			));
 	}

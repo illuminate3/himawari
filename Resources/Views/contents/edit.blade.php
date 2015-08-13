@@ -209,6 +209,26 @@
 		{!! Form::text('order', $content->order, ['id' => 'order', 'class' => 'form-control']) !!}
 	</div>
 
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_start" name="publish_start" class="form-control" value="{{ $content->publish_start }}">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
+		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
+		<div id="datepicker-container">
+			<div class="input-group date">
+				<input type="text" id="publish_end" name="publish_end" class="form-control" value="{{ $content->publish_end }}">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		</div>
+	</div>
+
 	<div class="form-group">
 		<label for="is_navigation" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_navigation') }}</label>
 		<div class="col-sm-9">
@@ -238,26 +258,6 @@
 				<label>
 					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $content->present()->timed }}>
 				</label>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
-		{!! Form::label('order', trans('kotoba::cms.publish_start'), $errors->first('order'), ['class' => 'control-label']) !!}
-		<div id="datepicker-container">
-			<div class="input-group date">
-				<input type="text" id="publish_start" name="publish_start" class="form-control" value="{{ $content->publish_start }}">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			</div>
-		</div>
-	</div>
-
-	<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
-		{!! Form::label('order', trans('kotoba::cms.publish_end'), $errors->first('order'), ['class' => 'control-label']) !!}
-		<div id="datepicker-container">
-			<div class="input-group date">
-				<input type="text" id="publish_end" name="publish_end" class="form-control" value="{{ $content->publish_end }}">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
 		</div>
 	</div>
