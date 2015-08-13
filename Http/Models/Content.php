@@ -16,9 +16,9 @@ use Baum\Node;
 use Cache;
 use DB;
 
-//class Content extends Node {
+
 class Content extends Node implements TranslatableContract, SluggableInterface {
-//class Content extends Node implements TranslatableContract {
+
 
 	use PresentableTrait;
 	use SluggableTrait;

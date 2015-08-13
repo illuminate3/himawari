@@ -46,11 +46,6 @@ class ContentRepository extends BaseRepository {
 	{
 		$this->locale_repo = $locale_repo;
 		$this->model = $content;
-
-		$this->id = Route::current()->parameter( 'id' );
-//		$this->pagelist = Page::getParentOptions( $exceptId = $this->id );
-//		$this->pagelist = Content::getParentOptions( $exceptId = $this->id );
-//dd($this->pagelist);
 	}
 
 

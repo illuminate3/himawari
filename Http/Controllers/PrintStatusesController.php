@@ -2,6 +2,8 @@
 
 namespace App\Modules\Himawari\Http\Controllers;
 
+use App\Modules\Core\Http\Repositories\LocaleRepository;
+
 use App\Modules\Himawari\Http\Models\PrintStatus;
 use App\Modules\Himawari\Http\Repositories\PrintStatusRepository;
 
@@ -26,9 +28,11 @@ class PrintStatusesController extends HimawariController {
 	protected $status;
 
 	public function __construct(
+			LocaleRepository $locale_repo,
 			PrintStatusRepository $status_repo
 		)
 	{
+		$this->locale_repo = $locale_repo;
 		$this->status_repo = $status_repo;
 // middleware
 		parent::__construct();
