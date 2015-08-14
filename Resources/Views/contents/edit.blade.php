@@ -28,6 +28,7 @@
 	CKEDITOR.replace( 'ckeditor' );
 	CKEDITOR.editorConfig = function( config ) {
 		config.extraAllowedContent = 'div(*)';
+		config.extraAllowedContent = 'ul(*)';
 		config.allowedContent=true;
 	};
 @stop
