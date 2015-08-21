@@ -43,7 +43,7 @@ class FrontendController extends HimawariController {
 
 //		$this->hashIds = new Hashids( Config::get('app.key'), 8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' );
 
-/*
+
 		$this->page = Route::current()->parameter('page');
 //dd($this->page);
 		$slugs = explode('/', $this->page);
@@ -74,7 +74,7 @@ class FrontendController extends HimawariController {
 // 		$this->postItemsPerPage = 2;
 		// $this->latestNewsPosts = Post::getLatestNewsPosts($this->postItemsNum, $this->postsOrderBy);
 // 		$this->contact = ["Demo NiftyCMS", "demo@niftycms.com"];
-*/
+
 	}
 
 	public function get_page()
