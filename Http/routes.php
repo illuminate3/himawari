@@ -42,6 +42,13 @@ Route::group(['prefix' => 'himawari'], function() {
 Route::group(['prefix' => 'admin'], function() {
 
 // Controllers
+
+	Route::get('contents/repair', array(
+		'uses'=>'ContentsController@repairTree'
+		));
+
+// Resources
+
 	Route::resource('contents', 'ContentsController');
 	Route::resource('print_statuses', 'PrintStatusesController');
 

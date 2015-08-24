@@ -177,13 +177,54 @@ class ContentsController extends HimawariController {
 	 * @param  int  $id
 	 * @return Response
 	 */
+// 	public function destroy($id)
+// 	{
+// //dd($id);
+// 		Content::find($id)->delete();
+//
+// 		Flash::success( trans('kotoba::cms.success.content_delete') );
+// 		return redirect('admin/contents');
+// 	}
 	public function destroy($id)
 	{
-//dd($id);
+		$node = Content::find($id);
+		$parent = $node->parent()->get();
+		$children = $node->children()->get();
+//dd($parent);
+
+		foreach($node->getImmediateDescendants() as $descendant) {
+//			print_r($descendant->title . '<br>');
+			$descendant->makeSiblingOf($node);
+		}
+
 		Content::find($id)->delete();
 
-		Flash::success( trans('kotoba::cms.success.content_delete') );
+		if ( Content::isValidNestedSet() == false ) {
+			Content::rebuild();
+		}
+
+		Flash::success( trans('kotoba::cms.success.category_delete') );
 		return redirect('admin/contents');
+	}
+
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function repairTree()
+	{
+
+		if ( Content::isValidNestedSet() == false ) {
+			Content::rebuild();
+			Flash::success( trans('kotoba::cms.success.repaired') );
+			return redirect('admin/contents');
+		}
+
+			Flash::info( trans('kotoba::cms.error.repair') );
+			return redirect('admin/contents');
+
 	}
 
 
