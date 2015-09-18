@@ -6,7 +6,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
 
-class HimawariDatabaseSeeder extends Seeder {
+class HimawariDatabaseSeeder extends Seeder
+{
+
 
 	/**
 	 * Run the database seeds.
@@ -17,9 +19,11 @@ class HimawariDatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('App\Modules\Himawari\Database\Seeds\ModuleSeeder');
+		$this->call('App\Modules\Himawari\Database\Seeds\ModulePermissionsSeeder');
+		$this->call('App\Modules\Himawari\Database\Seeds\ModuleLinksSeeder');
 		$this->call('App\Modules\Himawari\Database\Seeds\PrintStatusesSeeder');
 
 	}
+
 
 }

@@ -6,7 +6,9 @@ use Illuminate\Database\Seeder;
 Use DB, Eloquent, Model, Schema;
 
 
-class PrintStatusesSeeder extends Seeder {
+class PrintStatusesSeeder extends Seeder
+{
+
 
 	public function run()
 	{
@@ -77,5 +79,6 @@ class PrintStatusesSeeder extends Seeder {
 		DB::table('print_status_translations')->insert( $print_status_translations );
 
 	} // run
+
 
 }

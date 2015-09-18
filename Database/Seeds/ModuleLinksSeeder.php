@@ -7,30 +7,34 @@ Use DB;
 use Schema;
 
 
-class ModuleSeeder extends Seeder {
+class ModuleSeeder extends Seeder
+{
+
 
 	public function run()
 	{
 
-// Permissions -------------------------------------------------------------
-		$permissions = array(
-			[
-				'name'				=> 'Manage Himawari CMS',
-				'slug'				=> 'manage_himawari',
-				'description'		=> 'Give permission to user to manage CMS'
-			],
-		 );
+		$cms_id = DB::table('menus')
+			->where('name', '=', 'cms')
+			->pluck('id');
 
-		if (Schema::hasTable('permissions'))
-		{
-			DB::table('permissions')->insert( $permissions );
+		$settings_id = DB::table('menus')
+			->where('name', '=', 'settings')
+			->pluck('id');
+
+		if ($cms_id == null) {
+			$cms_id = 1;
+		}
+
+		if ($settings_id == null) {
+			$settings_id = 1;
 		}
 
 // Links -------------------------------------------------------------------
-// Locales
+// contents
 
 		$link_names = array([
-			'menu_id'				=> 1, // admin menu
+			'menu_id'				=> $cms_id
 			'position'				=> 3,
 		]);
 
@@ -58,9 +62,9 @@ class ModuleSeeder extends Seeder {
 			DB::table('menulink_translations')->insert( $ink_name_trans );
 		}
 
-// Settings
+// print statuses
 		$link_names = array([
-			'menu_id'				=> 1, // admin menu
+			'menu_id'				=> $settings_id
 			'position'				=> 7,
 		]);
 
@@ -89,5 +93,6 @@ class ModuleSeeder extends Seeder {
 		}
 
 	} // run
+
 
 }
