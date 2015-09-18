@@ -7,7 +7,7 @@ Use DB;
 use Schema;
 
 
-class ModuleSeeder extends Seeder
+class ModuleLinksSeeder extends Seeder
 {
 
 
@@ -34,7 +34,7 @@ class ModuleSeeder extends Seeder
 // contents
 
 		$link_names = array([
-			'menu_id'				=> $cms_id
+			'menu_id'				=> $cms_id,
 			'position'				=> 3,
 		]);
 
@@ -64,7 +64,7 @@ class ModuleSeeder extends Seeder
 
 // print statuses
 		$link_names = array([
-			'menu_id'				=> $settings_id
+			'menu_id'				=> $settings_id,
 			'position'				=> 7,
 		]);
 
