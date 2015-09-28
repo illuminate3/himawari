@@ -72,24 +72,23 @@ class ContentRepository extends BaseRepository {
 		$pagelist = $pagelist->merge($all_pagelist);
 
 
-
 		$users = $this->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
-//dd($users);
-//		$all_menus = $this->menu->all()->lists('name', 'id');
-// 		$all_users = $this->getUsers();
-// 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1));
-// 		$users = new Collection($users);
-// 		$users = $users->merge($all_users);
-
 
 		$print_statuses = $this->getPrintStatuses($locale_id);
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
+		$get_images = $this->getImages();
+
+		$get_documents = $this->getDocuments();
+
 		$user_id = Auth::user()->id;
+
 
 		return compact(
 			'pagelist',
+			'get_documents',
+			'get_images',
 			'print_statuses',
 			'users',
 			'user_id',
@@ -107,15 +106,7 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function show($id)
 	{
-		$content = $this->model->find($id);
-		$links = Content::find($id)->contentlinks;
-//$content = $this->content->show($id);
-
-//$content = $this->model->where('id', $id)->first();
-//		$content = new Collection($content);
-//dd($content);
-
-		return compact('content', 'links');
+		//
 	}
 
 
@@ -127,39 +118,7 @@ class ContentRepository extends BaseRepository {
 	 */
 	public function edit($id)
 	{
-		$content = $this->model->find($id);
-//dd($content);
-
-		$lang = Session::get('locale');
-		$locale_id = $this->locale_repo->getLocaleID($lang);
-//dd($locale_id);
-
-//		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
-
-// 		$pagelist = $this->getParents($locale_id, $id);
-// 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
-//dd($pagelist);
-		$all_pagelist = $this->getParents($locale_id, null);
-		$pagelist = array('' => trans('kotoba::cms.no_parent'));
-		$pagelist = new Collection($pagelist);
-		$pagelist = $pagelist->merge($all_pagelist);
-
-		$users = $this->getUsers();
-		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
-//dd($users);
-		$print_statuses = $this->getPrintStatuses($locale_id);
-		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
-
-//		$user_id = Auth::user()->id;
-
-		return compact(
-			'content',
-			'lang',
-//			'locales',
-			'pagelist',
-			'print_statuses',
-			'users'
-			);
+		//
 	}
 
 
@@ -280,6 +239,26 @@ class ContentRepository extends BaseRepository {
 		$this->manageBaum($input['parent_id'], null);
 
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
+
+
+		$document_id = Input::get('document_id');
+		if ( $document_id != null ) {
+			$this->attachDocument($last_insert_id, $document_id);
+		}
+//dd($document_id);
+
+		$image_id = Input::get('image_id');
+		if ( $image_id != null ) {
+			$this->attachImage($last_insert_id, $image_id);
+		}
+
+		$contents = Content::find($last_insert_id);
+		$values = [
+			'image_id'					=> $image_id
+		];
+		$contents->update($values);
+
+
 		return;
 	}
 
@@ -409,6 +388,50 @@ class ContentRepository extends BaseRepository {
 
 
 // Functions ----------------------------------------------------------------------------------------------------
+
+
+	public function attachDocument($id, $document_id)
+	{
+//dd($id);
+		$news = $this->model->find($id);
+		$news->documents()->attach($document_id);
+	}
+
+	public function detachDocument($id, $document_id)
+	{
+//dd($image_id);
+		$document = $this->model->find($id)->documents()->detach();
+	}
+
+
+	public function attachImage($id, $image_id)
+	{
+//dd($image_id);
+		$news = $this->model->find($id);
+		$news->images()->attach($image_id);
+	}
+
+	public function detachImage($id, $image_id)
+	{
+//dd($image_id);
+		$image = $this->model->find($id)->images()->detach();
+	}
+
+
+
+
+	public function getImages()
+	{
+		$images = DB::table('images')->get();
+		return $images;
+	}
+
+	public function getDocuments()
+	{
+		$documents = DB::table('documents')->get();
+		return $documents;
+	}
+
 
 	public function getContentID($name)
 	{

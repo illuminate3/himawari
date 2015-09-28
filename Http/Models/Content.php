@@ -40,8 +40,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 // DEFINE Fillable -------------------------------------------------------
 	protected $fillable = [
-// 		'is_deleted',
-// 		'is_online',
+ 		'image_id',
 		'is_featured',
 		'is_timed',
 		'is_navigation',
@@ -99,10 +98,25 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 	}
 
 
+// Relationships -----------------------------------------------------------
+
+// hasOne
 // hasMany
 // belongsTo
 // belongsToMany
 
+	public function documents()
+	{
+		return $this->belongsToMany('App\Modules\Filex\Http\Models\Document', 'content_document');
+	}
+
+	public function images()
+	{
+		return $this->belongsToMany('App\Modules\Filex\Http\Models\Image', 'content_image');
+	}
+
+
+// Functions ---------------------------------------------------------------
 
 
 	public static function getRoots()

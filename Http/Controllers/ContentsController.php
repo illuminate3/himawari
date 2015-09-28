@@ -13,11 +13,13 @@ use App\Modules\Himawari\Http\Requests\ContentCreateRequest;
 use App\Modules\Himawari\Http\Requests\ContentUpdateRequest;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 
 use Cache;
-//use Datatables;
 use Flash;
+use Lang;
+use Route;
 use Session;
 use Theme;
 
@@ -33,11 +35,13 @@ class ContentsController extends HimawariController {
 
 	public function __construct(
 			LocaleRepository $locale_repo,
-			ContentRepository $content
+			Content $content,
+			ContentRepository $content_repo
 		)
 	{
 		$this->locale_repo = $locale_repo;
 		$this->content = $content;
+		$this->content_repo = $content_repo;
 // middleware
 		parent::__construct();
 // middleware
@@ -58,7 +62,7 @@ class ContentsController extends HimawariController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-		$contents = $this->content->all();
+		$contents = $this->content_repo->all();
 //		$contents = Content::getNestedList('title', 'id', '>> ');
 //dd($contents);
 
@@ -129,6 +133,36 @@ class ContentsController extends HimawariController {
 	 */
 	public function edit($id)
 	{
+		$content = $this->content->with('images', 'documents')->find($id);
+//dd($content);
+
+		$lang = Session::get('locale');
+		$locale_id = $this->locale_repo->getLocaleID($lang);
+//dd($locale_id);
+
+//		$pagelist = $this->getParents( $exceptId = $this->id, $locales );
+
+// 		$pagelist = $this->getParents($locale_id, $id);
+// 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
+//dd($pagelist);
+		$all_pagelist = $this->content_repo->getParents($locale_id, null);
+		$pagelist = array('' => trans('kotoba::cms.no_parent'));
+		$pagelist = new Collection($pagelist);
+		$pagelist = $pagelist->merge($all_pagelist);
+
+		$users = $this->content_repo->getUsers();
+		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//dd($users);
+		$print_statuses = $this->content_repo->getPrintStatuses($locale_id);
+		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
+
+		$get_images = $this->content_repo->getImages();
+//dd($images);
+
+		$get_documents = $this->content_repo->getDocuments();
+
+//		$user_id = Auth::user()->id;
+
 		$modal_title = trans('kotoba::general.command.delete');
 		$modal_body = trans('kotoba::general.ask.delete');
 		$modal_route = 'admin.contents.destroy';
@@ -138,14 +172,20 @@ class ContentsController extends HimawariController {
 //dd($model);
 
 		return Theme::View('modules.himawari.contents.edit',
-//		return Theme::View('contents.edit',
-			$this->content->edit($id),
-				compact(
-					'modal_title',
-					'modal_body',
-					'modal_route',
-					'modal_id',
-					'model'
+			compact(
+				'content',
+				'get_documents',
+				'get_images',
+				'lang',
+//				'locales',
+				'pagelist',
+				'print_statuses',
+				'users',
+				'modal_title',
+				'modal_body',
+				'modal_route',
+				'modal_id',
+				'model'
 			));
 	}
 
@@ -163,8 +203,24 @@ class ContentsController extends HimawariController {
 	{
 //dd($request);
 
-		$this->content->update($request->all(), $id);
+		$this->content_repo->update($request->all(), $id);
 		Cache::flush();
+
+		if ( Input::get('previous_document_id') == null ) {
+			$document_id = Input::get('document_id');
+			if ( $document_id != null ) {
+				$this->content_repo->detachDocument($id, $document_id);
+				$this->content_repo->attachDocument($id, $document_id);
+			}
+		}
+
+		if ( Input::get('previous_image_id') == null ) {
+			$image_id = Input::get('image_id');
+			if ( $image_id != null ) {
+				$this->content_repo->detachImage($id, $image_id);
+				$this->content_repo->attachImage($id, $image_id);
+			}
+		}
 
 		Flash::success( trans('kotoba::cms.success.content_update') );
 		return redirect('admin/contents');
