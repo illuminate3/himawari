@@ -88,7 +88,7 @@ class ContentsController extends HimawariController {
 	 */
 	public function create()
 	{
-		return Theme::View('modules.himawari.contents.create',  $this->content->create());
+		return Theme::View('modules.himawari.contents.create',  $this->content_repo->create());
 	}
 
 
