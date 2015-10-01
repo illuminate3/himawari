@@ -480,7 +480,17 @@ function setImage(select){
 
 </div>
 
+
 {!! Form::close() !!}
 
+
 </div> <!-- ./ row -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	@include($activeTheme . '::' . '_partials.modal')
+</div>
+
+
 @stop
