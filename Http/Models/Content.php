@@ -224,6 +224,10 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $page;
 	}
 
+
+// scopes
+
+
 	public function scopeInPrint($query)
 	{
 		return $query
