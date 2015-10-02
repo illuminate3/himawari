@@ -215,11 +215,14 @@ class ContentsController extends HimawariController {
 		}
 
 		if ( Input::get('previous_image_id') == null ) {
+
 			$image_id = Input::get('image_id');
-			if ( $image_id != null ) {
+
+			if ( !isset($image_id) ) {
 				$this->content_repo->detachImage($id, $image_id);
 				$this->content_repo->attachImage($id, $image_id);
 			}
+
 		}
 
 		Flash::success( trans('kotoba::cms.success.content_update') );
