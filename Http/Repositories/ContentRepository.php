@@ -22,6 +22,7 @@ use Lang;
 use Route;
 use Session;
 use Illuminate\Support\Str;
+use Input;
 
 
 class ContentRepository extends BaseRepository {
@@ -181,6 +182,7 @@ class ContentRepository extends BaseRepository {
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 //		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
+		$slug = Str::slug($input['title_'.$app_locale_id]);
 
 		$values = [
 //			'name'			=> $input['name'],
@@ -209,6 +211,10 @@ class ContentRepository extends BaseRepository {
 //dd($values);
 
 		$content = Content::create($values);
+
+//		$last_insert_id = DB::getPdo()->lastInsertId();
+		$last_insert_id = $this->getContentIDbySlug($slug);
+//dd($last_insert_id);
 
 //		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
@@ -418,6 +424,18 @@ class ContentRepository extends BaseRepository {
 	}
 
 
+// get
+
+
+	public function getContentIDbySlug($slug)
+	{
+
+		$id = DB::table('contents')
+			->where('slug', '=', $slug)
+			->pluck('id');
+
+		return $id;
+	}
 
 
 	public function getImages()

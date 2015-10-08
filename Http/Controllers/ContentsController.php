@@ -103,7 +103,7 @@ class ContentsController extends HimawariController {
 	{
 //dd($request);
 
-		$this->content->store($request->all());
+		$this->content_repo->store($request->all());
 		Cache::flush();
 
 		Flash::success( trans('kotoba::cms.success.content_create') );
