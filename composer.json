@@ -7,7 +7,7 @@
 		"baum/baum": "~1.1",
 		"cviebrock/eloquent-sluggable": ">=3.0.0-beta",
 		"vespakoen/menu": "3.*",
-		"barryvdh/laravel-elfinder": "^0.3.4"
+		"stevebauman/calendar-helper": "dev-master"
 	},
 	"config": {
 		"preferred-install": "dist"
