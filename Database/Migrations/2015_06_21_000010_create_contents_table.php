@@ -52,17 +52,6 @@ class CreateContentsTable extends Migration
 
 			$table->integer('order')->nullable();
 
-// 			$table->integer('version')->nullable();
-// 			$table->boolean('is_online')->default(0);
-// 			$table->boolean('is_current')->default(0);
-// 			$table->boolean('is_latest')->default(1);
-// 			$table->boolean('is_deleted')->default(0);
-
-			$table->index('parent_id');
-			$table->index('lft');
-			$table->index('rgt');
-//			$table->index('slug');
-
 			$table->foreign('user_id')->references('id')->on('users');
 
 			$table->softDeletes();
