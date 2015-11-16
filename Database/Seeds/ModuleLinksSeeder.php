@@ -35,6 +35,7 @@ class ModuleLinksSeeder extends Seeder
 
 		$link_names = array([
 			'menu_id'				=> $cms_id,
+			'status'				=> 1,
 			'position'				=> 3,
 		]);
 
@@ -50,7 +51,6 @@ class ModuleLinksSeeder extends Seeder
 			->pluck('id');
 
 		$ink_name_trans = array([
-			'status'				=> 1,
 			'title'					=> 'Contents',
 			'url'					=> '/admin/contents',
 			'menulink_id'			=> $last_insert_id,
@@ -65,6 +65,7 @@ class ModuleLinksSeeder extends Seeder
 // print statuses
 		$link_names = array([
 			'menu_id'				=> $settings_id,
+			'status'				=> 1,
 			'position'				=> 7,
 		]);
 
@@ -80,7 +81,6 @@ class ModuleLinksSeeder extends Seeder
 			->pluck('id');
 
 		$ink_name_trans = array([
-			'status'				=> 1,
 			'title'					=> 'Print Statuses',
 			'url'					=> '/admin/print_statuses',
 			'menulink_id'			=> $last_insert_id,
