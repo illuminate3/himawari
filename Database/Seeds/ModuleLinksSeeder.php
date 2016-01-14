@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Modules\Himawari\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 Use DB;
 use Schema;
-
 
 class ModuleLinksSeeder extends Seeder
 {

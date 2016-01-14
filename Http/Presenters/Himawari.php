@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Presenters;
 
 use Laracasts\Presenter\Presenter;
 
 use DB;
-
 
 class Himawari extends Presenter {
 

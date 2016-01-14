@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -8,7 +7,6 @@ use App\Http\Controllers\Controller;
 // use Illuminate\Foundation\Validation\ValidatesRequests;
 
 use Theme;
-
 
 class HimawariController extends Controller
 {

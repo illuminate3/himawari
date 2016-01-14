@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
@@ -16,7 +15,6 @@ use Datatables;
 use Flash;
 use Session;
 use Theme;
-
 
 class PrintStatusesController extends HimawariController {
 

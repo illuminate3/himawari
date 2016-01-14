@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +14,6 @@ use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
 use Baum\Node;
 use Cache;
 use DB;
-
 
 class Content extends Node implements TranslatableContract, SluggableInterface {
 

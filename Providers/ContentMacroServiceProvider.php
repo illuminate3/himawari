@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Modules\Himawari\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 use Html;
 use Lang;
-
 
 class ContentMacroServiceProvider extends ServiceProvider
 {

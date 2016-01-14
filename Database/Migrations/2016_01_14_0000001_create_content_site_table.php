@@ -3,7 +3,10 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateContentImageTable extends Migration
+/**
+ * Class CreateContentSiteTable
+ */
+class CreateContentSiteTable extends Migration
 {
 
 
@@ -22,15 +25,16 @@ class CreateContentImageTable extends Migration
 	public function up()
 	{
 
-		Schema::create($this->prefix . 'content_image', function(Blueprint $table) {
+		Schema::create($this->prefix . 'content_site', function(Blueprint $table) {
 
 			$table->engine = 'InnoDB';
 
 			$table->integer('content_id')->unsigned()->index();
-			$table->integer('image_id')->unsigned()->index();
+			$table->integer('site_id')->unsigned()->index();
+//			$table->integer('order')->unsigned()->nullable();
 
 			$table->foreign('content_id')->references('id')->on($this->prefix.'contents')->onDelete('cascade');
-			$table->foreign('image_id')->references('id')->on($this->prefix.'images')->onDelete('cascade');
+			$table->foreign('site_id')->references('id')->on($this->prefix.'sites')->onDelete('cascade');
 
 		});
 
@@ -44,7 +48,7 @@ class CreateContentImageTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop($this->prefix . 'content_image');
+		Schema::drop($this->prefix . 'content_site');
 	}
 
 

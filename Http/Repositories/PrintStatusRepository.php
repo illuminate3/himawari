@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Repositories;
 
 use App\Modules\Himawari\Http\Models\PrintStatus;
 
 use DB;
 use Session;
-
 
 class PrintStatusRepository extends BaseRepository {
 

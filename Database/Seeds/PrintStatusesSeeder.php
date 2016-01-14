@@ -1,11 +1,14 @@
 <?php
-
 namespace App\Modules\Himawari\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 Use DB, Eloquent, Model, Schema;
 
-
+/**
+ * Class PrintStatusesSeeder
+ *
+ * @package App\Modules\Himawari\Database\Seeds
+ */
 class PrintStatusesSeeder extends Seeder
 {
 

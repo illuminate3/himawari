@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Repositories;
 
 use Illuminate\Support\Collection;
@@ -23,7 +22,6 @@ use Route;
 use Session;
 use Illuminate\Support\Str;
 use Input;
-
 
 class ContentRepository extends BaseRepository {
 

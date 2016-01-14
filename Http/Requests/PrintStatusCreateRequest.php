@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Config;
-
 
 class PrintStatusCreateRequest extends FormRequest {
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;
@@ -22,7 +21,6 @@ use Lang;
 use Route;
 use Session;
 use Theme;
-
 
 class ContentsController extends HimawariController {
 

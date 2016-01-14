@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-
 class CreatePrintStatusesTable extends Migration
 {
 
@@ -21,20 +20,7 @@ class CreatePrintStatusesTable extends Migration
 	 */
 	public function up()
 	{
-/*
-		Schema::create($this->prefix . 'print_statuses', function(Blueprint $table) {
 
-			$table->engine = 'InnoDB';
-			$table->increments('id');
-
-			$table->string('name')->nullable();
-			$table->string('description')->nullable();
-
-			$table->softDeletes();
-			$table->timestamps();
-
-		});
-*/
 		Schema::create($this->prefix . 'print_statuses', function(Blueprint $table) {
 
 			$table->engine = 'InnoDB';

@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Modules\Himawari\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 
 class DeleteRequest extends FormRequest {
 
