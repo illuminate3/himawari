@@ -2,53 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2db0740e-34d9-4ed2-bd4a-0425a38ba547" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/Himawari.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/composerJson.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Database/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Database/Migrations/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Database/Migrations/2015_04_12_000004_create_printstatuses_table.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Http/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Http/Controllers/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Http/Requests/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Providers/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/.gitkeep" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Migrations/2015_06_21_000010_create_contents_table.php" afterPath="$PROJECT_DIR$/Database/Migrations/2015_06_21_000010_create_contents_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Migrations/2015_06_21_000011_create_content_translations_table.php" afterPath="$PROJECT_DIR$/Database/Migrations/2015_06_21_000011_create_content_translations_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Migrations/2015_08_20_0000013_create_content_image_table.php" afterPath="$PROJECT_DIR$/Database/Migrations/2015_08_20_0000013_create_content_image_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Migrations/2015_08_20_0000014_create_content_document_table.php" afterPath="$PROJECT_DIR$/Database/Migrations/2015_08_20_0000014_create_content_document_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/HimawariDatabaseSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/HimawariDatabaseSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/ModuleLinksSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/ModulePermissionsSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/ModulePermissionsSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/Seeds/PrintStatusesSeeder.php" afterPath="$PROJECT_DIR$/Database/Seeds/PrintStatusesSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/ContentsController.php" afterPath="$PROJECT_DIR$/Http/Controllers/ContentsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/FrontendController.php" afterPath="$PROJECT_DIR$/Http/Controllers/FrontendController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/HimawariController.php" afterPath="$PROJECT_DIR$/Http/Controllers/HimawariController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Controllers/PrintStatusesController.php" afterPath="$PROJECT_DIR$/Http/Controllers/PrintStatusesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/Content.php" afterPath="$PROJECT_DIR$/Http/Models/Content.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/ContentTranslation.php" afterPath="$PROJECT_DIR$/Http/Models/ContentTranslation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/PrintStatus.php" afterPath="$PROJECT_DIR$/Http/Models/PrintStatus.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Models/PrintStatusTranslation.php" afterPath="$PROJECT_DIR$/Http/Models/PrintStatusTranslation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Presenters/Himawari.php" afterPath="$PROJECT_DIR$/Http/Presenters/Himawari.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/BaseRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/BaseRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/ContentRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/ContentRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Repositories/PrintStatusRepository.php" afterPath="$PROJECT_DIR$/Http/Repositories/PrintStatusRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/ContentCreateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/ContentCreateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/ContentUpdateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/ContentUpdateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/DeleteRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/DeleteRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/PrintStatusCreateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/PrintStatusCreateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Http/Requests/PrintStatusUpdateRequest.php" afterPath="$PROJECT_DIR$/Http/Requests/PrintStatusUpdateRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/ContentMacroServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/ContentMacroServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/HimawariServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/HimawariServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/RouteServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/RouteServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/ViewComposerServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/ViewComposerServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Providers/WidgetServiceProvider.php" afterPath="$PROJECT_DIR$/Providers/WidgetServiceProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Himawari.iws" />
     <ignored path=".idea/workspace.xml" />
