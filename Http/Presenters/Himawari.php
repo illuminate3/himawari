@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Presenters;
 
 use Laracasts\Presenter\Presenter;

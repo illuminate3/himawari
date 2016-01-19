@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Controllers;
 
 use App\Modules\Core\Http\Repositories\LocaleRepository;

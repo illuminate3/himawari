@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Repositories;
 
 use Illuminate\Support\Collection;

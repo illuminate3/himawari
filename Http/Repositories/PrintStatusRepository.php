@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Himawari\Http\Repositories;
 
 use App\Modules\Himawari\Http\Models\PrintStatus;

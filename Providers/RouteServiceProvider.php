@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Himawari\Providers;
 
 use Caffeinated\Modules\Providers\RouteServiceProvider as ServiceProvider;
