@@ -229,9 +229,8 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 
 	public function scopeInPrint($query)
 	{
-		return $query
-//			->where('is_published', '=', 1);
-			->where('print_status_id', '=', 2);
+//dd($query);
+		return $query->where('print_status_id', '=', 2);
 // 			->where('print_status_id', '<', 5, 'OR');
 	}
 
@@ -262,14 +261,14 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		$date = date("Y-m-d");
 	//dd($date);
 	//	return $query->where('created_at', '>', $today->modify('-7 days'));
-		return $query->where('publish_end', '>=', $date);
+		return $query->where('publish_end', '>=', $date . " 23:59:59");
 	}
 
 	public function scopePublishStart($query)
 	{
 		$date = date("Y-m-d");
 	//dd($date);
-		return $query->where('publish_start', '<=', $date);
+		return $query->where('publish_start', '<=', $date . " 00:00:00");
 	}
 
 	public function scopeIsAccessPoint($query)
