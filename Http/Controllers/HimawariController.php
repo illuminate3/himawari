@@ -24,6 +24,7 @@ class HimawariController extends Controller
 // middleware
 		$this->middleware('auth');
 		$this->middleware('admin');
+		$this->middleware('himawari');
 	}
 
 

@@ -16,4 +16,6 @@ return [
 	'prefix'					=> '',
 ),
 
+'auth_fail_redirect'			=> '/admin/dashboard',
+
 ];
