@@ -36,15 +36,15 @@ class CreateContentsTable extends Migration
 // 			$table->text('content')->nullable();
 			$table->string('slug')->nullable();
 
-			$table->integer('image_id')->nullable();
+//			$table->integer('image_id')->nullable();
 			$table->string('class', 50)->nullable();
 //			$table->text('link', 255)->nullable();
 
 			$table->tinyInteger('print_status_id')->default(0);
 //			$table->tinyInteger('is_published')->default(0);
-			$table->tinyInteger('is_featured')->default(0);
+//			$table->tinyInteger('is_featured')->default(0);
 // 			$table->tinyInteger('menu_id')->default(1);
-			$table->tinyInteger('is_timed')->default(0);
+//			$table->tinyInteger('is_timed')->default(0);
 			$table->tinyInteger('is_navigation')->default(0);
 			$table->date('publish_start')->nullable();
 			$table->date('publish_end')->nullable();

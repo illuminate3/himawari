@@ -137,11 +137,11 @@ class ContentRepository extends BaseRepository {
 			$class = $input['class'];
 		}
 
-		if ( !isset($input['is_featured']) ) {
-			$is_featured = 0;
-		} else {
-			$is_featured = $input['is_featured'];
-		}
+// 		if ( !isset($input['is_featured']) ) {
+// 			$is_featured = 0;
+// 		} else {
+// 			$is_featured = $input['is_featured'];
+// 		}
 
 		if ( !isset($input['is_published']) ) {
 			$is_published = 0;
@@ -155,11 +155,11 @@ class ContentRepository extends BaseRepository {
 			$is_navigation = $input['is_navigation'];
 		}
 
-		if ( !isset($input['is_timed']) ) {
-			$is_timed = 0;
-		} else {
-			$is_timed = $input['is_timed'];
-		}
+// 		if ( !isset($input['is_timed']) ) {
+// 			$is_timed = 0;
+// 		} else {
+// 			$is_timed = $input['is_timed'];
+// 		}
 
 		if ( $input['publish_end'] == '' ) {
 			$publish_end = null;
@@ -190,8 +190,8 @@ class ContentRepository extends BaseRepository {
 //			'is_online'			=> $is_online,
 //			'is_featured'		=> $input['is_featured'],
 			'is_published'		=> $is_published,
-			'is_featured'		=> $is_featured,
-			'is_timed'			=> $is_timed,
+//			'is_featured'		=> $is_featured,
+//			'is_timed'			=> $is_timed,
 			'is_navigation'		=> $is_navigation,
 //			'link'				=> $input['link'],
 //			'class'				=> $input['class'],
@@ -285,11 +285,11 @@ class ContentRepository extends BaseRepository {
 			$class = $input['class'];
 		}
 
-		if ( !isset($input['is_featured']) ) {
-			$is_featured = 0;
-		} else {
-			$is_featured = $input['is_featured'];
-		}
+// 		if ( !isset($input['is_featured']) ) {
+// 			$is_featured = 0;
+// 		} else {
+// 			$is_featured = $input['is_featured'];
+// 		}
 
 		if ( !isset($input['is_published']) ) {
 			$is_published = 0;
@@ -297,11 +297,11 @@ class ContentRepository extends BaseRepository {
 			$is_published = $input['is_published'];
 		}
 
-		if ( !isset($input['is_timed']) ) {
-			$is_timed = 0;
-		} else {
-			$is_timed = $input['is_timed'];
-		}
+// 		if ( !isset($input['is_timed']) ) {
+// 			$is_timed = 0;
+// 		} else {
+// 			$is_timed = $input['is_timed'];
+// 		}
 
 		if ( !isset($input['is_navigation']) ) {
 			$is_navigation = 0;
@@ -339,8 +339,8 @@ class ContentRepository extends BaseRepository {
 //			'is_online'			=> $is_online,
 //			'is_featured'		=> $input['is_featured'],
 			'is_published'		=> $is_published,
-			'is_featured'		=> $is_featured,
-			'is_timed'			=> $is_timed,
+//			'is_featured'		=> $is_featured,
+//			'is_timed'			=> $is_timed,
 			'is_navigation'		=> $is_navigation,
 //			'link'				=> $input['link'],
 //			'class'				=> $input['class'],
@@ -459,6 +459,15 @@ class ContentRepository extends BaseRepository {
 
 		return $id;
 	}
+
+	public function getSiteName($site_id)
+	{
+		$site_name = DB::table('sites')
+			->where('id', '=', $site_id)
+			->pluck('name');
+		return $site_name;
+	}
+
 
 //	public function getParents($exceptId, $locale)
 	public function getParents($locale_id, $id)

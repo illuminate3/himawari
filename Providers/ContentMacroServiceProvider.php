@@ -4,6 +4,7 @@ namespace App\Modules\Himawari\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Auth;
 use Html;
 use Lang;
 
@@ -85,11 +86,15 @@ class ContentMacroServiceProvider extends ServiceProvider
 				$html .= '<td>' . $node->present()->print_status($node->print_status_id) . '</td>';
 
 				$html .= '<td>';
-				$html .= '
-					<a href="/admin/contents/' . $node['id'] . '/edit" class="btn btn-success" title="' . trans("kotoba::button.edit") . '">
-						<i class="fa fa-pencil fa-fw"></i>' . trans("kotoba::button.edit") . '
-					</a>
-						';
+					if ( (Auth::user()->id == $node['user_id']) || (Auth::user()->is('super_admin')) ) {
+						$html .= '
+							<a href="/admin/contents/' . $node['id'] . '/edit" class="btn btn-success" title="' . trans("kotoba::button.edit") . '">
+								<i class="fa fa-pencil fa-fw"></i>' . trans("kotoba::button.edit") . '
+							</a>
+							';
+					} else {
+						$html .= '';
+					}
 				 $html .= '</td>';
 
 				$html .= '</tr>';

@@ -61,6 +61,7 @@ class ContentsController extends HimawariController {
 		$locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
+/*
 		$contents = $this->content_repo->all();
 //		$contents = Content::getNestedList('title', 'id', '>> ');
 //dd($contents);
@@ -68,12 +69,38 @@ class ContentsController extends HimawariController {
 		$list = Content::all();
 		$list = $list->toHierarchy();
 //dd($list);
+*/
+
+// Archived
+		$archives = Content::IsArchived()->get();
+		$archive_list = $archives->toHierarchy();
+//dd($archives);
+
+// Draft
+		$drafts = Content::IsDraft()->get();
+		$draft_list = $drafts->toHierarchy();
+//dd($drafts);
+
+// Published
+		$published = Content::InPrint()->get();
+		$publish_list = $published->toHierarchy();
+//dd($published);
+
+		$cache_site_id = Cache::get('siteId');
+		$site_name = $this->content_repo->getSiteName($cache_site_id);
+
 
 
 		return Theme::View('modules.himawari.contents.index',
 			compact(
-				'contents',
-				'list',
+// 				'contents',
+// 				'list',
+				'archives',
+				'archive_list',
+				'drafts',
+				'draft_list',
+				'published',
+				'publish_list',
 				'lang',
 				'locale_id'
 			));

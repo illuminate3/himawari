@@ -72,19 +72,19 @@ class Himawari extends Presenter {
 	 *
 	 * @return string
 	 */
-	public function featured()
-	{
-//dd('loaded');
-		$return = '';
-
-		$featured = $this->entity->is_featured;
-//dd($featured);
-		if ( $featured == 1 ) {
-			$return = "checked";
-		}
-
-		return $return;
-	}
+// 	public function featured()
+// 	{
+// //dd('loaded');
+// 		$return = '';
+//
+// 		$featured = $this->entity->is_featured;
+// //dd($featured);
+// 		if ( $featured == 1 ) {
+// 			$return = "checked";
+// 		}
+//
+// 		return $return;
+// 	}
 
 
 	/**
@@ -92,18 +92,18 @@ class Himawari extends Presenter {
 	 *
 	 * @return string
 	 */
-	public function timed()
-	{
-//dd('loaded');
-		$return = '';
-
-		$timed = $this->entity->is_timed;
-//dd($timed);
-		if ( $timed == 1 ) {
-			$return = "checked";
-		}
-
-		return $return;
-	}
+// 	public function timed()
+// 	{
+// //dd('loaded');
+// 		$return = '';
+//
+// 		$timed = $this->entity->is_timed;
+// //dd($timed);
+// 		if ( $timed == 1 ) {
+// 			$return = "checked";
+// 		}
+//
+// 		return $return;
+// 	}
 
 }

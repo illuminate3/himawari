@@ -39,9 +39,9 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 // DEFINE Fillable -------------------------------------------------------
 	protected $fillable = [
- 		'image_id',
-		'is_featured',
-		'is_timed',
+// 		'image_id',
+//		'is_featured',
+//		'is_timed',
 		'is_navigation',
 		'order',
 		'publish_start',
@@ -227,32 +227,40 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 // scopes
 
 
+	public function scopeIsDraft($query)
+	{
+		return $query->where('print_status_id', '=', 1);
+	}
+
 	public function scopeInPrint($query)
 	{
-//dd($query);
 		return $query->where('print_status_id', '=', 2);
-// 			->where('print_status_id', '<', 5, 'OR');
 	}
 
-	public function scopeIsFeatured($query)
+	public function scopeIsArchived($query)
 	{
-		return $query->where('is_featured', '=', 1);
+		return $query->where('print_status_id', '=', 4);
 	}
 
-	public function scopeIsTimed($query)
-	{
-		return $query->where('is_timed', '=', 1);
-	}
-
-	public function scopeNotFeatured($query)
-	{
-		return $query->where('is_featured', '=', 0);
-	}
-
-	public function scopeNotTimed($query)
-	{
-		return $query->where('is_timed', '=', 0);
-	}
+// 	public function scopeIsFeatured($query)
+// 	{
+// 		return $query->where('is_featured', '=', 1);
+// 	}
+//
+// 	public function scopeIsTimed($query)
+// 	{
+// 		return $query->where('is_timed', '=', 1);
+// 	}
+//
+// 	public function scopeNotFeatured($query)
+// 	{
+// 		return $query->where('is_featured', '=', 0);
+// 	}
+//
+// 	public function scopeNotTimed($query)
+// 	{
+// 		return $query->where('is_timed', '=', 0);
+// 	}
 
 	public function scopePublishEnd($query)
 	{

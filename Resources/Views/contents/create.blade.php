@@ -324,6 +324,7 @@ function setImage(select){
 		</div>
 	</div>
 
+{{--
 	<div class="form-group">
 		<label for="is_featured" class="col-sm-3 control-label">{{ trans('kotoba::cms.is_featured') }}</label>
 		<div class="col-sm-9">
@@ -345,7 +346,7 @@ function setImage(select){
 			</div>
 		</div>
 	</div>
-
+--}}
 </div>
 </div><!-- ./ col-6 -->
 </div><!-- ./ row -->
