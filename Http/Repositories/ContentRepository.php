@@ -82,13 +82,21 @@ class ContentRepository extends BaseRepository {
 
 		$get_documents = $this->getDocuments();
 
+		$get_sites = $this->getSites();
+		$allSites = $this->getListSites();
+
 		$user_id = Auth::user()->id;
+
+		$default_publish_status = Config::get('himawri.default_publish_status', '1');
 
 
 		return compact(
+			'default_publish_status',
 			'pagelist',
 			'get_documents',
 			'get_images',
+			'get_sites',
+			'allSites',
 			'print_statuses',
 			'users',
 			'user_id',
@@ -155,11 +163,11 @@ class ContentRepository extends BaseRepository {
 			$is_navigation = $input['is_navigation'];
 		}
 
-// 		if ( !isset($input['is_timed']) ) {
-// 			$is_timed = 0;
-// 		} else {
-// 			$is_timed = $input['is_timed'];
-// 		}
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+		} else {
+			$is_timed = $input['is_timed'];
+		}
 
 		if ( $input['publish_end'] == '' ) {
 			$publish_end = null;
@@ -191,7 +199,7 @@ class ContentRepository extends BaseRepository {
 //			'is_featured'		=> $input['is_featured'],
 			'is_published'		=> $is_published,
 //			'is_featured'		=> $is_featured,
-//			'is_timed'			=> $is_timed,
+			'is_timed'			=> $is_timed,
 			'is_navigation'		=> $is_navigation,
 //			'link'				=> $input['link'],
 //			'class'				=> $input['class'],
@@ -297,11 +305,11 @@ class ContentRepository extends BaseRepository {
 			$is_published = $input['is_published'];
 		}
 
-// 		if ( !isset($input['is_timed']) ) {
-// 			$is_timed = 0;
-// 		} else {
-// 			$is_timed = $input['is_timed'];
-// 		}
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+		} else {
+			$is_timed = $input['is_timed'];
+		}
 
 		if ( !isset($input['is_navigation']) ) {
 			$is_navigation = 0;
@@ -340,7 +348,7 @@ class ContentRepository extends BaseRepository {
 //			'is_featured'		=> $input['is_featured'],
 			'is_published'		=> $is_published,
 //			'is_featured'		=> $is_featured,
-//			'is_timed'			=> $is_timed,
+			'is_timed'			=> $is_timed,
 			'is_navigation'		=> $is_navigation,
 //			'link'				=> $input['link'],
 //			'class'				=> $input['class'],
@@ -398,8 +406,8 @@ class ContentRepository extends BaseRepository {
 	public function attachDocument($id, $document_id)
 	{
 //dd($id);
-		$news = $this->model->find($id);
-		$news->documents()->attach($document_id);
+		$content = $this->model->find($id);
+		$content->documents()->attach($document_id);
 	}
 
 	public function detachDocument($id, $document_id)
@@ -412,8 +420,8 @@ class ContentRepository extends BaseRepository {
 	public function attachImage($id, $image_id)
 	{
 //dd($image_id);
-		$news = $this->model->find($id);
-		$news->images()->attach($image_id);
+		$content = $this->model->find($id);
+		$content->images()->attach($image_id);
 	}
 
 	public function detachImage($id, $image_id)
@@ -653,5 +661,18 @@ dd($content);
 //
 // 		return $count ? "{$slug}-{$count}" : $slug;
 // 	}
+
+	public function getSites()
+	{
+		$sites = DB::table('sites')->get();
+		return $sites;
+	}
+
+	public function getListSites()
+	{
+		$sites = DB::table('sites')->lists('name', 'id');
+		return $sites;
+	}
+
 
 }

@@ -41,7 +41,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 	protected $fillable = [
 // 		'image_id',
 //		'is_featured',
-//		'is_timed',
+		'is_timed',
 		'is_navigation',
 		'order',
 		'publish_start',
@@ -112,6 +112,11 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 	public function images()
 	{
 		return $this->belongsToMany('App\Modules\Filex\Http\Models\Image', 'content_image');
+	}
+
+	public function sites()
+	{
+		return $this->belongsToMany('App\Modules\Campus\Http\Models\Site', 'content_site');
 	}
 
 
@@ -246,21 +251,21 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 // 	{
 // 		return $query->where('is_featured', '=', 1);
 // 	}
-//
-// 	public function scopeIsTimed($query)
-// 	{
-// 		return $query->where('is_timed', '=', 1);
-// 	}
-//
+
+	public function scopeIsTimed($query)
+	{
+		return $query->where('is_timed', '=', 1);
+	}
+
 // 	public function scopeNotFeatured($query)
 // 	{
 // 		return $query->where('is_featured', '=', 0);
 // 	}
-//
-// 	public function scopeNotTimed($query)
-// 	{
-// 		return $query->where('is_timed', '=', 0);
-// 	}
+
+	public function scopeNotTimed($query)
+	{
+		return $query->where('is_timed', '=', 0);
+	}
 
 	public function scopePublishEnd($query)
 	{

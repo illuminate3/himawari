@@ -184,8 +184,13 @@ class ContentsController extends HimawariController {
 
 		$get_images = $this->content_repo->getImages();
 //dd($images);
-
 		$get_documents = $this->content_repo->getDocuments();
+
+		$sites = $content->sites->lists('name', 'id');
+		$allSites = $this->content_repo->getListSites();
+
+
+		$default_publish_status = Config::get('himawari.default_publish_status', '1');
 
 //		$user_id = Auth::user()->id;
 
@@ -199,11 +204,14 @@ class ContentsController extends HimawariController {
 
 		return Theme::View('modules.himawari.contents.edit',
 			compact(
+				'default_publish_status',
 				'content',
 				'get_documents',
 				'get_images',
 				'lang',
 //				'locales',
+				'sites',
+				'allSites',
 				'pagelist',
 				'print_statuses',
 				'users',

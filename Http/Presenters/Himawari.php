@@ -58,7 +58,7 @@ class Himawari extends Presenter {
 		$return = '';
 
 		$navigation = $this->entity->is_navigation;
-//dd($featured);
+//dd($navigation);
 		if ( $navigation == 1 ) {
 			$return = "checked";
 		}
@@ -92,18 +92,18 @@ class Himawari extends Presenter {
 	 *
 	 * @return string
 	 */
-// 	public function timed()
-// 	{
-// //dd('loaded');
-// 		$return = '';
-//
-// 		$timed = $this->entity->is_timed;
-// //dd($timed);
-// 		if ( $timed == 1 ) {
-// 			$return = "checked";
-// 		}
-//
-// 		return $return;
-// 	}
+	public function timed()
+	{
+//dd('loaded');
+		$return = '';
+
+		$timed = $this->entity->is_timed;
+//dd($timed);
+		if ( $timed == 1 ) {
+			$return = "checked";
+		}
+
+		return $return;
+	}
 
 }
