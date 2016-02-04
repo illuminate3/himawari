@@ -286,9 +286,13 @@ function setImage(select){
 	<hr>
 
 	<select multiple id="file_select" name="document_id[]" class="form-control chosen-multi" data-placeholder="{{ trans('kotoba::general.command.select') . '&nbsp;' . Lang::choice('kotoba::files.file', 2) }}">
-		@foreach($get_documents as $document)
-			<option value="{{ $document->id }}">{{ $document->document_file_name }}</option>
-		@endforeach
+	@foreach ($allDocuments as $key => $value)
+		@if (isset($documents[$key]) )
+			<option value='{{ $key }}' selected>{{ $value }}</option>
+		@else
+			<option value='{{ $key }}'>{{ $value }}</option>
+		@endif
+	@endforeach
 	</select>
 
 

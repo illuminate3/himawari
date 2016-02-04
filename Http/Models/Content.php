@@ -8,6 +8,8 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
 use Laracasts\Presenter\PresentableTrait;
+//use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
+use App\Modules\Core\Http\Traits\TenantableTrait;
 
 use Vinkla\Translator\Translatable;
 use Vinkla\Translator\Contracts\Translatable as TranslatableContract;
@@ -21,6 +23,8 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 	use PresentableTrait;
 	use SluggableTrait;
+//	use TenantScopedModelTrait;
+	use TenantableTrait;
 	use Translatable;
 
 	protected $table = 'contents';
@@ -39,8 +43,6 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 // DEFINE Fillable -------------------------------------------------------
 	protected $fillable = [
-// 		'image_id',
-//		'is_featured',
 		'is_timed',
 		'is_navigation',
 		'order',

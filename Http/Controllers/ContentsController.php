@@ -17,6 +17,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 
 use Cache;
+use Config;
 use Flash;
 use Lang;
 use Route;
@@ -185,6 +186,8 @@ class ContentsController extends HimawariController {
 		$get_images = $this->content_repo->getImages();
 //dd($images);
 		$get_documents = $this->content_repo->getDocuments();
+		$documents = $content->documents->lists('document_file_name', 'id');
+		$allDocuments = $this->content_repo->getListDocuments();
 
 		$sites = $content->sites->lists('name', 'id');
 		$allSites = $this->content_repo->getListSites();
@@ -206,6 +209,8 @@ class ContentsController extends HimawariController {
 			compact(
 				'default_publish_status',
 				'content',
+				'documents',
+				'allDocuments',
 				'get_documents',
 				'get_images',
 				'lang',

@@ -145,11 +145,11 @@ class ContentRepository extends BaseRepository {
 			$class = $input['class'];
 		}
 
-// 		if ( !isset($input['is_featured']) ) {
-// 			$is_featured = 0;
-// 		} else {
-// 			$is_featured = $input['is_featured'];
-// 		}
+		if ( !isset($input['order']) ) {
+			$order = 1;
+		} else {
+			$order = $input['order'];
+		}
 
 		if ( !isset($input['is_published']) ) {
 			$is_published = 0;
@@ -181,39 +181,28 @@ class ContentRepository extends BaseRepository {
 			$publish_start = $input['publish_start'];
 		}
 
-		if ( ($input['print_status_id'] == 3 || $input['print_status_id'] == 4) ) {
-			$is_published = 1;
+		if ( Auth::user()->is('super_admin') ) {
+			$print_status_id = $input['print_status_id'];
+		} else {
+			$print_status_id = Config::get('himwarai.default_publish_status', '2');
 		}
 
 		$lang = Session::get('locale');
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
-//dd($locale_id);
-//		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
+
 		$slug = Str::slug($input['title_'.$app_locale_id]);
 
 		$values = [
-//			'name'			=> $input['name'],
-//			'is_current'		=> 1,
-//			'is_online'			=> $input['is_online'],
-//			'is_online'			=> $is_online,
-//			'is_featured'		=> $input['is_featured'],
 			'is_published'		=> $is_published,
-//			'is_featured'		=> $is_featured,
 			'is_timed'			=> $is_timed,
 			'is_navigation'		=> $is_navigation,
-//			'link'				=> $input['link'],
-//			'class'				=> $input['class'],
 			'class'				=> $class,
-			'order'				=> $input['order'],
-			'print_status_id'	=> $input['print_status_id'],
-//			'publish_end'		=> $input['publish_end'],
-//			'publish_start'		=> $input['publish_start'],
+			'order'				=> $order,
+			'print_status_id'	=> $print_status_id,
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
-//			'slug'				=> $input['title_1'],
-			'slug'				=> Str::slug($input['title_'.$app_locale_id]),
-//			'user_id'			=> 1
-			'user_id'			=>  $input['user_id']
+			'slug'				=> $slug,
+			'user_id'			=> $input['user_id']
 		];
 //dd($values);
 
@@ -223,7 +212,6 @@ class ContentRepository extends BaseRepository {
 		$last_insert_id = $this->getContentIDbySlug($slug);
 //dd($last_insert_id);
 
-//		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
@@ -236,11 +224,6 @@ class ContentRepository extends BaseRepository {
 				'content'		=> $input['content_'.$properties->id],
 				'summary'		=> $input['summary_'.$properties->id],
 				'title'			=> $input['title_'.$properties->id],
-
-//				'slug'			=> $input['slug_'.$properties->id],
-//				'slug'			=> Str::slug($input['title_'.$properties->id]),
-//				'slug'			=> Str::slug($input['title_'.$properties->id]),
-
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
@@ -254,11 +237,23 @@ class ContentRepository extends BaseRepository {
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
 
 
-		$document_id = Input::get('document_id');
-		if ( $document_id != null ) {
-			$this->attachDocument($last_insert_id, $document_id);
-		}
+// TODO fix mulitple select documents
+// 		$document_id = Input::get('document_id');
+// 		if ( $document_id != null ) {
+// 			$this->attachDocument($last_insert_id, $document_id);
+// 		}
 //dd($document_id);
+		$content = $this->content->find($last_insert_id);
+		if ( isset($input['document_id']) ) {
+			$content->documents()->sync($input['document_id']);
+		} else {
+			$content->documents()->detach();
+		}
+		if ( isset($input['sites_id']) ) {
+			$content->sites()->sync($input['sites_id']);
+		} else {
+			$content->sites()->detach();
+		}
 
 		$image_id = Input::get('image_id');
 		if ( $image_id != null ) {
@@ -293,11 +288,11 @@ class ContentRepository extends BaseRepository {
 			$class = $input['class'];
 		}
 
-// 		if ( !isset($input['is_featured']) ) {
-// 			$is_featured = 0;
-// 		} else {
-// 			$is_featured = $input['is_featured'];
-// 		}
+		if ( !isset($input['order']) ) {
+			$order = 1;
+		} else {
+			$order = $input['order'];
+		}
 
 		if ( !isset($input['is_published']) ) {
 			$is_published = 0;
@@ -329,46 +324,36 @@ class ContentRepository extends BaseRepository {
 			$publish_start = $input['publish_start'];
 		}
 
-		if ( ($input['print_status_id'] == 3 || $input['print_status_id'] == 4) ) {
-			$is_published = 1;
+		if ( Auth::user()->is('super_admin') ) {
+			$print_status_id = $input['print_status_id'];
+		} else {
+			$print_status_id = Config::get('himawari.default_publish_status', '1');
 		}
 
 		$content = Content::find($id);
+//dd($content);
 
 		$lang = Session::get('locale');
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
-//		$app_locale_id = $this->getLocaleID(Config::get('app.locale'));
+
+		$slug = Str::slug($input['title_'.$app_locale_id]);
 
 		$values = [
-//			'name'			=> $input['name'],
-//			'is_current'		=> 1,
-//			'is_online'			=> $input['is_online'],
-//			'is_online'			=> $is_online,
-//			'is_featured'		=> $input['is_featured'],
 			'is_published'		=> $is_published,
-//			'is_featured'		=> $is_featured,
 			'is_timed'			=> $is_timed,
 			'is_navigation'		=> $is_navigation,
-//			'link'				=> $input['link'],
-//			'class'				=> $input['class'],
 			'class'				=> $class,
-			'order'				=> $input['order'],
-			'print_status_id'	=> $input['print_status_id'],
-//			'publish_end'		=> $input['publish_end'],
-//			'publish_start'		=> $input['publish_start'],
+			'order'				=> $order,
+			'print_status_id'	=> $print_status_id,
 			'publish_end'		=> $publish_end,
 			'publish_start'		=> $publish_start,
-//			'slug'				=> $input['title_1'],
-//			'slug'				=> Str::slug($input['title_'.$properties->id]),
-			'slug'				=> Str::slug($input['title_'.$app_locale_id]),
-//			'user_id'			=> 1
-			'user_id'			=>  $input['user_id']
+			'slug'				=> $slug,
+			'user_id'			=> $input['user_id']
 		];
 
 		$content->update($values);
 
-//		$locales = Cache::get('languages');
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
 
@@ -381,9 +366,6 @@ class ContentRepository extends BaseRepository {
 				'content'		=> $input['content_'.$properties->id],
 				'summary'		=> $input['summary_'.$properties->id],
 				'title'			=> $input['title_'.$properties->id],
-
-//				'slug'			=> Str::slug($input['title_'.$properties->id]),
-
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
@@ -396,6 +378,20 @@ class ContentRepository extends BaseRepository {
 		$this->manageBaum($input['parent_id'], $id);
 
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
+
+//dd($input['sites_id']);
+//		$content = $this->content->find($id);
+		if ( isset($input['document_id']) ) {
+			$content->documents()->sync($input['document_id']);
+		} else {
+			$content->documents()->detach();
+		}
+		if ( isset($input['sites_id']) ) {
+			$content->sites()->sync($input['sites_id']);
+		} else {
+			$content->sites()->detach();
+		}
+
 		return;
 	}
 
@@ -672,6 +668,12 @@ dd($content);
 	{
 		$sites = DB::table('sites')->lists('name', 'id');
 		return $sites;
+	}
+
+	public function getListDocuments()
+	{
+		$documents = DB::table('documents')->lists('document_file_name', 'id');
+		return $documents;
 	}
 
 
