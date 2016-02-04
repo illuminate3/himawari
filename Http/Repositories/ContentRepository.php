@@ -243,7 +243,7 @@ class ContentRepository extends BaseRepository {
 // 			$this->attachDocument($last_insert_id, $document_id);
 // 		}
 //dd($document_id);
-		$content = $this->content->find($last_insert_id);
+//		$content = $this->content->find($last_insert_id);
 		if ( isset($input['document_id']) ) {
 			$content->documents()->sync($input['document_id']);
 		} else {

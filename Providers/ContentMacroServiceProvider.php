@@ -93,7 +93,11 @@ class ContentMacroServiceProvider extends ServiceProvider
 							</a>
 							';
 					} else {
-						$html .= '';
+						$html .= '
+							<a href="' . $node['slug'] . '" class="btn btn-primary" title="' . trans("kotoba::button.view") . '">
+								<i class="fa fa-search fa-fw"></i>' . trans("kotoba::button.view") . '
+							</a>
+							';
 					}
 				 $html .= '</td>';
 
