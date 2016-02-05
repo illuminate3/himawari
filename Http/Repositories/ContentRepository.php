@@ -529,7 +529,7 @@ class ContentRepository extends BaseRepository {
 
 	public function getContent($page_ID)
 	{
-//dd($page_ID);
+dd($page_ID);
  		$content = Content::find($page_ID);
 /*
 		$page = DB::table('contents')

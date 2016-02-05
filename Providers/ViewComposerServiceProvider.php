@@ -28,6 +28,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 		$total_contents = $this->getAllContents();
 		$content_drafts = $this->getContentDrafts();
 
+
 		View::share('total_contents', $total_contents);
 		View::share('content_drafts', $content_drafts);
 
