@@ -90,6 +90,7 @@ class FrontendController extends HimawariController {
 //			return View::make('frontends.page', ['page' => $this->currentPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 
 			$page = $this->currentPage;
+			$this->setSeo($page);
 /*
     0 => "meta_description"
     1 => "meta_keywords"

@@ -375,7 +375,7 @@ function setImage(select){
 <div class="col-sm-6">
 <div class="padding">
 
-	@if (Auth::user()->can('super_admin'))
+	@if (Auth::user()->is('super_admin'))
 		<div class="form-group">
 			{!! Form::label('print_status_id', Lang::choice('kotoba::general.status', 1), ['class' => 'control-label']) !!}
 			{!!
