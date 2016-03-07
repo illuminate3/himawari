@@ -28,8 +28,12 @@ $(document).ready(function() {
 	$('#table-publish').DataTable({
 		'pageLength': 25
 		});
-	$('#table-draft').DataTable( {} );
-	$('#table-archive').DataTable( {} );
+	$('#table-draft').DataTable( {
+		'pageLength': 25
+		});
+	$('#table-archive').DataTable( {
+		'pageLength': 25
+		});
 
 });
 @stop
