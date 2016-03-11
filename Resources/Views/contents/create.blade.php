@@ -328,14 +328,14 @@ function setImage(select){
 			</div>
 		</div>
 
-		<div class="form-group {{ $errors->first('class') ? 'has-error' : '' }}">
-			{!! Form::label('class', trans('kotoba::cms.class'), $errors->first('class'), ['class' => 'control-label']) !!}
-			{!! Form::text('class', Input::old('class'), ['id' => 'class', 'class' => 'form-control', 'placeholder' => trans('kotoba::cms.class')]) !!}
-		</div>
-
 		<div class="form-group {{ $errors->first('order') ? 'has-error' : '' }}">
 			{!! Form::label('order', trans('kotoba::cms.position'), $errors->first('order'), ['class' => 'control-label']) !!}
 			{!! Form::text('order', Input::old('order'), ['id' => 'order', 'class' => 'form-control']) !!}
+		</div>
+
+		<div class="form-group {{ $errors->first('class') ? 'has-error' : '' }}">
+			{!! Form::label('class', trans('kotoba::cms.class'), $errors->first('class'), ['class' => 'control-label']) !!}
+			{!! Form::text('class', Input::old('class'), ['id' => 'class', 'class' => 'form-control', 'placeholder' => trans('kotoba::cms.class')]) !!}
 		</div>
 
 	</div>

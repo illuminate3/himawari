@@ -300,16 +300,17 @@ class ContentRepository extends BaseRepository {
 			$is_published = $input['is_published'];
 		}
 
-		if ( !isset($input['is_timed']) ) {
-			$is_timed = 0;
-		} else {
-			$is_timed = $input['is_timed'];
-		}
-
 		if ( !isset($input['is_navigation']) ) {
 			$is_navigation = 0;
 		} else {
 			$is_navigation = $input['is_navigation'];
+		}
+
+/*
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+		} else {
+			$is_timed = $input['is_timed'];
 		}
 
 		if ( $input['publish_end'] == '' ) {
@@ -321,6 +322,16 @@ class ContentRepository extends BaseRepository {
 		if ( $input['publish_start'] == '' ) {
 			$publish_start = null;
 		} else {
+			$publish_start = $input['publish_start'];
+		}
+*/
+		if ( !isset($input['is_timed']) ) {
+			$is_timed = 0;
+			$publish_end = null;
+			$publish_start = null;
+		} else {
+			$is_timed = $input['is_timed'];
+			$publish_end = $input['publish_end'];
 			$publish_start = $input['publish_start'];
 		}
 

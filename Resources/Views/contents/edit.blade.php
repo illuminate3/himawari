@@ -418,7 +418,7 @@ function setImage(select){
 			{!! Form::text('order', $content->order, ['id' => 'order', 'class' => 'form-control']) !!}
 		</div>
 
-		<div class="form-group {{ $errors->first('link') ? 'has-error' : '' }}">
+		<div class="form-group {{ $errors->first('class') ? 'has-error' : '' }}">
 			{!! Form::label('class', trans('kotoba::cms.class'), $errors->first('link'), ['class' => 'control-label']) !!}
 			{!! Form::text('class', Input::old('class'), ['id' => 'class', 'class' => 'form-control', 'placeholder' => trans('kotoba::cms.class')]) !!}
 		</div>
