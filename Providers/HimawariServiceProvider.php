@@ -85,6 +85,10 @@ class HimawariServiceProvider extends ServiceProvider
 		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');
 
+// Register Middleware
+		$kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
+		$kernel->pushMiddleware('App\Modules\Himawari\Http\Middleware\MenuHimawariMiddleware');
+
 	}
 
 
