@@ -118,7 +118,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 
 	public function sites()
 	{
-		return $this->belongsToMany('App\Modules\Campus\Http\Models\Site', 'content_site');
+		return $this->belongsToMany('App\Modules\Core\Http\Models\Site', 'content_site');
 	}
 
 
