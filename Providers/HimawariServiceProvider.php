@@ -88,6 +88,7 @@ class HimawariServiceProvider extends ServiceProvider
 // Register Middleware
 		$kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
 		$kernel->pushMiddleware('App\Modules\Himawari\Http\Middleware\MenuHimawariMiddleware');
+		$kernel->pushMiddleware('App\Modules\Menus\Http\Middleware\MenuMiddleware');
 
 	}
 
