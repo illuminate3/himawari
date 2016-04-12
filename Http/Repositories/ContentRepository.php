@@ -190,7 +190,8 @@ class ContentRepository extends BaseRepository {
 		$lang = Session::get('locale');
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 
-		$slug = Str::slug($input['title_'.$app_locale_id]);
+//		$slug = Str::slug($input['title_'.$app_locale_id]);
+		$slug = Str::slug($input['slug_'.$app_locale_id]);
 
 		$values = [
 			'is_published'		=> $is_published,
@@ -348,7 +349,8 @@ class ContentRepository extends BaseRepository {
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 //dd($locale_id);
 
-		$slug = Str::slug($input['title_'.$app_locale_id]);
+//		$slug = Str::slug($input['title_'.$app_locale_id]);
+		$slug = Str::slug($input['slug_'.$app_locale_id]);
 
 		$values = [
 			'is_published'		=> $is_published,

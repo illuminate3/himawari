@@ -64,7 +64,8 @@ class ContentMacroServiceProvider extends ServiceProvider
 
 			$title = $node->translate($lang)->title;
 			if ($node['depth'] > 0) {
-				$title = str_repeat('>', $node['depth']) . ' ' . $title;
+//				$title = str_repeat('>', $node['depth']) . ' ' . $title;
+				$title = str_repeat('&nldr;', $node['depth']) . ' ' . $node['parent']['title'] . ' > ' . $title;
 			}
 
 			if( empty($node['children']) ) {
@@ -75,7 +76,9 @@ class ContentMacroServiceProvider extends ServiceProvider
 
 				$html = '<tr>';
 
-				$html .= '<td><a href="' . url($node['slug']) . '">' . $title . '</a></td>';
+//				$html .= '<td><a href="' . url($node['slug']) . '">' . $title . '</a></td>';
+				$html .= '<td><a href="' . url('/admin/contents/' . $node['id']) . '">' . $title . '</a></td>';
+
 
 				$html .= '<td>' . $node->translate($lang)->summary . '</td>';
 

@@ -101,6 +101,12 @@ function setImage(select){
 				<label for="title">{{ trans('kotoba::general.title') }}</label>
 				<input type="text" class="form-control" name="{{ 'title_'. $language->id }}" id="{{ 'title_'. $language->id }}" placeholder="{{ trans('kotoba::general.title') }}">
 			</div>
+
+			<div class="form-group">
+				<label for="slug">{{ trans('kotoba::general.slug') }}</label>
+				<input type="text" class="form-control" name="{{ 'slug_'. $language->id }}" id="{{ 'slug_'. $language->id }}" placeholder="{{ trans('kotoba::general.slug') }}">
+			</div>
+
 			<div class="form-group">
 				<label for="content">{{ trans('kotoba::cms.content') }}</label>
 				<textarea class="form-control summernote" name="{{ 'content_'. $language->id }}" id="{{ 'content_'. $language->id }}" placeholder="{{ trans('kotoba::cms.content') }}"></textarea>
