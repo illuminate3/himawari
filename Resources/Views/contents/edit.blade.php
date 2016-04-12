@@ -3,7 +3,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ Lang::choice('kotoba::general.content', 2) }} :: @parent
+{{ trans('kotoba::cms.content') }} :: @parent
 @stop
 
 @section('styles')
