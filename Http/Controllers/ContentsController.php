@@ -178,8 +178,12 @@ class ContentsController extends HimawariController {
 		$pagelist = $pagelist->merge($all_pagelist);
 
 		$users = $this->content_repo->getUsers();
-		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+		$user_select = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) );
+		$user_select = new Collection($user_select);
+		$users = $user_select->merge($users);
 //dd($users);
+
 		$print_statuses = $this->content_repo->getPrintStatuses($locale_id);
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
 
