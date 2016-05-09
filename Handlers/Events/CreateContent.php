@@ -89,7 +89,7 @@ class CreateContent {
 		foreach ($recipients as $recipient )
 		{
 
-			if ( ($recipient->user_id != Config::get('himawari.mailer.editor_one')) || ($recipient->user_id != Config::get('himawari.mailer.editor_two')) ) {
+			if ( ($recipient->id != Config::get('himawari.editor_one')) || ($recipient->id != Config::get('himawari.editor_two')) ) {
 				$data = array(
 					'content_id'		=> $content->id,
 					'from_email'		=> $from_email,
