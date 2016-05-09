@@ -15,7 +15,7 @@ use App\Modules\Yubin\Http\Repositories\MailCannedRepository;
 use App\Modules\Yubin\Http\Models\MailGroup;
 use App\Modules\Yubin\Http\Repositories\MailGroupRepository;
 
-use App\Modules\Yubin\Library\YubinMailer;
+use App\Modules\Yubin\Http\Library\YubinMailer;
 
 use Config;
 use Mail;
