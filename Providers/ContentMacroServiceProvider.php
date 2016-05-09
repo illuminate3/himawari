@@ -82,7 +82,8 @@ class ContentMacroServiceProvider extends ServiceProvider
 
 				$html .= '<td>' . $node->translate($lang)->summary . '</td>';
 
-				$html .= '<td>' . $node['slug'] . '</td>';
+//				$html .= '<td>' . $node['slug'] . '</td>';
+				$html .= '<td>' . $node->translate($lang)->slug . '</td>';
 
 				$html .= '<td>' . $node['order'] . '</td>';
 

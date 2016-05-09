@@ -7,18 +7,18 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 use App\Providers\EventServiceProvider;
 
-use App\Modules\Jinji\Events\EmployeeWasCreated;
-use App\Modules\Jinji\Handlers\Events\CreateEmployee;
-use App\Modules\Jinji\Events\EmployeeWasDeleted;
-use App\Modules\Jinji\Handlers\Events\DeleteEmployee;
+use App\Modules\Himawari\Events\ContentWasCreated;
+use App\Modules\Himawari\Handlers\Events\CreateContent;
+use App\Modules\Himawari\Events\ContentWasUpdated;
+use App\Modules\Himawari\Handlers\Events\UpdateContent;
 
-use App\Modules\Kagi\Http\Models\User;
+use App\Modules\Himawari\Http\Models\Content;
 
 use App;
 use Event;
 
 
-class JinjiEventServiceProvider extends EventServiceProvider {
+class HimawariEventServiceProvider extends EventServiceProvider {
 
 
 	/**
@@ -28,12 +28,12 @@ class JinjiEventServiceProvider extends EventServiceProvider {
 	 */
 	protected $listen = [
 
-		EmployeeWasCreated::class => [
-			CreateEmployee::class,
+		ContentWasCreated::class => [
+			CreateContent::class,
 		],
 
-		EmployeeWasDeleted::class => [
-			DeleteEmployee::class,
+		ContentWasUpdated::class => [
+			UpdateContent::class,
 		],
 
 	];
@@ -49,15 +49,13 @@ class JinjiEventServiceProvider extends EventServiceProvider {
 	{
 		parent::boot($events);
 
-		User::created(function ($user) {
-//dd($user);
-			\Event::fire(new EmployeeWasCreated($user));
-		});
-
-		User::deleted(function ($user) {
-//dd($user);
-			\Event::fire(new EmployeeWasDeleted($user));
-		});
+// 		Content::created(function ($content) {
+// 			\Event::fire(new ContentWasCreated($content));
+// 		});
+//
+// 		Content::saved(function ($content) {
+// 			\Event::fire(new ContentWasUpdated($content));
+// 		});
 
 	}
 
@@ -66,10 +64,10 @@ class JinjiEventServiceProvider extends EventServiceProvider {
 	{
 
 		$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-		$loader->alias('EmployeeWasCreated', 'App\Modules\Jinji\Events\EmployeeWasCreated');
+		$loader->alias('ContentWasCreated', 'App\Modules\Himawari\Events\ContentWasCreated');
 
 		$loader = \Illuminate\Foundation\AliasLoader::getInstance();
-		$loader->alias('EmployeeWasDeleted', 'App\Modules\Jinji\Events\EmployeeWasDeleted');
+		$loader->alias('ContentWasUpdated', 'App\Modules\Himawari\Events\ContentWasUpdated');
 
 	}
 

@@ -4,8 +4,8 @@ namespace App\Modules\Himawari\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+// use Cviebrock\EloquentSluggable\SluggableInterface;
+// use Cviebrock\EloquentSluggable\SluggableTrait;
 
 use Laracasts\Presenter\PresentableTrait;
 //use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
@@ -18,11 +18,12 @@ use Baum\Node;
 use Cache;
 use DB;
 
-class Content extends Node implements TranslatableContract, SluggableInterface {
+//class Content extends Node implements TranslatableContract, SluggableInterface {
+class Content extends Node implements TranslatableContract {
 
 
 	use PresentableTrait;
-	use SluggableTrait;
+//	use SluggableTrait;
 //	use TenantScopedModelTrait;
 	use TenantableTrait;
 	use Translatable;
@@ -49,7 +50,6 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		'publish_start',
 		'publish_end',
 		'print_status_id',
-		'slug',
 		'user_id',
 		// Translatable columns
 		'meta_description',
@@ -57,15 +57,16 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		'meta_title',
 		'class',
 		'content',
+		'slug',
 		'summary',
 		'title'
 		];
 
 // Sluggable Item -------------------------------------------------------
-	protected $sluggable = [
-		'build_from' => 'title',
-		'save_to'    => 'slug',
-	];
+// 	protected $sluggable = [
+// 		'build_from' => 'title',
+// 		'save_to'    => 'slug',
+// 	];
 
 // Translated Columns -------------------------------------------------------
 	protected $translatedAttributes = [
@@ -73,7 +74,7 @@ class Content extends Node implements TranslatableContract, SluggableInterface {
 		'meta_keywords',
 		'meta_title',
 		'content',
-//		'slug',
+		'slug',
 		'summary',
 		'title'
 		];

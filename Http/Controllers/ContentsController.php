@@ -146,6 +146,7 @@ class ContentsController extends HimawariController {
 	 */
 	public function show($id)
 	{
+dd('show');
 // 		$content = $this->content->findOrFail($id);
 //
 // 		return View::make('HR::contents.show', compact('content'));

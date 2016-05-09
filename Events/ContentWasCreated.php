@@ -6,7 +6,7 @@ use App\Modules\Himawari\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
 
-class EmployeeWasCreated extends Event {
+class ContentWasCreated extends Event {
 
 	use SerializesModels;
 
@@ -18,7 +18,7 @@ class EmployeeWasCreated extends Event {
 //dd($data->id);
 
 		$this->id				= $data->id;
-		$this->email			= $data->email;
+//		$this->email			= $data->email;
 
 	}
 

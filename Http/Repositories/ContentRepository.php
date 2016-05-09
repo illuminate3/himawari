@@ -13,6 +13,9 @@ use App\Modules\Core\Http\Models\Locale;
 use App\Modules\Himawari\Http\Models\Content;
 use App\Modules\Himawari\Http\Models\ContentTranslation;
 
+use App\Modules\Himawari\Events\ContentWasCreated;
+use App\Modules\Himawari\Events\ContentWasUpdated;
+
 use App;
 use Auth;
 use Cache;
@@ -191,26 +194,26 @@ class ContentRepository extends BaseRepository {
 		$app_locale_id = $this->locale_repo->getLocaleID($lang);
 
 //		$slug = Str::slug($input['title_'.$app_locale_id]);
-		$slug = Str::slug($input['slug_'.$app_locale_id]);
+//		$slug = Str::slug($input['slug_'.$app_locale_id]);
 
 		$values = [
-			'is_published'		=> $is_published,
-			'is_timed'			=> $is_timed,
-			'is_navigation'		=> $is_navigation,
-			'class'				=> $class,
-			'order'				=> $order,
-			'print_status_id'	=> $print_status_id,
-			'publish_end'		=> $publish_end,
-			'publish_start'		=> $publish_start,
-			'slug'				=> $slug,
-			'user_id'			=> $input['user_id']
+			'is_published'				=> $is_published,
+			'is_timed'					=> $is_timed,
+			'is_navigation'				=> $is_navigation,
+			'class'						=> $class,
+			'order'						=> $order,
+			'print_status_id'			=> $print_status_id,
+			'publish_end'				=> $publish_end,
+			'publish_start'				=> $publish_start,
+//			'slug'						=> $slug,
+			'user_id'					=> $input['user_id']
 		];
 //dd($values);
 
 		$content = Content::create($values);
 
-//		$last_insert_id = DB::getPdo()->lastInsertId();
-		$last_insert_id = $this->getContentIDbySlug($slug);
+		$last_insert_id = DB::getPdo()->lastInsertId();
+//		$last_insert_id = $this->getContentIDbySlug($slug);
 //dd($last_insert_id);
 
 		$locales = Cache::get('languages');
@@ -222,9 +225,10 @@ class ContentRepository extends BaseRepository {
 			App::setLocale($properties->locale);
 
 			$values = [
-				'content'		=> $input['content_'.$properties->id],
-				'summary'		=> $input['summary_'.$properties->id],
-				'title'			=> $input['title_'.$properties->id],
+				'content'				=> $input['content_'.$properties->id],
+				'summary'				=> $input['summary_'.$properties->id],
+				'title'					=> $input['title_'.$properties->id],
+				'slug'					=> $input['slug_'.$properties->id],
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
@@ -267,6 +271,7 @@ class ContentRepository extends BaseRepository {
 		];
 		$contents->update($values);
 
+		\Event::fire(new ContentWasCreated($content));
 
 		return;
 	}
@@ -350,19 +355,19 @@ class ContentRepository extends BaseRepository {
 //dd($locale_id);
 
 //		$slug = Str::slug($input['title_'.$app_locale_id]);
-		$slug = Str::slug($input['slug_'.$app_locale_id]);
+//		$slug = Str::slug($input['slug_'.$app_locale_id]);
 
 		$values = [
-			'is_published'		=> $is_published,
-			'is_timed'			=> $is_timed,
-			'is_navigation'		=> $is_navigation,
-			'class'				=> $class,
-			'order'				=> $order,
-			'print_status_id'	=> $print_status_id,
-			'publish_end'		=> $publish_end,
-			'publish_start'		=> $publish_start,
-			'slug'				=> $slug,
-			'user_id'			=> $input['user_id']
+			'is_published'				=> $is_published,
+			'is_timed'					=> $is_timed,
+			'is_navigation'				=> $is_navigation,
+			'class'						=> $class,
+			'order'						=> $order,
+			'print_status_id'			=> $print_status_id,
+			'publish_end'				=> $publish_end,
+			'publish_start'				=> $publish_start,
+//			'slug'						=> $slug,
+			'user_id'					=> $input['user_id']
 		];
 
 		$content->update($values);
@@ -376,9 +381,9 @@ class ContentRepository extends BaseRepository {
 			App::setLocale($properties->locale);
 
 			$values = [
-				'content'		=> $input['content_'.$properties->id],
-				'summary'		=> $input['summary_'.$properties->id],
-				'title'			=> $input['title_'.$properties->id],
+				'content'				=> $input['content_'.$properties->id],
+				'summary'				=> $input['summary_'.$properties->id],
+				'slug'					=> $input['slug_'.$properties->id],
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
@@ -404,6 +409,8 @@ class ContentRepository extends BaseRepository {
 		} else {
 			$content->sites()->detach();
 		}
+
+		\Event::fire(new ContentWasUpdated($content));
 
 		return;
 	}

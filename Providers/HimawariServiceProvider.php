@@ -80,9 +80,10 @@ class HimawariServiceProvider extends ServiceProvider
 
 		$app->register('App\Modules\Himawari\Providers\ContentMacroServiceProvider');
 		$app->register('App\Modules\Himawari\Providers\ViewComposerServiceProvider');
+		$app->register('App\Modules\Himawari\Providers\HimawariEventServiceProvider');
 
 		$app->register('App\Modules\Menus\Providers\WidgetServiceProvider');
-		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
+//		$app->register('Cviebrock\EloquentSluggable\SluggableServiceProvider');
 		$app->register('Baum\Providers\BaumServiceProvider');
 
 // Register Middleware
