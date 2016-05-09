@@ -88,19 +88,21 @@ class UpdateContent {
 		foreach ($recipients as $recipient )
 		{
 
-			$data = array(
-				'content_id'		=> $content->id,
-				'from_email'		=> $from_email,
-				'from_name'			=> $from_name,
-//				'to_email'			=> $to_email,
-				'to_email'			=> $recipient->email,
-				'subject'			=> $subject,
-				'canned'			=> $message,
-//				'theme'				=> $theme,
-				'theme_layout'		=> $theme_layout
-			);
+			if ( ($recipient->user_id != Config::get('himawari.mailer.editor_one')) || ($recipient->user_id != Config::get('himawari.mailer.editor_two')) ) {
+				$data = array(
+					'content_id'		=> $content->id,
+					'from_email'		=> $from_email,
+					'from_name'			=> $from_name,
+//					'to_email'			=> $to_email,
+					'to_email'			=> $recipient->email,
+					'subject'			=> $subject,
+					'canned'			=> $message,
+//					'theme'				=> $theme,
+					'theme_layout'		=> $theme_layout
+				);
 
-			$this->yubin_mailer->sendMail($template_view, $data, $message);
+				$this->yubin_mailer->sendMail($template_view, $data, $message);
+			}
 		}
 
 		return;
