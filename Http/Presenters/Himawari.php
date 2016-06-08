@@ -106,4 +106,24 @@ class Himawari extends Presenter {
 		return $return;
 	}
 
+
+	/**
+	 * timed checkbox
+	 *
+	 * @return string
+	 */
+	public function isPrivate()
+	{
+//dd('loaded');
+		$return = '';
+
+		$private = $this->entity->is_private;
+//dd($timed);
+		if ( $private == 1 ) {
+			$return = "checked";
+		}
+
+		return $return;
+	}
+
 }

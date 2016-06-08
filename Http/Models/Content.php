@@ -250,6 +250,16 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 		return $query->where('print_status_id', '=', 1);
 	}
 
+	public function scopeIsPrivate($query)
+	{
+		return $query->where('is_private', '=', 1);
+	}
+
+	public function scopeIsNotPrivate($query)
+	{
+		return $query->where('is_private', '=', 0);
+	}
+
 	public function scopeInPrint($query)
 	{
 		return $query->where('print_status_id', '=', 2);

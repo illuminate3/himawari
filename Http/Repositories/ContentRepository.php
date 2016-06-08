@@ -16,6 +16,7 @@ use App\Modules\Himawari\Http\Models\ContentTranslation;
 use App\Modules\Himawari\Events\ContentWasCreated;
 use App\Modules\Himawari\Events\ContentWasUpdated;
 
+use Illuminate\Support\Str;
 use App;
 use Auth;
 use Cache;
@@ -24,7 +25,7 @@ use DB;
 use Lang;
 use Route;
 use Session;
-use Illuminate\Support\Str;
+use Shinobi;
 use Input;
 
 class ContentRepository extends BaseRepository {
@@ -550,8 +551,16 @@ class ContentRepository extends BaseRepository {
 	public function getContent($page_ID)
 	{
 //dd($page_ID);
- 		$content = Content::find($page_ID);
+
+		if ( Auth::user() ) {
+			$content = Content::find($page_ID);
+		} else {
+			$content = Content::IsNotPrivate()->find($page_ID);
+		}
+
 /*
+->IsTimed()
+
 		$page = DB::table('contents')
 			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
 			->where('content_translations.locale_id', '=', $locale_id)
