@@ -27,7 +27,7 @@ return [
 	'from_email'				=> '',
 	'from_name'					=> '',
 	'group_slug'				=> 'cms-mailer-group',
-	'template'					=> 'seminars',
+	'template'					=> 'cms',
 	'create_canned_slug'		=> 'content_created',
 	'update_canned_slug'		=> 'content_update',
 ],
