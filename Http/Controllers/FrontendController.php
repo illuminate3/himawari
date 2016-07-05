@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Config;
 use Flash;
 use Hashids\Hashids;
+use Meta;
 use Session;
 use Route;
 use Theme;

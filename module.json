@@ -3,6 +3,6 @@
     "slug": "himawari",
     "description": "CMS for Rakko",
     "version": "1.0",
-    "order": "99",
+    "order": "1",
     "enabled": true
 }

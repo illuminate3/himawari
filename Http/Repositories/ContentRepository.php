@@ -454,7 +454,7 @@ class ContentRepository extends BaseRepository {
 	public function getContentIDbySlug($slug)
 	{
 
-		$id = DB::table('contents')
+		$id = DB::table('content_translations')
 			->where('slug', '=', $slug)
 			->pluck('id');
 
@@ -540,7 +540,7 @@ class ContentRepository extends BaseRepository {
 			->where('content_translations.slug', '=', $slug)
 			->pluck('content_id');
 */
-		$page_ID = DB::table('contents')
+		$page_ID = DB::table('content_translations')
 			->where('slug', '=', $slug)
 			->pluck('id');
 //dd($page_ID);
