@@ -59,6 +59,7 @@ class FrontendController extends HimawariController {
 		$page_ID = $this->content_repo->getPageID($slug = $lastSlug);
 //dd($page_ID);
 		$this->currentPage = $this->content_repo->getContent($page_ID);
+//		$this->currentPage = Content::IsPublished()->SiteID()->with('images', 'documents', 'sites')->find($article_ID);
 //dd($this->currentPage);
 
 //dd('here');
@@ -79,61 +80,53 @@ class FrontendController extends HimawariController {
 
 	public function get_page()
 	{
-//dd('get_page');
+
 //dd($this->currentPage);
 		if ( $this->currentPage ) {
-// 			$mainMenu = NiftyMenus::getMainMenu( $this->currentPage );
-// dd($mainMenu);
-//dd($this->currentPage);
-// 			$root = $this->currentPage->getRoot();
-// 			$secMenu = NiftyMenus::getSecMenu($root, $this->currentPage );
-
-//			return View::make('frontends.page', ['page' => $this->currentPage, 'mainMenu' => $mainMenu, 'secMenu' => $secMenu]);
 
 			$page = $this->currentPage;
-Meta::setKeywords($page->meta_keywords);
-Meta::setDescription($page->meta_description);
-/*
-    0 => "meta_description"
-    1 => "meta_keywords"
-    2 => "meta_title"
-    3 => "content"
-    4 => "slug"
-    5 => "summary"
-    6 => "title"
-*/
-
 //dd($page);
-// 			$mainMenu = $mainMenu;
-// 			$secMenu = $secMenu;
-		$lang = Session::get('locale');
-		$js_lang = array(
-//			'CLOSE' => trans('kotoba::button.close'),
-			'CLOSE' => "Close",
-//			'TITLE' => $document->document_file_name
-			'TITLE' => "View Document"
-		);
 
-		$modal_title = trans('kotoba::general.command.delete');
-		$modal_body = trans('kotoba::general.ask.delete');
-		$modal_route = 'admin.documents.destroy';
-		$modal_id = $page->id;
-		$model = '$document';
+/*
+	0 => "meta_description"
+	1 => "meta_keywords"
+	2 => "meta_title"
+	3 => "content"
+	4 => "slug"
+	5 => "summary"
+	6 => "title"
+*/
+			Meta::setKeywords($page->meta_keywords);
+			Meta::setDescription($page->meta_description);
 
+			$lang = Session::get('locale');
+			$js_lang = array(
+	//			'CLOSE' => trans('kotoba::button.close'),
+	//			'TITLE' => $document->document_file_name
+				'CLOSE' => "Close",
+				'TITLE' => "View Document"
+			);
 
-		return Theme::View('modules.himawari.frontend.index',
-			compact(
-				'page',
-				'js_lang',
-				'modal_title',
-				'modal_body',
-				'modal_route',
-				'modal_id',
-				'model'
-			));
-		}
-		else
+			$modal_title = trans('kotoba::general.command.delete');
+			$modal_body = trans('kotoba::general.ask.delete');
+			$modal_route = 'admin.documents.destroy';
+			$modal_id = $page->id;
+			$model = '$document';
+
+			return Theme::View('modules.himawari.frontend.index',
+				compact(
+					'page',
+					'js_lang',
+					'modal_title',
+					'modal_body',
+					'modal_route',
+					'modal_id',
+					'model'
+				));
+		} else {
 			App::abort(404);
+		}
+
 	}
 
 	public function index()

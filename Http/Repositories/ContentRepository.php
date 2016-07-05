@@ -548,32 +548,22 @@ class ContentRepository extends BaseRepository {
 		return $page_ID;
 	}
 
+
 	public function getContent($page_ID)
 	{
 //dd($page_ID);
 
 		if ( Auth::user() ) {
-			$content = Content::find($page_ID);
+//			$content = Content::find($page_ID);
+			$content = Content::InPrint()->SiteID()->find($page_ID);
 		} else {
-			$content = Content::IsNotPrivate()->find($page_ID);
+			$content = Content::InPrint()->SiteID()->IsNotPrivate()->find($page_ID);
 		}
-
-/*
-->IsTimed()
-
-		$page = DB::table('contents')
-			->join('content_translations', 'contents.id', '=', 'content_translations.content_id')
-			->where('content_translations.locale_id', '=', $locale_id)
-//			->where('contents.is_current', '=', 1, 'AND')
-			->where('contents.is_online', '=', 1, 'AND')
-			->where('contents.is_deleted', '=', 0, 'AND')
-			->where('content_translations.slug', '=', $slug, 'AND')
-			->pluck('contents.id');
-*/
 //dd($content);
 
 		return $content;
 	}
+
 
 	public function getPage($locale_id, $slug)
 	{

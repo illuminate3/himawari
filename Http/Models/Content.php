@@ -237,11 +237,11 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	public function scopeSiteID($query)
 	{
 //		return $query->where('site_id', '=', 11);
-				$siteId = Cache::get('siteId');
-				return $query->whereHas('sites', function($query) use($siteId)
-				{
-					$query->where('sites.id', $siteId);
-				});
+		$siteId = Cache::get('siteId');
+		return $query->whereHas('sites', function($query) use($siteId)
+		{
+			$query->where('sites.id', $siteId);
+		});
 	}
 
 
