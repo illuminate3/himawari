@@ -14,7 +14,7 @@
 @stop
 
 @section('scripts')
-	<script src="{{ asset('assets/vendors/DataTables-1.10.10/dataTables.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/vendors/DataTables-1.10.10/datatables.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/vendors/chosen_v1.4.2/chosen.jquery.min.js') }}"></script>
 @stop
 
