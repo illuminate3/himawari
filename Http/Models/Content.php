@@ -238,6 +238,7 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	{
 //		return $query->where('site_id', '=', 11);
 		$siteId = Cache::get('siteId');
+//dd($siteId);
 		return $query->whereHas('sites', function($query) use($siteId)
 		{
 			$query->where('sites.id', $siteId);
