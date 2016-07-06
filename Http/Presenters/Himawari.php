@@ -126,5 +126,45 @@ class Himawari extends Presenter {
 		return $return;
 	}
 
+	/**
+	 * timed checkbox
+	 *
+	 * @return string
+	 */
+	public function isNavigation()
+	{
+//dd("loaded");
+		$return = '';
+		$is_navigation = $this->entity->is_navigation;
+
+		if ( $is_navigation == 1 ) {
+			$return = '<span class="glyphicon glyphicon-ok text-success"></span>';
+		} else {
+			$return = '<span class="glyphicon glyphicon-remove text-danger"></span>';
+		}
+
+		return $return;
+	}
+
+	/**
+	 * timed checkbox
+	 *
+	 * @return string
+	 */
+	public function isTimed()
+	{
+//dd("loaded");
+		$return = '';
+		$is_timed = $this->entity->is_timed;
+
+		if ( $is_timed == 1 ) {
+			$return = '<span class="glyphicon glyphicon-ok text-success"></span>';
+		} else {
+			$return = '<span class="glyphicon glyphicon-remove text-danger"></span>';
+		}
+
+		return $return;
+	}
+
 
 }
