@@ -52,7 +52,7 @@ class Himawari extends Presenter {
 	 *
 	 * @return string
 	 */
-	public function navigation()
+	public function checkNavigation()
 	{
 //dd('loaded');
 		$return = '';
@@ -68,31 +68,11 @@ class Himawari extends Presenter {
 
 
 	/**
-	 * featured checkbox
-	 *
-	 * @return string
-	 */
-// 	public function featured()
-// 	{
-// //dd('loaded');
-// 		$return = '';
-//
-// 		$featured = $this->entity->is_featured;
-// //dd($featured);
-// 		if ( $featured == 1 ) {
-// 			$return = "checked";
-// 		}
-//
-// 		return $return;
-// 	}
-
-
-	/**
 	 * timed checkbox
 	 *
 	 * @return string
 	 */
-	public function timed()
+	public function checkTimed()
 	{
 //dd('loaded');
 		$return = '';
@@ -108,22 +88,43 @@ class Himawari extends Presenter {
 
 
 	/**
+	 * featured checkbox
+	 *
+	 * @return string
+	 */
+	public function checkPrivate()
+	{
+//dd('loaded');
+		$return = '';
+
+		$is_private = $this->entity->is_private;
+//dd($navigation);
+		if ( $is_private == 1 ) {
+			$return = "checked";
+		}
+
+		return $return;
+	}
+
+	/**
 	 * timed checkbox
 	 *
 	 * @return string
 	 */
 	public function isPrivate()
 	{
-//dd('loaded');
+//dd("loaded");
 		$return = '';
+		$is_private = $this->entity->is_private;
 
-		$private = $this->entity->is_private;
-//dd($timed);
-		if ( $private == 1 ) {
-			$return = "checked";
+		if ( $is_private == 1 ) {
+			$return = '<span class="glyphicon glyphicon-ok text-success"></span>';
+		} else {
+			$return = '<span class="glyphicon glyphicon-remove text-danger"></span>';
 		}
 
 		return $return;
 	}
+
 
 }

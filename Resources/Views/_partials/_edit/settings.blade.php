@@ -89,7 +89,7 @@
 		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_navigation" name="is_navigation" value="1" {{ $content->present()->navigation }}>
+					<input type="checkbox" id="is_navigation" name="is_navigation" value="1" {{ $content->present()->checkNavigation }}>
 				</label>
 			</div>
 		</div>
@@ -125,7 +125,7 @@
 		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $content->present()->timed }}>
+					<input type="checkbox" id="is_timed" name="is_timed" value="1" {{ $content->present()->checkTimed }}>
 				</label>
 			</div>
 		</div>
@@ -171,7 +171,7 @@
 		<div class="col-sm-9">
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="is_private" name="is_private" value="1" {{ $content->present()->isPrivate }}>
+					<input type="checkbox" id="is_private" name="is_private" value="1" {{ $content->present()->checkPrivate }}>
 				</label>
 			</div>
 		</div>

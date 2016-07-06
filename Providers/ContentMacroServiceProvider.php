@@ -89,6 +89,8 @@ class ContentMacroServiceProvider extends ServiceProvider
 
 				$html .= '<td>' . $node->present()->print_status($node->print_status_id) . '</td>';
 
+				$html .= '<td>' . $node->present()->isPrivate($node->is_private) . '</td>';
+
 				$html .= '<td>';
 					if ( (Auth::user()->id == $node['user_id']) || (Auth::user()->is('super_admin')) ) {
 						$html .= '

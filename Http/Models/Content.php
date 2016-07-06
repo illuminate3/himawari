@@ -44,6 +44,7 @@ class Content extends Node implements TranslatableContract {
 
 // DEFINE Fillable -------------------------------------------------------
 	protected $fillable = [
+		'is_private',
 		'is_timed',
 		'is_navigation',
 		'order',
@@ -270,11 +271,6 @@ dd(['0' => trans('kotoba::cms.no_parent')]
 	{
 		return $query->where('print_status_id', '=', 4);
 	}
-
-// 	public function scopeIsFeatured($query)
-// 	{
-// 		return $query->where('is_featured', '=', 1);
-// 	}
 
 	public function scopeIsTimed($query)
 	{

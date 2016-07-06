@@ -41,8 +41,6 @@ class CreateContentsTable extends Migration
 //			$table->text('link', 255)->nullable();
 
 			$table->tinyInteger('print_status_id')->default(0);
-//			$table->tinyInteger('is_published')->default(0);
-//			$table->tinyInteger('is_featured')->default(0);
 // 			$table->tinyInteger('menu_id')->default(1);
 			$table->tinyInteger('is_timed')->default(0);
 			$table->tinyInteger('is_private')->default(0);

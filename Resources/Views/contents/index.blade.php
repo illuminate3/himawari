@@ -26,12 +26,15 @@ $(document).ready(function() {
 	});
 
 	$('#table-publish').DataTable({
+		stateSave: true,
 		'pageLength': 25
 		});
 	$('#table-draft').DataTable( {
+		stateSave: true,
 		'pageLength': 25
 		});
 	$('#table-archive').DataTable( {
+		stateSave: true,
 		'pageLength': 25
 		});
 
@@ -101,7 +104,8 @@ $(document).ready(function() {
 					<th>{{ trans('kotoba::table.summary') }}</th>
 					<th>{{ trans('kotoba::table.slug') }}</th>
 					<th>{{ trans('kotoba::table.position') }}</th>
-					<th>{{ trans('kotoba::table.online') }}</th>
+					<th>{{ trans('kotoba::table.status') }}</th>
+					<th>{{ trans('kotoba::table.private') }}</th>
 					<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 				</tr>
 			</thead>
@@ -135,7 +139,7 @@ $(document).ready(function() {
 					<th>{{ trans('kotoba::table.summary') }}</th>
 					<th>{{ trans('kotoba::table.slug') }}</th>
 					<th>{{ trans('kotoba::table.position') }}</th>
-					<th>{{ trans('kotoba::table.online') }}</th>
+					<th>{{ trans('kotoba::table.status') }}</th>
 					<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 				</tr>
 			</thead>
@@ -170,7 +174,7 @@ $(document).ready(function() {
 					<th>{{ trans('kotoba::table.summary') }}</th>
 					<th>{{ trans('kotoba::table.slug') }}</th>
 					<th>{{ trans('kotoba::table.position') }}</th>
-					<th>{{ trans('kotoba::table.online') }}</th>
+					<th>{{ trans('kotoba::table.status') }}</th>
 					<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 				</tr>
 			</thead>

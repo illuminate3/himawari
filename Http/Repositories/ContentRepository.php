@@ -155,10 +155,10 @@ class ContentRepository extends BaseRepository {
 			$order = $input['order'];
 		}
 
-		if ( !isset($input['is_published']) ) {
-			$is_published = 0;
+		if ( !isset($input['is_private']) ) {
+			$is_private = 0;
 		} else {
-			$is_published = $input['is_published'];
+			$is_private = $input['is_private'];
 		}
 
 		if ( !isset($input['is_navigation']) ) {
@@ -198,7 +198,7 @@ class ContentRepository extends BaseRepository {
 //		$slug = Str::slug($input['slug_'.$app_locale_id]);
 
 		$values = [
-			'is_published'				=> $is_published,
+			'is_private'				=> $is_private,
 			'is_timed'					=> $is_timed,
 			'is_navigation'				=> $is_navigation,
 			'class'						=> $class,
@@ -301,10 +301,10 @@ class ContentRepository extends BaseRepository {
 			$order = $input['order'];
 		}
 
-		if ( !isset($input['is_published']) ) {
-			$is_published = 0;
+		if ( !isset($input['is_private']) ) {
+			$is_private = 0;
 		} else {
-			$is_published = $input['is_published'];
+			$is_private = $input['is_private'];
 		}
 
 		if ( !isset($input['is_navigation']) ) {
@@ -359,7 +359,7 @@ class ContentRepository extends BaseRepository {
 //		$slug = Str::slug($input['slug_'.$app_locale_id]);
 
 		$values = [
-			'is_published'				=> $is_published,
+			'is_private'				=> $is_private,
 			'is_timed'					=> $is_timed,
 			'is_navigation'				=> $is_navigation,
 			'class'						=> $class,
