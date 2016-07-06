@@ -552,12 +552,14 @@ class ContentRepository extends BaseRepository {
 	public function getContent($page_ID)
 	{
 //dd($page_ID);
-
+//dd(Auth::user());
 		if ( Auth::user() ) {
 //			$content = Content::find($page_ID);
 			$content = Content::InPrint()->SiteID()->find($page_ID);
+//dd($content);
 		} else {
 			$content = Content::InPrint()->SiteID()->IsNotPrivate()->find($page_ID);
+//dd($content);
 		}
 //dd($content);
 

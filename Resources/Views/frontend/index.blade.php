@@ -5,6 +5,11 @@
 {{{ $page->title }}} :: @parent
 @stop
 
+@section('seo')
+	<meta name="keywords" content="{{ Meta::getKeywords() }}" />
+	<meta name="description" content="{{ Meta::getDescription() }}" />
+@stop
+
 @section('styles')
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pdf_viewer.css') }}">
 @stop
@@ -40,17 +45,34 @@ $(function(){
 	<h1>
 		{{ $page->title }}
 	</h1>
+	<hr>
 </div>
 
+
+<div class="row">
+<div class="col-sm-8 col-sm-offset-2">
+	@if ( count($page->images) )
+		@foreach($page->images as $image)
+			<img src="<?= $image->image->url('landscape') ?>" class="img-responsive img-rounded">
+		@endforeach
+	@endif
+</div>
+</div>
+
+{{--
 <div class="row">
 	<h2>
 		{!! $page->summary !!}
 	</h2>
 </div>
+--}}
 
-<div class="row">
+<div class="row padding-xl">
+<div class="col-sm-12">
 	{!! $page->content !!}
 </div>
+</div>
+
 
 
 @if ( count($page->documents) )
