@@ -211,11 +211,14 @@ class ContentRepository extends BaseRepository {
 		];
 //dd($values);
 
-		$content = Content::create($values);
+		$content = Content::insert($values);
 
 		$last_insert_id = DB::getPdo()->lastInsertId();
 //		$last_insert_id = $this->getContentIDbySlug($slug);
 //dd($last_insert_id);
+
+		$contents = Content::find($last_insert_id);
+//dd($contents);
 
 		$locales = Cache::get('languages');
 		$original_locale = Session::get('locale');
@@ -235,7 +238,7 @@ class ContentRepository extends BaseRepository {
 				'meta_description'		=> $input['meta_description_'.$properties->id]
 			];
 
-			$content->update($values);
+			$contents->update($values);
 		}
 
 		$this->manageBaum($input['parent_id'], null);
@@ -251,14 +254,14 @@ class ContentRepository extends BaseRepository {
 //dd($document_id);
 //		$content = $this->content->find($last_insert_id);
 		if ( isset($input['document_id']) ) {
-			$content->documents()->sync($input['document_id']);
+			$contents->documents()->sync($input['document_id']);
 		} else {
-			$content->documents()->detach();
+			$contents->documents()->detach();
 		}
 		if ( isset($input['sites_id']) ) {
-			$content->sites()->sync($input['sites_id']);
+			$contents->sites()->sync($input['sites_id']);
 		} else {
-			$content->sites()->detach();
+			$contents->sites()->detach();
 		}
 
 		$image_id = Input::get('image_id');
@@ -266,13 +269,14 @@ class ContentRepository extends BaseRepository {
 			$this->attachImage($last_insert_id, $image_id);
 		}
 
-		$contents = Content::find($last_insert_id);
-		$values = [
+		$content_values = [
 			'image_id'					=> $image_id
 		];
-		$contents->update($values);
+		if ( $content_values != "" ) {
+			$contents->update($content_values);
+		}
 
-		\Event::fire(new ContentWasCreated($content));
+		\Event::fire(new ContentWasCreated($contents));
 
 		return;
 	}
@@ -334,8 +338,8 @@ class ContentRepository extends BaseRepository {
 */
 		if ( !isset($input['is_timed']) ) {
 			$is_timed = 0;
-			$publish_end = null;
-			$publish_start = null;
+			$publish_end = '0000-00-00';
+			$publish_start = '0000-00-00';
 		} else {
 			$is_timed = $input['is_timed'];
 			$publish_end = $input['publish_end'];
@@ -519,6 +523,10 @@ class ContentRepository extends BaseRepository {
 	public function manageBaum($parent_id, $id)
 	{
 //dd($parent_id);
+
+		if ($parent_id == "" ) {
+			$parent_id = 0;
+		}
 
 		if ($parent_id != 0 && $id != null) {
 			$node = Content::find($id);

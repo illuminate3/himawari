@@ -174,7 +174,7 @@ dd('show');
 // 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
 //dd($pagelist);
 		$all_pagelist = $this->content_repo->getParents($locale_id, null);
-		$pagelist = array('' => trans('kotoba::cms.no_parent'));
+		$pagelist = array('0' => trans('kotoba::cms.no_parent'));
 		$pagelist = new Collection($pagelist);
 		$pagelist = $pagelist->merge($all_pagelist);
 
