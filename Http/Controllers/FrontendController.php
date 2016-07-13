@@ -61,9 +61,9 @@ class FrontendController extends HimawariController {
 //		$this->currentPage = $this->content_repo->getPage($locale_id, $slug = $lastSlug);
 //		$this->currentPage = new \Illuminate\Support\Collection($this->currentPage);
 
-		$page_ID = $this->content_repo->getPageID($lastSlug);
+		$page_ID = $this->content_repo->getPageID($lastSlug, $locale_id);
 //dd($page_ID);
-		$this->currentPage = $this->content_repo->getContent($page_ID, $locale_id);
+		$this->currentPage = $this->content_repo->getContent($page_ID);
 //		$this->currentPage = Content::IsPublished()->SiteID()->with('images', 'documents', 'sites')->find($article_ID);
 //dd($this->currentPage);
 
