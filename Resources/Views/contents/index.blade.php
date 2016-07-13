@@ -142,6 +142,9 @@ $(document).ready(function() {
 					<th>{{ trans('kotoba::table.slug') }}</th>
 					<th>{{ trans('kotoba::table.position') }}</th>
 					<th>{{ trans('kotoba::table.status') }}</th>
+					<th>{{ trans('kotoba::table.private') }}</th>
+					<th>{{ trans('kotoba::table.navigation') }}</th>
+					<th>{{ trans('kotoba::table.timed') }}</th>
 					<th>{{ Lang::choice('kotoba::table.action', 2) }}</th>
 				</tr>
 			</thead>

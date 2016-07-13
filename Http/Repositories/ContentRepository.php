@@ -544,13 +544,13 @@ class ContentRepository extends BaseRepository {
 	{
 //dd($slug);
 /*
-		$page_ID = DB::table('content_translations')
-			->where('content_translations.slug', '=', $slug)
-			->pluck('content_id');
-*/
 		$page_ID = DB::table('contents')
 			->where('slug', '=', $slug)
 			->pluck('id');
+*/
+		$page_ID = DB::table('content_translations')
+			->where('content_translations.slug', '=', $slug)
+			->pluck('content_id');
 //dd($page_ID);
 
 		return $page_ID;
