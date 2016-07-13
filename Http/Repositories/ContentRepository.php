@@ -398,6 +398,8 @@ class ContentRepository extends BaseRepository {
 
 		}
 
+//dd($input['parent_id']);
+
 		$this->manageBaum($input['parent_id'], $id);
 
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));

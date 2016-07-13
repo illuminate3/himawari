@@ -174,9 +174,12 @@ dd('show');
 // 		$pagelist = array('' => trans('kotoba::cms.no_parent')) + $pagelist;
 //dd($pagelist);
 		$all_pagelist = $this->content_repo->getParents($locale_id, null);
-		$pagelist = array('0' => trans('kotoba::cms.no_parent'));
-		$pagelist = new Collection($pagelist);
-		$pagelist = $pagelist->merge($all_pagelist);
+		$all_pagelist->prepend(trans('kotoba::cms.no_parent'), 0 );
+ 		$pagelist = $all_pagelist;
+//dd($all_pagelist);
+// 		$pagelist = array('0' => trans('kotoba::cms.no_parent'));
+// 		$pagelist = new Collection($pagelist);
+// 		$pagelist = $pagelist->merge($all_pagelist);
 
 		$users = $this->content_repo->getUsers();
 		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
