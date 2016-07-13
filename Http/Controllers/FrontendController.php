@@ -46,9 +46,14 @@ class FrontendController extends HimawariController {
 
 		$this->page = Route::current()->parameter('page');
 //dd($this->page);
+/*
 		$slugs = explode('/', $this->page);
 //dd($slugs);
 		$lastSlug = Route::current()->getName() == 'search' ? 'search' : $slugs[count($slugs)-1];
+//dd($lastSlug);
+*/
+
+		$lastSlug = $this->page;
 //dd($lastSlug);
 
 //		$this->currentPage = Page::getPage( $slug = $lastSlug );
@@ -58,7 +63,7 @@ class FrontendController extends HimawariController {
 
 		$page_ID = $this->content_repo->getPageID($lastSlug);
 //dd($page_ID);
-		$this->currentPage = $this->content_repo->getContent($page_ID);
+		$this->currentPage = $this->content_repo->getContent($page_ID, $locale_id);
 //		$this->currentPage = Content::IsPublished()->SiteID()->with('images', 'documents', 'sites')->find($article_ID);
 //dd($this->currentPage);
 

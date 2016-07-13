@@ -206,7 +206,7 @@ class ContentRepository extends BaseRepository {
 			'print_status_id'			=> $print_status_id,
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
-//			'slug'						=> $slug,
+			'slug'						=> $slug,
 			'user_id'					=> $input['user_id']
 		];
 //dd($values);
@@ -540,7 +540,7 @@ class ContentRepository extends BaseRepository {
 
 	}
 
-	public function getPageID($slug)
+	public function getPageID($slug, $locale_id)
 	{
 //dd($slug);
 /*
@@ -550,6 +550,7 @@ class ContentRepository extends BaseRepository {
 */
 		$page_ID = DB::table('content_translations')
 			->where('content_translations.slug', '=', $slug)
+			->where('content_translations.locale_id', '=', $locale_id)
 			->pluck('content_id');
 //dd($page_ID);
 
