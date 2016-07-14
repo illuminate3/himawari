@@ -206,7 +206,7 @@ class ContentRepository extends BaseRepository {
 			'print_status_id'			=> $print_status_id,
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
-			'slug'						=> $slug,
+//			'slug'						=> $slug,
 			'user_id'					=> $input['user_id']
 		];
 //dd($values);

@@ -84,8 +84,8 @@ class ContentsController extends HimawariController {
 
 // Published
 		$published = Content::InPrint()->get();
-		$publish_list = $published->toHierarchy();
 //dd($published);
+		$publish_list = $published->toHierarchy();
 
 		$cache_site_id = Cache::get('siteId');
 		$site_name = $this->content_repo->getSiteName($cache_site_id);
