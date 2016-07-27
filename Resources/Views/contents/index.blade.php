@@ -8,7 +8,7 @@
 
 
 @section('styles')
-	<link href="{{ asset('assets/vendors/DataTables-1.10.10/DataTables-1.10.10/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/DataTables-1.10.10/DataTables-1.10.10/css/dataTables.bootstrap.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/chosen_v1.4.2/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen_bootstrap.css') }}">
 @stop
