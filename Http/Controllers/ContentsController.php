@@ -182,10 +182,11 @@ dd('show');
 // 		$pagelist = $pagelist->merge($all_pagelist);
 
 		$users = $this->content_repo->getUsers();
-		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
 // 		$user_select = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) );
 // 		$user_select = new Collection($user_select);
 // 		$users = $user_select->merge($users);
+		$users->prepend(trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1), 0 );
 //dd($users);
 
 		$print_statuses = $this->content_repo->getPrintStatuses($locale_id);

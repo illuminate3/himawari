@@ -12,6 +12,7 @@ use App\Modules\Core\Http\Repositories\LocaleRepository;
 use App\Modules\Core\Http\Models\Locale;
 use App\Modules\Himawari\Http\Models\Content;
 use App\Modules\Himawari\Http\Models\ContentTranslation;
+use App\Modules\Profiles\Http\Models\Profile;
 
 use App\Modules\Himawari\Events\ContentWasCreated;
 use App\Modules\Himawari\Events\ContentWasUpdated;
@@ -77,7 +78,8 @@ class ContentRepository extends BaseRepository {
 
 
 		$users = $this->getUsers();
-		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+//		$users = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1) ) + $users;
+		$users->prepend(trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::account.user', 1), 0 );
 
 		$print_statuses = $this->getPrintStatuses($locale_id);
 		$print_statuses = array('' => trans('kotoba::general.command.select_a') . '&nbsp;' . Lang::choice('kotoba::cms.print_status', 1) ) + $print_statuses;
@@ -659,7 +661,8 @@ dd($content);
 
 	public function getUsers()
 	{
-		$users = DB::table('users')->lists('email', 'id');
+//		$users = DB::table('users')->lists('email', 'id');
+		$users = Profile::all()->lists('full_email', 'id');
 		return $users;
 	}
 
