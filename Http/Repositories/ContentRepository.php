@@ -376,6 +376,7 @@ class ContentRepository extends BaseRepository {
 //			'slug'						=> $slug,
 			'user_id'					=> $input['user_id']
 		];
+//dd($values);
 
 		$content->update($values);
 
@@ -386,8 +387,9 @@ class ContentRepository extends BaseRepository {
 		{
 
 			App::setLocale($properties->locale);
-
+//dd($input['content_'.$properties->id]);
 			$values = [
+				'title'					=> $input['title_'.$properties->id],
 				'content'				=> $input['content_'.$properties->id],
 				'summary'				=> $input['summary_'.$properties->id],
 				'slug'					=> $input['slug_'.$properties->id],
@@ -395,15 +397,13 @@ class ContentRepository extends BaseRepository {
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
 			];
+//dd($values);
 
 			$content->update($values);
 
 		}
 
 //dd($input['parent_id']);
-
-		$this->manageBaum($input['parent_id'], $id);
-
 		App::setLocale($original_locale, Config::get('app.fallback_locale'));
 
 //dd($input['sites_id']);
@@ -418,6 +418,9 @@ class ContentRepository extends BaseRepository {
 		} else {
 			$content->sites()->detach();
 		}
+
+
+		$this->manageBaum($input['parent_id'], $id);
 
 		\Event::fire(new ContentWasUpdated($content));
 
@@ -530,7 +533,7 @@ class ContentRepository extends BaseRepository {
 //dd($id);
 
 		if ($parent_id == "" ) {
-			$parent_id = 0;
+			$parent_id = null;
 		}
 
 		if ($parent_id != 0 && $id != null) {
@@ -538,11 +541,14 @@ class ContentRepository extends BaseRepository {
 			$node->makeChildOf($parent_id);
 		}
 
+		Content::rebuild();
+
 		if ($parent_id == 0 && $id != null) {
 			$node = Content::find($id);
 //			$node->makeRoot();
 			$node->parent_id = null;
 			$node->save();
+//dd($node->save());
 		}
 
 	}
