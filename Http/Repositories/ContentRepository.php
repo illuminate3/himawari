@@ -189,6 +189,9 @@ class ContentRepository extends BaseRepository {
 
 		if ( Auth::user()->is('super_admin') ) {
 			$print_status_id = $input['print_status_id'];
+			if ($print_status_id == '' ) {
+				$print_status_id = Config::get('himwarai.default_publish_status', '2');
+			}
 		} else {
 			$print_status_id = Config::get('himwarai.default_publish_status', '2');
 		}
@@ -209,7 +212,9 @@ class ContentRepository extends BaseRepository {
 			'publish_end'				=> $publish_end,
 			'publish_start'				=> $publish_start,
 //			'slug'						=> $slug,
-			'user_id'					=> $input['user_id']
+			'user_id'					=> $input['user_id'],
+			'created_at'				=> date("Y-m-d H:i:s")
+
 		];
 //dd($values);
 
@@ -533,7 +538,7 @@ class ContentRepository extends BaseRepository {
 //dd($id);
 
 		if ($parent_id == "" ) {
-			$parent_id = null;
+			$parent_id = 0;
 		}
 
 		if ($parent_id != 0 && $id != null) {
