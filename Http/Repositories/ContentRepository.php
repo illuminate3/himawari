@@ -235,11 +235,17 @@ class ContentRepository extends BaseRepository {
 
 			App::setLocale($properties->locale);
 
+			if ( $input['slug_'.$properties->id] == "" ) {
+				$slug = Str::slug($input['title_'.$properties->id]);
+			} else {
+				$slug = $input['slug_'.$properties->id];
+			}
+
 			$values = [
 				'content'				=> $input['content_'.$properties->id],
 				'summary'				=> $input['summary_'.$properties->id],
 				'title'					=> $input['title_'.$properties->id],
-				'slug'					=> $input['slug_'.$properties->id],
+				'slug'					=> $slug,
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
@@ -391,13 +397,19 @@ class ContentRepository extends BaseRepository {
 		foreach($locales as $locale => $properties)
 		{
 
+			if ( $input['slug_'.$properties->id] == "" ) {
+				$slug = Str::slug($input['title_'.$properties->id]);
+			} else {
+				$slug = $input['slug_'.$properties->id];
+			}
+
 			App::setLocale($properties->locale);
 //dd($input['content_'.$properties->id]);
 			$values = [
 				'title'					=> $input['title_'.$properties->id],
 				'content'				=> $input['content_'.$properties->id],
 				'summary'				=> $input['summary_'.$properties->id],
-				'slug'					=> $input['slug_'.$properties->id],
+				'slug'					=> $slug,
 				'meta_title'			=> $input['meta_title_'.$properties->id],
 				'meta_keywords'			=> $input['meta_keywords_'.$properties->id],
 				'meta_description'		=> $input['meta_description_'.$properties->id]
