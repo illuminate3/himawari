@@ -238,7 +238,7 @@ class ContentRepository extends BaseRepository {
 			if ( $input['slug_'.$properties->id] == "" ) {
 				$slug = Str::slug($input['title_'.$properties->id]);
 			} else {
-				$slug = $input['slug_'.$properties->id];
+				$slug = Str::slug($input['slug_'.$properties->id]);
 			}
 
 			$values = [
@@ -400,7 +400,7 @@ class ContentRepository extends BaseRepository {
 			if ( $input['slug_'.$properties->id] == "" ) {
 				$slug = Str::slug($input['title_'.$properties->id]);
 			} else {
-				$slug = $input['slug_'.$properties->id];
+				$slug = Str::slug($input['slug_'.$properties->id]);
 			}
 
 			App::setLocale($properties->locale);
