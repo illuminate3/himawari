@@ -527,6 +527,7 @@ class ContentRepository extends BaseRepository {
 	public function manageBaum($parent_id, $id)
 	{
 //dd($parent_id);
+//dd($id);
 
 		if ($parent_id == "" ) {
 			$parent_id = 0;
@@ -539,7 +540,9 @@ class ContentRepository extends BaseRepository {
 
 		if ($parent_id == 0 && $id != null) {
 			$node = Content::find($id);
-			$node->makeRoot();
+//			$node->makeRoot();
+			$node->parent_id = null;
+			$node->save();
 		}
 
 	}
